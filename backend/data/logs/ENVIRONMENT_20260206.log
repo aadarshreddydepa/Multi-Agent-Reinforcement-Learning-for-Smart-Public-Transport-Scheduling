@@ -115,3 +115,73 @@
 2026-02-06 22:56:07,892 - ENVIRONMENT - INFO - PassengerDemand initialized
 2026-02-06 22:56:07,892 - ENVIRONMENT - INFO - TrafficEnvironment initialized
 2026-02-06 22:56:07,892 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 23:11:32,609 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 23:11:32,610 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 23:11:32,610 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 23:11:32,610 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 23:11:32,610 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 23:11:32,610 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-06 23:11:32,610 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 23:11:32,610 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-06 23:11:32,620 - ENVIRONMENT - DEBUG - Generated 12 passengers at main_gate (peak=True)
+2026-02-06 23:11:32,620 - ENVIRONMENT - DEBUG - Generated 3 passengers at main_gate (peak=False)
+2026-02-06 23:11:32,620 - ENVIRONMENT - DEBUG - Boarded 5 passengers at main_gate
+2026-02-06 23:11:32,620 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-06 23:11:32,620 - ENVIRONMENT - INFO - Environment reset with 3 buses
+2026-02-06 23:11:32,620 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-06 23:11:32,620 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-06 23:11:33,124 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-06 23:11:33,124 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=False)
+2026-02-06 23:11:33,629 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-06 23:11:34,134 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-06 23:11:34,135 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-06 23:11:34,637 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-06 23:11:34,638 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=False)
+2026-02-06 23:11:34,638 - ENVIRONMENT - DEBUG - Generated 2 passengers at sports_complex (peak=False)
+2026-02-06 23:11:37,701 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 23:11:37,701 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 23:11:37,701 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 23:11:37,701 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 23:11:37,701 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 23:11:37,701 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-06 23:11:37,713 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-06 23:11:37,713 - ENVIRONMENT - INFO - Environment reset with 3 buses
+2026-02-06 23:11:37,713 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-06 23:11:37,713 - ENVIRONMENT - DEBUG - Generated 2 passengers at library (peak=False)
+2026-02-06 23:11:37,713 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-06 23:11:37,713 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-06 23:11:37,714 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-06 23:11:37,714 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=False)
+2026-02-06 23:11:37,714 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-06 23:11:37,714 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-06 23:11:42,494 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 23:11:42,494 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 23:11:42,495 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 23:11:42,495 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 23:11:42,495 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 23:11:42,495 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-06 23:11:42,495 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 23:11:46,042 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 23:11:46,042 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 23:11:46,042 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 23:11:46,042 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 23:11:46,042 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 23:11:46,042 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-06 23:11:46,043 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 23:12:30,177 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 23:12:30,177 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 23:12:30,177 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 23:12:30,177 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 23:12:30,177 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 23:12:30,177 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-06 23:12:30,177 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 23:13:06,918 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-06 23:13:06,918 - ENVIRONMENT - INFO - Environment reset with 3 buses
+2026-02-06 23:13:06,919 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-06 23:13:06,919 - ENVIRONMENT - INFO - Environment reset with 3 buses
+2026-02-06 23:13:06,935 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=False)
+2026-02-06 23:13:06,935 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-06 23:13:07,920 - ENVIRONMENT - DEBUG - Generated 2 passengers at canteen (peak=False)
+2026-02-06 23:13:07,920 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=False)
+2026-02-06 23:13:08,921 - ENVIRONMENT - DEBUG - Generated 2 passengers at main_gate (peak=False)
+2026-02-06 23:13:10,930 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)

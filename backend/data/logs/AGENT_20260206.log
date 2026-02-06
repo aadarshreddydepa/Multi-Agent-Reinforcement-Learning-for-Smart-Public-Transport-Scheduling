@@ -148,3 +148,158 @@
 2026-02-06 22:56:07,643 - AGENT - INFO - MultiAgentCoordinator initialized
 2026-02-06 22:56:07,893 - AGENT - INFO - RewardCalculator initialized
 2026-02-06 22:56:07,893 - AGENT - INFO - MultiAgentCoordinator initialized
+2026-02-06 23:11:37,698 - AGENT - INFO - RewardCalculator initialized
+2026-02-06 23:11:37,698 - AGENT - INFO - MultiAgentCoordinator initialized
+2026-02-06 23:11:37,701 - AGENT - INFO - QTable initialized for test_agent (α=0.1, γ=0.95)
+2026-02-06 23:11:37,712 - AGENT - DEBUG - test_agent Q-update: state=1_2_0_1, action=0, Q=0.00→1.55, reward=15.50
+2026-02-06 23:11:37,712 - AGENT - INFO - Saved Q-table for test_agent to test_qtable.pkl
+2026-02-06 23:11:37,712 - AGENT - INFO - QTable initialized for test_agent (α=0.1, γ=0.95)
+2026-02-06 23:11:37,712 - AGENT - INFO - Loaded Q-table for test_agent from test_qtable.pkl
+2026-02-06 23:11:37,712 - AGENT - INFO -   States explored: 1, Updates: 1
+2026-02-06 23:11:37,712 - AGENT - DEBUG - Reward for DEPART_NOW: 143.0 (boarded=10, occupancy=85%)
+2026-02-06 23:11:37,712 - AGENT - DEBUG - Reward for WAIT_30: -7.5 (boarded=0, occupancy=40%)
+2026-02-06 23:11:37,712 - AGENT - DEBUG - Reward for SKIP_STOP: 8.0 (boarded=0, occupancy=60%)
+2026-02-06 23:11:37,712 - AGENT - DEBUG - Reward for DEPART_NOW: 165.0 (boarded=15, occupancy=120%)
+2026-02-06 23:11:37,712 - AGENT - INFO - QTable initialized for test_bus_1 (α=0.1, γ=0.95)
+2026-02-06 23:11:37,712 - AGENT - INFO - BusAgent test_bus_1 initialized for route_1
+2026-02-06 23:11:37,713 - AGENT - DEBUG - test_bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,713 - AGENT - DEBUG - test_bus_1 Q-update: state=2_1_0_1, action=0, Q=0.00→2.50, reward=25.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - test_bus_1 learned: reward=25.00, total_episode_reward=25.00
+2026-02-06 23:11:37,713 - AGENT - INFO - QTable initialized for bus_0 (α=0.1, γ=0.95)
+2026-02-06 23:11:37,713 - AGENT - INFO - BusAgent bus_0 initialized for route_1
+2026-02-06 23:11:37,713 - AGENT - INFO - Added agent bus_0 to coordinator
+2026-02-06 23:11:37,713 - AGENT - INFO - QTable initialized for bus_1 (α=0.1, γ=0.95)
+2026-02-06 23:11:37,713 - AGENT - INFO - BusAgent bus_1 initialized for route_1
+2026-02-06 23:11:37,713 - AGENT - INFO - Added agent bus_1 to coordinator
+2026-02-06 23:11:37,713 - AGENT - INFO - QTable initialized for bus_2 (α=0.1, γ=0.95)
+2026-02-06 23:11:37,713 - AGENT - INFO - BusAgent bus_2 initialized for route_1
+2026-02-06 23:11:37,713 - AGENT - INFO - Added agent bus_2 to coordinator
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_1 selected action: WAIT_30 (ε=0.200)
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_2 selected action: WAIT_30 (ε=0.200)
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_0 Q-update: state=0_0_0_1, action=0, Q=0.00→0.10, reward=1.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_0 learned: reward=1.00, total_episode_reward=1.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_1 Q-update: state=0_0_0_1, action=1, Q=0.00→0.00, reward=0.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_1 learned: reward=0.00, total_episode_reward=0.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_2 Q-update: state=0_0_0_1, action=1, Q=0.00→0.00, reward=0.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_2 learned: reward=0.00, total_episode_reward=0.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_1 selected action: WAIT_30 (ε=0.200)
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_2 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_0 Q-update: state=0_0_0_1, action=0, Q=0.10→0.19, reward=1.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_0 learned: reward=1.00, total_episode_reward=2.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_1 Q-update: state=0_0_0_1, action=1, Q=0.00→0.00, reward=0.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_1 learned: reward=0.00, total_episode_reward=0.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_2 Q-update: state=0_0_0_1, action=0, Q=0.00→0.10, reward=1.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_2 learned: reward=1.00, total_episode_reward=1.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_1 selected action: WAIT_30 (ε=0.200)
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_2 selected action: WAIT_60 (ε=0.200)
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_0 Q-update: state=1_0_0_1, action=0, Q=0.00→0.10, reward=1.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_0 learned: reward=1.00, total_episode_reward=3.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_1 Q-update: state=1_0_0_1, action=1, Q=0.00→0.00, reward=0.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_1 learned: reward=0.00, total_episode_reward=0.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_2 Q-update: state=1_0_0_1, action=2, Q=0.00→0.00, reward=0.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_2 learned: reward=0.00, total_episode_reward=1.00
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,713 - AGENT - DEBUG - bus_2 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 Q-update: state=1_0_0_1, action=0, Q=0.10→0.20, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 learned: reward=1.00, total_episode_reward=4.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 Q-update: state=1_0_0_1, action=0, Q=0.00→0.10, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 learned: reward=1.00, total_episode_reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 Q-update: state=1_0_0_1, action=0, Q=0.00→0.10, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 learned: reward=1.00, total_episode_reward=2.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 Q-update: state=1_0_0_1, action=0, Q=0.20→0.30, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 learned: reward=1.00, total_episode_reward=5.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 Q-update: state=1_0_0_1, action=0, Q=0.10→0.20, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 learned: reward=1.00, total_episode_reward=2.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 Q-update: state=1_0_0_1, action=0, Q=0.10→0.20, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 learned: reward=1.00, total_episode_reward=3.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 selected action: WAIT_60 (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 Q-update: state=1_0_0_1, action=0, Q=0.30→0.40, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 learned: reward=1.00, total_episode_reward=6.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 Q-update: state=1_0_0_1, action=0, Q=0.20→0.30, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 learned: reward=1.00, total_episode_reward=3.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 Q-update: state=1_0_0_1, action=2, Q=0.00→0.02, reward=0.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 learned: reward=0.00, total_episode_reward=3.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 Q-update: state=1_0_0_1, action=0, Q=0.40→0.50, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 learned: reward=1.00, total_episode_reward=7.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 Q-update: state=1_0_0_1, action=0, Q=0.30→0.40, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 learned: reward=1.00, total_episode_reward=4.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 Q-update: state=1_0_0_1, action=0, Q=0.20→0.30, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 learned: reward=1.00, total_episode_reward=4.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 Q-update: state=1_0_0_1, action=0, Q=0.50→0.59, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 learned: reward=1.00, total_episode_reward=8.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 Q-update: state=1_0_0_1, action=0, Q=0.40→0.50, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 learned: reward=1.00, total_episode_reward=5.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 Q-update: state=1_0_0_1, action=0, Q=0.30→0.40, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 learned: reward=1.00, total_episode_reward=5.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 selected action: WAIT_30 (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 Q-update: state=1_0_0_1, action=1, Q=0.00→0.06, reward=0.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 learned: reward=0.00, total_episode_reward=8.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 Q-update: state=1_0_0_1, action=0, Q=0.50→0.59, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 learned: reward=1.00, total_episode_reward=6.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 Q-update: state=1_0_0_1, action=0, Q=0.40→0.50, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 learned: reward=1.00, total_episode_reward=6.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 Q-update: state=1_0_0_1, action=0, Q=0.59→0.69, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_0 learned: reward=1.00, total_episode_reward=9.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 Q-update: state=1_0_0_1, action=0, Q=0.59→0.69, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_1 learned: reward=1.00, total_episode_reward=7.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 Q-update: state=1_0_0_1, action=0, Q=0.50→0.59, reward=1.00
+2026-02-06 23:11:37,714 - AGENT - DEBUG - bus_2 learned: reward=1.00, total_episode_reward=7.00
+2026-02-06 23:11:42,496 - AGENT - INFO - RewardCalculator initialized
+2026-02-06 23:11:42,496 - AGENT - INFO - MultiAgentCoordinator initialized
+2026-02-06 23:11:46,043 - AGENT - INFO - RewardCalculator initialized
+2026-02-06 23:11:46,044 - AGENT - INFO - MultiAgentCoordinator initialized
+2026-02-06 23:12:30,178 - AGENT - INFO - RewardCalculator initialized
+2026-02-06 23:12:30,178 - AGENT - INFO - MultiAgentCoordinator initialized
+2026-02-06 23:13:06,918 - AGENT - INFO - QTable initialized for bus_0 (α=0.1, γ=0.95)
+2026-02-06 23:13:06,918 - AGENT - INFO - BusAgent bus_0 initialized for route_1
+2026-02-06 23:13:06,918 - AGENT - INFO - Added agent bus_0 to coordinator
+2026-02-06 23:13:06,918 - AGENT - INFO - QTable initialized for bus_1 (α=0.1, γ=0.95)
+2026-02-06 23:13:06,918 - AGENT - INFO - BusAgent bus_1 initialized for route_1
+2026-02-06 23:13:06,918 - AGENT - INFO - Added agent bus_1 to coordinator
+2026-02-06 23:13:06,918 - AGENT - INFO - QTable initialized for bus_2 (α=0.1, γ=0.95)
+2026-02-06 23:13:06,918 - AGENT - INFO - BusAgent bus_2 initialized for route_1
+2026-02-06 23:13:06,918 - AGENT - INFO - Added agent bus_2 to coordinator
+2026-02-06 23:13:06,919 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:06,919 - AGENT - DEBUG - bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:06,919 - AGENT - DEBUG - bus_2 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:07,920 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:07,920 - AGENT - DEBUG - bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:07,920 - AGENT - DEBUG - bus_2 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:08,921 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:08,921 - AGENT - DEBUG - bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:08,921 - AGENT - DEBUG - bus_2 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:09,925 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:09,925 - AGENT - DEBUG - bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:09,925 - AGENT - DEBUG - bus_2 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:10,930 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:10,930 - AGENT - DEBUG - bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:10,930 - AGENT - DEBUG - bus_2 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:11,935 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:11,935 - AGENT - DEBUG - bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:11,935 - AGENT - DEBUG - bus_2 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:12,938 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:12,939 - AGENT - DEBUG - bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:12,939 - AGENT - DEBUG - bus_2 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:13,938 - AGENT - DEBUG - bus_0 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:13,939 - AGENT - DEBUG - bus_1 selected action: DEPART_NOW (ε=0.200)
+2026-02-06 23:13:13,939 - AGENT - DEBUG - bus_2 selected action: DEPART_NOW (ε=0.200)

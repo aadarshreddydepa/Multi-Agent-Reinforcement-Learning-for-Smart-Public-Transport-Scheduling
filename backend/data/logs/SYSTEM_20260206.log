@@ -6,3 +6,15 @@
 2026-02-06 22:56:07,654 - SYSTEM - INFO - Flask app initialized
 2026-02-06 22:56:07,893 - SYSTEM - INFO - Trainer initialized
 2026-02-06 22:56:07,904 - SYSTEM - INFO - Flask app initialized
+2026-02-06 23:11:42,496 - SYSTEM - INFO - Trainer initialized
+2026-02-06 23:11:42,510 - SYSTEM - INFO - Flask app initialized
+2026-02-06 23:11:46,044 - SYSTEM - INFO - Trainer initialized
+2026-02-06 23:11:46,055 - SYSTEM - INFO - Flask app initialized
+2026-02-06 23:12:30,178 - SYSTEM - INFO - Trainer initialized
+2026-02-06 23:12:30,190 - SYSTEM - INFO - Flask app initialized
+2026-02-06 23:13:06,918 - SYSTEM - INFO - Initializing agents...
+2026-02-06 23:13:06,919 - SYSTEM - INFO - Initialized 3 agents
+2026-02-06 23:13:06,919 - SYSTEM - INFO - Simulation loop started
+2026-02-06 23:13:06,920 - SYSTEM - INFO - Simulation started
+2026-02-06 23:13:14,153 - SYSTEM - INFO - Simulation stopped
+2026-02-06 23:13:14,942 - SYSTEM - INFO - Simulation loop ended
