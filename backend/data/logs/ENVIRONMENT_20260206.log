@@ -1,0 +1,117 @@
+2026-02-06 22:51:17,317 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 22:51:17,317 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 22:51:17,317 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 22:51:17,317 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:52:29,897 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 22:52:29,897 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 22:52:29,897 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 22:52:29,897 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:52:29,897 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:52:29,897 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-06 22:52:29,899 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:52:29,899 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-06 22:52:31,884 - ENVIRONMENT - DEBUG - Generated 12 passengers at main_gate (peak=True)
+2026-02-06 22:52:31,884 - ENVIRONMENT - DEBUG - Generated 4 passengers at main_gate (peak=False)
+2026-02-06 22:52:31,885 - ENVIRONMENT - DEBUG - Boarded 5 passengers at main_gate
+2026-02-06 22:52:31,885 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-06 22:53:48,713 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 22:53:48,713 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 22:53:48,713 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 22:53:48,713 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:53:48,713 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:53:48,713 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-06 22:53:48,713 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:53:48,713 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-06 22:53:48,724 - ENVIRONMENT - DEBUG - Generated 15 passengers at main_gate (peak=True)
+2026-02-06 22:53:48,724 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-06 22:53:48,724 - ENVIRONMENT - DEBUG - Boarded 5 passengers at main_gate
+2026-02-06 22:53:48,724 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-06 22:53:48,724 - ENVIRONMENT - INFO - Environment reset with 3 buses
+2026-02-06 22:54:17,772 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 22:54:17,773 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 22:54:17,773 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 22:54:17,773 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:54:17,773 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:54:17,773 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-06 22:54:17,773 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:54:17,773 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-06 22:54:17,784 - ENVIRONMENT - DEBUG - Generated 15 passengers at main_gate (peak=True)
+2026-02-06 22:54:17,784 - ENVIRONMENT - DEBUG - Generated 6 passengers at main_gate (peak=False)
+2026-02-06 22:54:17,784 - ENVIRONMENT - DEBUG - Boarded 5 passengers at main_gate
+2026-02-06 22:54:17,784 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-06 22:54:17,784 - ENVIRONMENT - INFO - Environment reset with 3 buses
+2026-02-06 22:54:17,784 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-06 22:54:29,367 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 22:54:29,367 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 22:54:29,367 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 22:54:29,367 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:54:29,367 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:54:29,367 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-06 22:54:29,367 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:54:29,367 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-06 22:54:29,378 - ENVIRONMENT - DEBUG - Generated 15 passengers at main_gate (peak=True)
+2026-02-06 22:54:29,378 - ENVIRONMENT - DEBUG - Generated 4 passengers at main_gate (peak=False)
+2026-02-06 22:54:29,378 - ENVIRONMENT - DEBUG - Boarded 5 passengers at main_gate
+2026-02-06 22:54:29,378 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-06 22:54:29,378 - ENVIRONMENT - INFO - Environment reset with 3 buses
+2026-02-06 22:54:29,883 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=False)
+2026-02-06 22:54:30,387 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-06 22:54:30,387 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-06 22:54:30,892 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-06 22:54:31,397 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-06 22:54:31,397 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=False)
+2026-02-06 22:54:36,866 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 22:54:36,866 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 22:54:36,866 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 22:54:36,866 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:54:36,866 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:54:36,866 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-06 22:54:36,878 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-06 22:54:36,878 - ENVIRONMENT - INFO - Environment reset with 3 buses
+2026-02-06 22:54:59,856 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 22:54:59,856 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 22:54:59,856 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 22:54:59,856 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:54:59,856 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:54:59,856 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-06 22:54:59,868 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-06 22:54:59,868 - ENVIRONMENT - INFO - Environment reset with 3 buses
+2026-02-06 22:54:59,869 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=False)
+2026-02-06 22:54:59,869 - ENVIRONMENT - DEBUG - Generated 4 passengers at canteen (peak=False)
+2026-02-06 22:54:59,869 - ENVIRONMENT - DEBUG - Generated 3 passengers at sports_complex (peak=False)
+2026-02-06 22:54:59,869 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-06 22:54:59,869 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-06 22:54:59,869 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-06 22:54:59,869 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=False)
+2026-02-06 22:54:59,869 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-06 22:54:59,869 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-06 22:54:59,870 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-06 22:54:59,870 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=False)
+2026-02-06 22:55:07,198 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 22:55:07,198 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 22:55:07,198 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 22:55:07,198 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:55:07,198 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:55:07,198 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-06 22:55:07,198 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:55:53,967 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 22:55:53,967 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 22:55:53,968 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 22:55:53,968 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:55:53,968 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:55:53,968 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-06 22:55:53,968 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:56:07,642 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 22:56:07,642 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 22:56:07,642 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 22:56:07,642 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:56:07,642 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:56:07,642 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-06 22:56:07,642 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:56:07,891 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-06 22:56:07,892 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-06 22:56:07,892 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-06 22:56:07,892 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:56:07,892 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-06 22:56:07,892 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-06 22:56:07,892 - ENVIRONMENT - INFO - PassengerDemand initialized

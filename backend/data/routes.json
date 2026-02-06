@@ -1,0 +1,23 @@
+{
+  "routes": [
+    {
+      "id": "route_1",
+      "name": "College Campus Circuit",
+      "description": "Main campus circular route covering all key locations",
+      "color": "#FF5722",
+      "stops": [
+        "main_gate",
+        "library",
+        "canteen",
+        "hostel_block_a",
+        "sports_complex",
+        "main_gate"
+      ],
+      "frequency_minutes": 15,
+      "operating_hours": {
+        "start": "07:00",
+        "end": "22:00"
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "stops": [
+    {
+      "id": "main_gate",
+      "name": "Main Gate",
+      "description": "College main entrance - High traffic area",
+      "location": {
+        "lat": 17.3850,
+        "lng": 78.4867
+      },
+      "capacity": 30,
+      "peak_demand_hours": ["08:00-09:00", "17:00-18:00"],
+      "amenities": ["shelter", "seating", "display_board"]
+    },
+    {
+      "id": "library",
+      "name": "Central Library",
+      "description": "Main library building",
+      "location": {
+        "lat": 17.3855,
+        "lng": 78.4872
+      },
+      "capacity": 20,
+      "peak_demand_hours": ["09:00-10:00", "14:00-15:00"],
+      "amenities": ["shelter", "seating"]
+    },
+    {
+      "id": "canteen",
+      "name": "Student Canteen",
+      "description": "Main dining facility",
+      "location": {
+        "lat": 17.3860,
+        "lng": 78.4877
+      },
+      "capacity": 25,
+      "peak_demand_hours": ["12:00-14:00", "18:00-19:00"],
+      "amenities": ["shelter", "seating", "water_fountain"]
+    },
+    {
+      "id": "hostel_block_a",
+      "name": "Hostel Block A",
+      "description": "Student residential area",
+      "location": {
+        "lat": 17.3865,
+        "lng": 78.4882
+      },
+      "capacity": 35,
+      "peak_demand_hours": ["07:00-08:00", "19:00-20:00"],
+      "amenities": ["shelter", "seating", "lighting"]
+    },
+    {
+      "id": "sports_complex",
+      "name": "Sports Complex",
+      "description": "Athletic facilities and gymnasium",
+      "location": {
+        "lat": 17.3870,
+        "lng": 78.4875
+      },
+      "capacity": 15,
+      "peak_demand_hours": ["16:00-18:00"],
+      "amenities": ["shelter", "seating"]
+    }
+  ]
+}
