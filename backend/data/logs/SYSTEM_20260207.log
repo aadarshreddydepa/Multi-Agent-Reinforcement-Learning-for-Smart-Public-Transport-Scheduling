@@ -1,0 +1,37 @@
+2026-02-07 19:25:51,999 - SYSTEM - INFO - Trainer initialized
+2026-02-07 19:25:52,015 - SYSTEM - INFO - Flask app initialized
+2026-02-07 19:25:52,236 - SYSTEM - INFO - Trainer initialized
+2026-02-07 19:25:52,246 - SYSTEM - INFO - Flask app initialized
+2026-02-07 19:29:46,013 - SYSTEM - INFO - Trainer initialized
+2026-02-07 19:29:46,028 - SYSTEM - INFO - Flask app initialized
+2026-02-07 19:29:46,263 - SYSTEM - INFO - Trainer initialized
+2026-02-07 19:29:46,273 - SYSTEM - INFO - Flask app initialized
+2026-02-07 19:29:47,997 - SYSTEM - INFO - Client connected: hXRj4pwe-qGc7kOfAAAB
+2026-02-07 19:29:51,530 - SYSTEM - INFO - Initializing agents...
+2026-02-07 19:29:51,531 - SYSTEM - INFO - Initialized 3 agents
+2026-02-07 19:29:51,532 - SYSTEM - INFO - Simulation loop started
+2026-02-07 19:29:51,532 - SYSTEM - INFO - Simulation started
+2026-02-07 19:30:13,670 - SYSTEM - INFO - Client disconnected: hXRj4pwe-qGc7kOfAAAB
+2026-02-07 19:30:56,780 - SYSTEM - INFO - Client connected: 5vyShcoDvUcafFEoAAAD
+2026-02-07 19:36:37,930 - SYSTEM - INFO - Simulation loop ended
+2026-02-07 19:36:38,044 - SYSTEM - INFO - Simulation reset
+2026-02-07 19:36:39,225 - SYSTEM - INFO - Simulation loop started
+2026-02-07 19:36:39,225 - SYSTEM - INFO - Simulation started
+2026-02-07 19:47:41,026 - SYSTEM - INFO - Trainer initialized
+2026-02-07 19:47:41,042 - SYSTEM - INFO - Flask app initialized
+2026-02-07 19:47:41,277 - SYSTEM - INFO - Trainer initialized
+2026-02-07 19:47:41,287 - SYSTEM - INFO - Flask app initialized
+2026-02-07 19:47:42,651 - SYSTEM - INFO - Client connected: v6InLhv7_2ikAo2GAAAB
+2026-02-07 19:47:46,526 - SYSTEM - INFO - Client disconnected: v6InLhv7_2ikAo2GAAAB
+2026-02-07 19:47:49,113 - SYSTEM - INFO - Client connected: 34_WSjwrayBOM7zQAAAD
+2026-02-07 19:47:49,718 - SYSTEM - INFO - Initializing agents...
+2026-02-07 19:47:49,719 - SYSTEM - INFO - Initialized 3 agents
+2026-02-07 19:47:49,719 - SYSTEM - INFO - Simulation loop started
+2026-02-07 19:47:49,719 - SYSTEM - INFO - Simulation started
+2026-02-07 19:48:33,663 - SYSTEM - INFO - Client disconnected: 34_WSjwrayBOM7zQAAAD
+2026-02-07 19:52:58,737 - SYSTEM - INFO - Trainer initialized
+2026-02-07 19:52:58,753 - SYSTEM - INFO - Flask app initialized
+2026-02-07 19:53:06,123 - SYSTEM - INFO - Trainer initialized
+2026-02-07 19:53:06,134 - SYSTEM - INFO - Flask app initialized
+2026-02-07 19:53:18,580 - SYSTEM - INFO - Trainer initialized
+2026-02-07 19:53:18,591 - SYSTEM - INFO - Flask app initialized

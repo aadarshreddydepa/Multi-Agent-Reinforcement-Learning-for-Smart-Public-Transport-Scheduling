@@ -1,0 +1,346 @@
+2026-02-07 19:25:51,997 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-07 19:25:51,998 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-07 19:25:51,998 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-07 19:25:51,998 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:25:51,998 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:25:51,998 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-07 19:25:51,998 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:25:52,234 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-07 19:25:52,234 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-07 19:25:52,234 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-07 19:25:52,234 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:25:52,234 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:25:52,234 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-07 19:25:52,235 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:29:46,010 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-07 19:29:46,010 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-07 19:29:46,010 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-07 19:29:46,010 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:29:46,010 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:29:46,010 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-07 19:29:46,011 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:29:46,261 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-07 19:29:46,261 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-07 19:29:46,261 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-07 19:29:46,261 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:29:46,261 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:29:46,261 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-07 19:29:46,262 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:29:51,530 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-07 19:29:51,530 - ENVIRONMENT - INFO - Environment reset with 3 buses
+2026-02-07 19:29:51,531 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-07 19:29:51,531 - ENVIRONMENT - INFO - Environment reset with 3 buses
+2026-02-07 19:29:53,542 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:29:54,544 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:29:55,549 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:29:56,550 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:29:56,550 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:29:57,553 - ENVIRONMENT - DEBUG - Generated 3 passengers at hostel_block_a (peak=True)
+2026-02-07 19:29:57,553 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:29:58,556 - ENVIRONMENT - DEBUG - Generated 2 passengers at library (peak=False)
+2026-02-07 19:29:58,556 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:29:58,556 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:29:59,558 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:01,565 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:30:01,565 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:01,565 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:30:02,570 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:30:02,570 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:30:03,575 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:30:04,580 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:30:06,586 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:30:06,586 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:30:07,591 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:30:07,591 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:30:08,596 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:09,596 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:09,596 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:30:10,601 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:30:10,602 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:30:11,606 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:12,609 - ENVIRONMENT - DEBUG - Generated 2 passengers at library (peak=False)
+2026-02-07 19:30:12,609 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:30:13,614 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:13,614 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:30:14,618 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:14,618 - ENVIRONMENT - DEBUG - Generated 3 passengers at hostel_block_a (peak=True)
+2026-02-07 19:30:15,623 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:30:15,623 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:15,623 - ENVIRONMENT - DEBUG - Generated 3 passengers at hostel_block_a (peak=True)
+2026-02-07 19:30:16,624 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:30:17,630 - ENVIRONMENT - DEBUG - Generated 4 passengers at hostel_block_a (peak=True)
+2026-02-07 19:30:18,631 - ENVIRONMENT - DEBUG - Generated 2 passengers at main_gate (peak=False)
+2026-02-07 19:30:18,631 - ENVIRONMENT - DEBUG - Generated 2 passengers at library (peak=False)
+2026-02-07 19:30:18,631 - ENVIRONMENT - DEBUG - Generated 2 passengers at canteen (peak=False)
+2026-02-07 19:30:19,636 - ENVIRONMENT - DEBUG - Generated 3 passengers at library (peak=False)
+2026-02-07 19:30:20,641 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:30:20,641 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:20,641 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:30:20,641 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:30:22,646 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:30:25,659 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:30:26,664 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:27,669 - ENVIRONMENT - DEBUG - Generated 4 passengers at hostel_block_a (peak=True)
+2026-02-07 19:30:28,674 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:30:28,674 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:30:29,675 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:30:31,676 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:30:32,681 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:30:33,685 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:30:34,685 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:30:34,685 - ENVIRONMENT - DEBUG - Generated 2 passengers at sports_complex (peak=False)
+2026-02-07 19:30:35,691 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:30:37,697 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:30:37,697 - ENVIRONMENT - DEBUG - Generated 2 passengers at sports_complex (peak=False)
+2026-02-07 19:30:38,702 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:30:39,708 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:40,712 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:41,717 - ENVIRONMENT - DEBUG - Generated 2 passengers at main_gate (peak=False)
+2026-02-07 19:30:42,722 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:44,731 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:30:48,745 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:30:48,746 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:49,751 - ENVIRONMENT - DEBUG - Generated 2 passengers at main_gate (peak=False)
+2026-02-07 19:30:49,752 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:51,759 - ENVIRONMENT - DEBUG - Generated 2 passengers at main_gate (peak=False)
+2026-02-07 19:30:53,766 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:30:53,766 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:54,770 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:30:55,775 - ENVIRONMENT - DEBUG - Generated 2 passengers at canteen (peak=False)
+2026-02-07 19:30:59,791 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:31:02,806 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:31:05,821 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:31:10,837 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:31:11,842 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:31:13,849 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:31:21,881 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:31:24,891 - ENVIRONMENT - DEBUG - Generated 2 passengers at main_gate (peak=False)
+2026-02-07 19:31:25,893 - ENVIRONMENT - DEBUG - Generated 2 passengers at main_gate (peak=False)
+2026-02-07 19:31:26,897 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:31:27,900 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:31:33,920 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:31:36,931 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:31:37,934 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:31:39,942 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:31:42,957 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:36:38,042 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-07 19:36:38,043 - ENVIRONMENT - INFO - Environment reset with 3 buses
+2026-02-07 19:36:39,224 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-07 19:36:39,225 - ENVIRONMENT - INFO - Environment reset with 3 buses
+2026-02-07 19:36:39,226 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:36:39,228 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:36:40,231 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:36:41,235 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:36:42,238 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:36:43,240 - ENVIRONMENT - DEBUG - Generated 5 passengers at hostel_block_a (peak=True)
+2026-02-07 19:36:43,240 - ENVIRONMENT - DEBUG - Generated 2 passengers at sports_complex (peak=False)
+2026-02-07 19:36:44,242 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:36:45,242 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:36:45,243 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:36:45,243 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:36:46,246 - ENVIRONMENT - DEBUG - Generated 2 passengers at canteen (peak=False)
+2026-02-07 19:36:46,246 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:36:47,250 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:36:47,250 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:36:47,250 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:36:48,251 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:36:49,250 - ENVIRONMENT - DEBUG - Generated 3 passengers at hostel_block_a (peak=True)
+2026-02-07 19:36:49,251 - ENVIRONMENT - DEBUG - Generated 2 passengers at sports_complex (peak=False)
+2026-02-07 19:36:50,255 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:36:50,256 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:36:51,258 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:36:53,265 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:36:54,270 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:36:54,270 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:36:55,273 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:36:55,273 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:36:55,273 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:36:55,273 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:36:56,273 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:36:56,273 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:36:58,274 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:36:58,274 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:36:58,274 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:37:00,285 - ENVIRONMENT - DEBUG - Generated 2 passengers at library (peak=False)
+2026-02-07 19:37:00,285 - ENVIRONMENT - DEBUG - Generated 2 passengers at canteen (peak=False)
+2026-02-07 19:37:01,290 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:37:01,290 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:37:03,295 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:37:03,295 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:37:04,298 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:37:04,298 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:37:05,298 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:37:07,306 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:37:07,306 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:37:07,306 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:37:09,315 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:37:09,316 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:37:10,320 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:37:11,323 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:37:11,323 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:37:12,328 - ENVIRONMENT - DEBUG - Generated 2 passengers at library (peak=False)
+2026-02-07 19:37:12,328 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:37:12,328 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:37:13,332 - ENVIRONMENT - DEBUG - Generated 3 passengers at hostel_block_a (peak=True)
+2026-02-07 19:37:14,335 - ENVIRONMENT - DEBUG - Generated 2 passengers at sports_complex (peak=False)
+2026-02-07 19:37:16,344 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:37:19,353 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:37:22,359 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:37:23,364 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:37:26,374 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:37:27,378 - ENVIRONMENT - DEBUG - Generated 2 passengers at main_gate (peak=False)
+2026-02-07 19:37:28,381 - ENVIRONMENT - DEBUG - Generated 2 passengers at main_gate (peak=False)
+2026-02-07 19:37:28,381 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:37:31,389 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:37:32,395 - ENVIRONMENT - DEBUG - Generated 3 passengers at library (peak=False)
+2026-02-07 19:37:32,395 - ENVIRONMENT - DEBUG - Generated 2 passengers at canteen (peak=False)
+2026-02-07 19:37:34,400 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:37:35,403 - ENVIRONMENT - DEBUG - Generated 2 passengers at main_gate (peak=False)
+2026-02-07 19:37:36,406 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:37:37,408 - ENVIRONMENT - DEBUG - Generated 2 passengers at main_gate (peak=False)
+2026-02-07 19:37:37,408 - ENVIRONMENT - DEBUG - Generated 2 passengers at canteen (peak=False)
+2026-02-07 19:37:40,423 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:37:41,428 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:37:42,432 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:37:43,432 - ENVIRONMENT - DEBUG - Generated 2 passengers at main_gate (peak=False)
+2026-02-07 19:37:44,437 - ENVIRONMENT - DEBUG - Generated 2 passengers at canteen (peak=False)
+2026-02-07 19:37:45,440 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:37:49,449 - ENVIRONMENT - DEBUG - Generated 2 passengers at main_gate (peak=False)
+2026-02-07 19:37:51,456 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:37:52,461 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:37:54,471 - ENVIRONMENT - DEBUG - Generated 2 passengers at library (peak=False)
+2026-02-07 19:38:05,501 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:38:06,507 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:38:08,511 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:38:08,511 - ENVIRONMENT - DEBUG - Generated 2 passengers at library (peak=False)
+2026-02-07 19:38:09,516 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:38:10,522 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:38:11,523 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:38:21,559 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:47:41,024 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-07 19:47:41,024 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-07 19:47:41,024 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-07 19:47:41,024 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:47:41,024 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:47:41,024 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-07 19:47:41,025 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:47:41,275 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-07 19:47:41,275 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-07 19:47:41,275 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-07 19:47:41,275 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:47:41,275 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:47:41,275 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-07 19:47:41,276 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:47:49,718 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-07 19:47:49,719 - ENVIRONMENT - INFO - Environment reset with 3 buses
+2026-02-07 19:47:49,719 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-07 19:47:49,719 - ENVIRONMENT - INFO - Environment reset with 3 buses
+2026-02-07 19:47:49,745 - ENVIRONMENT - DEBUG - Generated 3 passengers at library (peak=False)
+2026-02-07 19:47:50,731 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:47:51,734 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:47:51,734 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:47:51,734 - ENVIRONMENT - DEBUG - Generated 3 passengers at hostel_block_a (peak=True)
+2026-02-07 19:47:52,740 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:47:53,743 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:47:54,747 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:47:54,747 - ENVIRONMENT - DEBUG - Generated 2 passengers at sports_complex (peak=False)
+2026-02-07 19:47:55,753 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:47:55,753 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:47:56,753 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:47:56,753 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:47:57,758 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:47:57,758 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:47:57,758 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:47:59,774 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:47:59,774 - ENVIRONMENT - DEBUG - Generated 3 passengers at hostel_block_a (peak=True)
+2026-02-07 19:48:00,780 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:48:01,781 - ENVIRONMENT - DEBUG - Generated 2 passengers at main_gate (peak=False)
+2026-02-07 19:48:01,782 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:48:02,785 - ENVIRONMENT - DEBUG - Generated 3 passengers at main_gate (peak=False)
+2026-02-07 19:48:02,785 - ENVIRONMENT - DEBUG - Generated 7 passengers at hostel_block_a (peak=True)
+2026-02-07 19:48:03,788 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:48:04,790 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:48:04,790 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:48:05,795 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:48:06,799 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:48:06,799 - ENVIRONMENT - DEBUG - Generated 3 passengers at hostel_block_a (peak=True)
+2026-02-07 19:48:07,803 - ENVIRONMENT - DEBUG - Generated 2 passengers at canteen (peak=False)
+2026-02-07 19:48:07,803 - ENVIRONMENT - DEBUG - Generated 2 passengers at sports_complex (peak=False)
+2026-02-07 19:48:08,804 - ENVIRONMENT - DEBUG - Generated 2 passengers at main_gate (peak=False)
+2026-02-07 19:48:09,809 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:48:10,810 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:48:10,810 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:48:10,810 - ENVIRONMENT - DEBUG - Generated 2 passengers at sports_complex (peak=False)
+2026-02-07 19:48:11,812 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:48:11,813 - ENVIRONMENT - DEBUG - Generated 2 passengers at sports_complex (peak=False)
+2026-02-07 19:48:12,815 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:48:12,815 - ENVIRONMENT - DEBUG - Generated 3 passengers at hostel_block_a (peak=True)
+2026-02-07 19:48:13,820 - ENVIRONMENT - DEBUG - Generated 1 passengers at hostel_block_a (peak=True)
+2026-02-07 19:48:13,821 - ENVIRONMENT - DEBUG - Generated 2 passengers at sports_complex (peak=False)
+2026-02-07 19:48:15,824 - ENVIRONMENT - DEBUG - Generated 2 passengers at hostel_block_a (peak=True)
+2026-02-07 19:48:16,824 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:48:16,824 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:48:17,830 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:48:18,832 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:48:19,836 - ENVIRONMENT - DEBUG - Generated 4 passengers at library (peak=False)
+2026-02-07 19:48:19,836 - ENVIRONMENT - DEBUG - Generated 2 passengers at sports_complex (peak=False)
+2026-02-07 19:48:20,840 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:48:20,840 - ENVIRONMENT - DEBUG - Generated 1 passengers at sports_complex (peak=False)
+2026-02-07 19:48:23,847 - ENVIRONMENT - DEBUG - Generated 2 passengers at library (peak=False)
+2026-02-07 19:48:25,851 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:48:26,854 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:48:26,855 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:48:28,862 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:48:30,872 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:48:32,881 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:48:35,894 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:48:35,894 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:48:38,900 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:48:40,909 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:48:40,910 - ENVIRONMENT - DEBUG - Generated 2 passengers at canteen (peak=False)
+2026-02-07 19:48:43,921 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:48:43,921 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:48:44,925 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:48:45,930 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:48:47,936 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:48:50,951 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:48:54,963 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:48:55,968 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:48:56,973 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:48:56,973 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:48:58,983 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:48:59,985 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:49:02,996 - ENVIRONMENT - DEBUG - Generated 1 passengers at library (peak=False)
+2026-02-07 19:49:05,002 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:49:06,003 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:49:09,018 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:49:10,021 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:49:10,021 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:49:11,025 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:49:11,025 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:49:13,035 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:49:19,053 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:49:20,058 - ENVIRONMENT - DEBUG - Generated 1 passengers at main_gate (peak=False)
+2026-02-07 19:49:21,063 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:49:26,085 - ENVIRONMENT - DEBUG - Generated 1 passengers at canteen (peak=False)
+2026-02-07 19:52:58,734 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-07 19:52:58,734 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-07 19:52:58,734 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-07 19:52:58,734 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:52:58,734 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:52:58,734 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-07 19:52:58,735 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:53:06,122 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-07 19:53:06,122 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-07 19:53:06,122 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-07 19:53:06,122 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:53:06,122 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:53:06,122 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-07 19:53:06,122 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:53:18,578 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-07 19:53:18,578 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-07 19:53:18,578 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-07 19:53:18,578 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:53:18,578 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-07 19:53:18,578 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-07 19:53:18,578 - ENVIRONMENT - INFO - PassengerDemand initialized

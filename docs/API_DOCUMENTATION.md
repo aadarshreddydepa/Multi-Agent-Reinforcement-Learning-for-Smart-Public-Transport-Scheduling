@@ -4,7 +4,7 @@
 
 The Smart Bus MARL backend provides a **REST API** and **WebSocket interface** for real-time bus simulation and control.
 
-**Base URL**: `http://localhost:5000`
+**Base URL**: `http://localhost:5001`
 
 ---
 
@@ -407,16 +407,16 @@ Sent automatically when simulation is running.
 import requests
 
 # Start simulation
-response = requests.post('http://localhost:5000/api/simulation/start',
+response = requests.post('http://localhost:5001/api/simulation/start',
                         json={'use_trained_agents': True})
 print(response.json())
 
 # Get current state
-state = requests.get('http://localhost:5000/api/state').json()
+state = requests.get('http://localhost:5001/api/state').json()
 print(f"Buses: {len(state['buses'])}")
 
 # Stop simulation
-requests.post('http://localhost:5000/api/simulation/stop')
+requests.post('http://localhost:5001/api/simulation/stop')
 ```
 
 ---
@@ -425,7 +425,7 @@ requests.post('http://localhost:5000/api/simulation/stop')
 
 ```javascript
 // Start simulation
-fetch('http://localhost:5000/api/simulation/start', {
+fetch('http://localhost:5001/api/simulation/start', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ use_trained_agents: true })
@@ -434,7 +434,7 @@ fetch('http://localhost:5000/api/simulation/start', {
 .then(data => console.log(data));
 
 // Get state
-fetch('http://localhost:5000/api/state')
+fetch('http://localhost:5001/api/state')
   .then(res => res.json())
   .then(state => console.log(state));
 ```
@@ -446,7 +446,7 @@ fetch('http://localhost:5000/api/state')
 ```javascript
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:5000');
+const socket = io('http://localhost:5001');
 
 // Connection
 socket.on('connect', () => {
@@ -541,8 +541,8 @@ python backend/test_api.py
 python backend/test_websocket.py
 
 # Manual testing with curl
-curl http://localhost:5000/api/status
-curl -X POST http://localhost:5000/api/simulation/start
+curl http://localhost:5001/api/status
+curl -X POST http://localhost:5001/api/simulation/start
 ```
 
 ---
@@ -560,7 +560,7 @@ curl -X POST http://localhost:5000/api/simulation/start
 
 **WebSocket not connecting?**
 - Check CORS origins
-- Verify port 5000 is not blocked
+- Verify port 5001 is not blocked
 - Ensure backend is running
 
 **State updates not received?**

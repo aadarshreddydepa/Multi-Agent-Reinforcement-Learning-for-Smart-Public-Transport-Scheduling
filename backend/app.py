@@ -201,6 +201,91 @@ def reset_simulation():
         'was_running': was_running
     })
 
+@app.route('/api/buses/add', methods=['POST'])
+def add_bus():
+    """Add a new bus to handle increased demand"""
+    try:
+        success = traffic_env.add_bus_on_demand()
+        
+        if success:
+            system_logger.info("Manual bus added via API")
+            return jsonify({
+                'success': True,
+                'message': 'Bus added successfully',
+                'total_buses': len(traffic_env.buses)
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'message': 'Maximum bus limit reached or insufficient demand'
+            }), 400
+            
+    except Exception as e:
+        system_logger.error(f"Error adding bus: {e}")
+        return jsonify({
+            'success': False,
+            'message': f'Error adding bus: {str(e)}'
+        }), 500
+
+@app.route('/api/buses/<bus_id>/remove', methods=['DELETE'])
+def remove_bus(bus_id):
+    """Remove a dynamic bus"""
+    try:
+        success = traffic_env.remove_bus_on_demand(bus_id)
+        
+        if success:
+            system_logger.info(f"Manual bus removal via API: {bus_id}")
+            return jsonify({
+                'success': True,
+                'message': f'Bus {bus_id} removed successfully',
+                'total_buses': len(traffic_env.buses)
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'message': f'Cannot remove bus {bus_id}. Only dynamic buses can be removed.'
+            }), 400
+            
+    except Exception as e:
+        system_logger.error(f"Error removing bus: {e}")
+        return jsonify({
+            'success': False,
+            'message': f'Error removing bus: {str(e)}'
+        }), 500
+
+@app.route('/api/buses', methods=['GET'])
+def get_buses():
+    """Get detailed information about all buses"""
+    try:
+        buses_info = []
+        for bus_id, bus in traffic_env.buses.items():
+            buses_info.append({
+                'id': bus['id'],
+                'route_id': bus['route_id'],
+                'state': bus['state'],
+                'current_stop': bus['current_stop'],
+                'target_stop': bus.get('target_stop'),
+                'passengers_count': len(bus['passengers']),
+                'capacity': bus['capacity'],
+                'occupancy_rate': len(bus['passengers']) / bus['capacity'] * 100,
+                'position': bus['position'],
+                'is_dynamic': bus.get('is_dynamic', False)
+            })
+        
+        return jsonify({
+            'success': True,
+            'buses': buses_info,
+            'total_buses': len(buses_info),
+            'dynamic_buses': len([b for b in buses_info if b['is_dynamic']])
+        })
+        
+    except Exception as e:
+        system_logger.error(f"Error getting buses: {e}")
+        return jsonify({
+            'success': False,
+            'message': f'Error getting buses: {str(e)}'
+        }), 500
+
 @app.route('/api/agent/<agent_id>/decision', methods=['GET'])
 def get_agent_decision(agent_id):
     """Get explanation for agent's decision"""

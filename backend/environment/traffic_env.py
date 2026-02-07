@@ -226,7 +226,7 @@ class PassengerDemand:
         env_logger.info(f"Rush hour simulated at {stop_id}: {num_passengers} passengers")
 
 class TrafficEnvironment:
-    """Main traffic environment for bus simulation"""
+    """Main traffic environment for bus simulation with intelligent movement"""
     
     def __init__(self):
         """Initialize traffic environment"""
@@ -234,6 +234,10 @@ class TrafficEnvironment:
         self.simulation_time = 0.0
         self.passenger_demand = PassengerDemand()
         self.route_manager = route_manager
+        self.bus_routes = {}  # Track each bus's route progress
+        self.dynamic_buses = []  # List of dynamically added buses
+        self.demand_threshold = 15  # Threshold for adding new buses
+        self.max_buses = 10  # Maximum buses allowed
         env_logger.info("TrafficEnvironment initialized")
     
     def reset(self):
@@ -269,14 +273,17 @@ class TrafficEnvironment:
         return self.get_state()
     
     def step(self, actions):
-        """Execute one simulation step"""
+        """Execute one simulation step with intelligent bus movement"""
         self.simulation_time += Config.UPDATE_INTERVAL
         
         # Generate passengers at stops
         for stop_id in self.route_manager.stops.keys():
             self.passenger_demand.generate_passengers(stop_id, delta_time=Config.UPDATE_INTERVAL)
         
-        # Process bus actions
+        # Check for dynamic bus allocation based on demand
+        self._manage_dynamic_buses()
+        
+        # Process bus actions and movement
         rewards = {}
         observations = {}
         
@@ -284,25 +291,16 @@ class TrafficEnvironment:
             if bus_id in self.buses:
                 bus = self.buses[bus_id]
                 
-                # Simple reward logic
-                reward = 0.0
-                if action == 'DEPART_NOW':
-                    reward = 1.0
-                elif action == 'WAIT':
-                    reward = -0.1
-                
+                # Execute action and calculate reward
+                reward = self._execute_bus_action(bus, action)
                 rewards[bus_id] = reward
                 observations[bus_id] = self._get_observation_for_bus(bus_id)
         
-        # Update bus states (simplified)
-        for bus_id, bus in self.buses.items():
-            if bus_id in actions and actions[bus_id] == 'DEPART_NOW':
-                bus['state'] = 'IN_TRANSIT'
-            elif bus['state'] == 'IN_TRANSIT':
-                # Simplified movement
-                bus['state'] = 'AT_STOP'
+        # Update bus positions and states
+        self._update_bus_positions()
         
-        done = self.simulation_time >= 300  # 5 minutes max simulation time
+        # Check if simulation should end
+        done = self.simulation_time >= 1800  # 30 minutes max simulation time
         
         return observations, rewards, done
     
@@ -312,6 +310,184 @@ class TrafficEnvironment:
         for bus_id in self.buses.keys():
             observations[bus_id] = self._get_observation_for_bus(bus_id)
         return observations
+    
+    def _execute_bus_action(self, bus, action):
+        """Execute bus action with intelligent decision making"""
+        reward = 0.0
+        current_stop = bus['current_stop']
+        
+        if action == 'DEPART_NOW':
+            # Board passengers before departing
+            queue_length = len(self.passenger_demand.stop_queues.get(current_stop, []))
+            available_space = bus['capacity'] - len(bus['passengers'])
+            
+            if queue_length > 0 and available_space > 0:
+                passengers_to_board = min(queue_length, available_space)
+                boarded = self.passenger_demand.board_passengers(current_stop, passengers_to_board)
+                bus['passengers'].extend(boarded)
+                
+                # Reward based on passengers served and efficiency
+                occupancy_rate = len(bus['passengers']) / bus['capacity']
+                reward = len(boarded) * 10 + occupancy_rate * 5
+                
+                env_logger.debug(f"Bus {bus['id']} boarded {len(boarded)} passengers at {current_stop}")
+            else:
+                # Small penalty for departing with no passengers or full bus
+                reward = -2.0
+            
+            # Start transit to next stop
+            bus['state'] = 'IN_TRANSIT'
+            self._set_next_destination(bus)
+            
+        elif action == 'WAIT_30':
+            # Wait for more passengers - reward depends on demand
+            queue_length = len(self.passenger_demand.stop_queues.get(current_stop, []))
+            if queue_length > 5:
+                reward = 1.0  # Good decision to wait
+            else:
+                reward = -0.5  # Unnecessary waiting
+            
+        elif action == 'SKIP_STOP':
+            # Skip stop - penalize if there are passengers waiting
+            queue_length = len(self.passenger_demand.stop_queues.get(current_stop, []))
+            if queue_length > 0:
+                reward = -5.0  # Bad decision to skip
+            else:
+                reward = 2.0  # Good decision to skip empty stop
+            
+            # Move to next stop
+            bus['state'] = 'IN_TRANSIT'
+            self._set_next_destination(bus)
+        
+        return reward
+    
+    def _set_next_destination(self, bus):
+        """Set next destination for bus based on passenger demand"""
+        route_stops = self.route_manager.get_route_stops(bus['route_id'])
+        current_index = route_stops.index(bus['current_stop']) if bus['current_stop'] in route_stops else 0
+        
+        # Find next stop with highest demand
+        next_stop_index = (current_index + 1) % len(route_stops)
+        next_stop = route_stops[next_stop_index]
+        
+        # Initialize route progress if not exists
+        if bus['id'] not in self.bus_routes:
+            self.bus_routes[bus['id']] = {
+                'current_index': current_index,
+                'target_stop': next_stop,
+                'progress': 0.0  # 0 = at current stop, 1 = at next stop
+            }
+        else:
+            self.bus_routes[bus['id']]['target_stop'] = next_stop
+            self.bus_routes[bus['id']]['progress'] = 0.0
+        
+        bus['target_stop'] = next_stop
+    
+    def _update_bus_positions(self):
+        """Update bus positions with smooth transitions"""
+        for bus_id, bus in self.buses.items():
+            if bus['state'] == 'IN_TRANSIT':
+                route_info = self.bus_routes.get(bus_id)
+                if route_info:
+                    # Update progress towards next stop
+                    route_info['progress'] += 0.1  # Move 10% closer each step
+                    
+                    if route_info['progress'] >= 1.0:
+                        # Arrived at next stop
+                        bus['current_stop'] = route_info['target_stop']
+                        bus['state'] = 'AT_STOP'
+                        route_info['progress'] = 0.0
+                        
+                        # Update position to exact stop coordinates
+                        stop_data = self.route_manager.stops[bus['current_stop']]
+                        bus['position'] = {
+                            'lat': stop_data.get('lat', 17.3850),
+                            'lng': stop_data.get('lng', 78.4867)
+                        }
+                    else:
+                        # Interpolate position between stops
+                        self._interpolate_bus_position(bus)
+    
+    def _interpolate_bus_position(self, bus):
+        """Interpolate bus position between stops for smooth movement"""
+        route_info = self.bus_routes[bus['id']]
+        current_stop_data = self.route_manager.stops[bus['current_stop']]
+        target_stop_data = self.route_manager.stops[route_info['target_stop']]
+        
+        # Linear interpolation
+        progress = route_info['progress']
+        
+        bus['position'] = {
+            'lat': current_stop_data.get('lat', 17.3850) + 
+                   (target_stop_data.get('lat', 17.3850) - current_stop_data.get('lat', 17.3850)) * progress,
+            'lng': current_stop_data.get('lng', 78.4867) + 
+                   (target_stop_data.get('lng', 78.4867) - current_stop_data.get('lng', 78.4867)) * progress
+        }
+    
+    def _manage_dynamic_buses(self):
+        """Add or remove buses based on passenger demand"""
+        total_waiting = self.passenger_demand.get_total_waiting()
+        current_buses = len(self.buses)
+        
+        # Add buses if demand is high
+        if total_waiting > self.demand_threshold and current_buses < self.max_buses:
+            if not any(bus_id.startswith('dynamic_') for bus_id in self.buses.keys()):
+                # Add a dynamic bus
+                self._add_dynamic_bus()
+        
+        # Remove dynamic buses if demand is low
+        elif total_waiting < 5 and current_buses > Config.NUM_BUSES:
+            dynamic_buses = [bus_id for bus_id in self.buses.keys() if bus_id.startswith('dynamic_')]
+            if dynamic_buses:
+                self._remove_dynamic_bus(dynamic_buses[0])
+    
+    def _add_dynamic_bus(self):
+        """Add a new bus to handle high demand"""
+        bus_id = f'dynamic_{len(self.dynamic_buses)}'
+        first_stop_id = list(self.route_manager.stops.keys())[0]
+        first_stop = self.route_manager.stops[first_stop_id]
+        
+        new_bus = {
+            'id': bus_id,
+            'route_id': 'route_1',
+            'state': 'AT_STOP',
+            'current_stop': first_stop_id,
+            'passengers': [],
+            'capacity': Config.BUS_CAPACITY,
+            'position': {
+                'lat': first_stop.get('lat', 17.3850),
+                'lng': first_stop.get('lng', 78.4867)
+            },
+            'is_dynamic': True
+        }
+        
+        self.buses[bus_id] = new_bus
+        self.dynamic_buses.append(bus_id)
+        
+        env_logger.info(f"Added dynamic bus {bus_id} to handle high demand")
+    
+    def _remove_dynamic_bus(self, bus_id):
+        """Remove a dynamic bus when demand is low"""
+        if bus_id in self.buses and self.buses[bus_id].get('is_dynamic'):
+            del self.buses[bus_id]
+            self.dynamic_buses.remove(bus_id)
+            if bus_id in self.bus_routes:
+                del self.bus_routes[bus_id]
+            
+            env_logger.info(f"Removed dynamic bus {bus_id} due to low demand")
+    
+    def add_bus_on_demand(self):
+        """Manually add a bus (for frontend control)"""
+        if len(self.buses) < self.max_buses:
+            self._add_dynamic_bus()
+            return True
+        return False
+    
+    def remove_bus_on_demand(self, bus_id):
+        """Manually remove a bus (for frontend control)"""
+        if bus_id in self.buses and self.buses[bus_id].get('is_dynamic'):
+            self._remove_dynamic_bus(bus_id)
+            return False
     
     def _get_observation_for_bus(self, bus_id):
         """Get observation for specific bus"""

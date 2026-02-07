@@ -74,8 +74,8 @@ def test_websocket():
     
     try:
         # Connect to backend
-        print("\nConnecting to http://localhost:5000...")
-        sio.connect('http://localhost:5000')
+        print("\nConnecting to http://localhost:5001...")
+        sio.connect('http://localhost:5001')
         
         # Wait for initial connection
         time.sleep(1)
@@ -121,6 +121,6 @@ if __name__ == "__main__":
         test_websocket()
     except socketio.exceptions.ConnectionError:
         print("\n✗ ERROR: Could not connect to backend")
-        print("Make sure backend is running on http://localhost:5000")
+        print("Make sure backend is running on http://localhost:5001")
     except Exception as e:
         print(f"\n✗ ERROR: {e}")

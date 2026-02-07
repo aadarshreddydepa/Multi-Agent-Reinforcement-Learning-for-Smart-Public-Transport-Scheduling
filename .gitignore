@@ -2,3 +2,6 @@
 /setups
 /quick_start.sh
 backend/venv
+
+node_modules
+
