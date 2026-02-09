@@ -33,8 +33,9 @@ export const apiService = {
   startSimulation: async (useTrained = false) => (await api.post('/api/simulation/start', { use_trained_agents: useTrained })).data,
   stopSimulation: async () => (await api.post('/api/simulation/stop')).data,
   resetSimulation: async () => (await api.post('/api/simulation/reset')).data,
+  startTraining: async (numEpisodes = 100) => (await api.post('/api/training/start', { num_episodes: numEpisodes })).data,
   addBus: async () => (await api.post('/api/buses/add')).data,
-  removeBus: async (busId) => (await api.delete(`/api/buses/${busId}`)).data,
+  removeBus: async (busId) => (await api.delete(`/api/buses/${busId}/remove`)).data,
 };
 
 export default apiService;

@@ -2,6 +2,7 @@ import React from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import BusMarker from './BusMarker';
 import StopMarker from './StopMarker';
+import RouteVisualization from './RouteVisualization';
 import 'leaflet/dist/leaflet.css';
 
 const Map = ({ buses, stops, stopPassengers, center }) => {
@@ -19,6 +20,9 @@ const Map = ({ buses, stops, stopPassengers, center }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      
+      {/* Render bus routes */}
+      <RouteVisualization buses={Object.values(buses || {})} stops={stops} />
       
       {/* Render all bus stops */}
       {stops && stops.map((stop) => (

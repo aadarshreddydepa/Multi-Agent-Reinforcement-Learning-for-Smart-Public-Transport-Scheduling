@@ -47,12 +47,15 @@ class RewardCalculator:
         if 0.8 <= bus_occupancy <= 1.0:
             # Optimal occupancy (80-100% full)
             reward += Config.REWARD_OPTIMAL_OCCUPANCY
+        elif 0.6 <= bus_occupancy < 0.8:
+            # Good utilization - efficient
+            reward += getattr(Config, 'REWARD_GOOD_OCCUPANCY', 8)
         elif bus_occupancy > 1.0:
             # Overcrowding penalty
             reward += Config.PENALTY_OVERCROWDING
         elif bus_occupancy < 0.3 and passengers_boarded > 0:
             # Underutilized bus (minor penalty)
-            reward -= 5
+            reward -= 3
         
         # 3. PENALTY: Passengers waiting
         # Each passenger waiting incurs a small penalty per second

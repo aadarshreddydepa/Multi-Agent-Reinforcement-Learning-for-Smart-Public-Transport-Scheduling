@@ -225,5 +225,15 @@ class PassengerDemand:
         
         env_logger.info(f"Rush hour simulated at {stop_id}: {num_passengers} passengers")
 
+    def generate_passengers_all(self, current_time: str = None, delta_time: float = 1.0) -> int:
+        """
+        Generate passengers at all stops. Called each simulation step.
+        Returns total passengers generated.
+        """
+        total = 0
+        for stop_id in self.stop_queues.keys():
+            total += self.generate_passengers(stop_id, current_time, delta_time)
+        return total
+
 # Create singleton instance
 passenger_demand = PassengerDemand()

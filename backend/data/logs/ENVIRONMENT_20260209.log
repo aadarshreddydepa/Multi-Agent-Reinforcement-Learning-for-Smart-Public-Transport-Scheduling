@@ -1,0 +1,29 @@
+2026-02-09 09:42:51,246 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-09 09:42:51,247 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-09 09:42:51,247 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-09 09:42:51,249 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-09 09:42:51,249 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-09 09:42:51,249 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-09 09:42:51,249 - ENVIRONMENT - INFO - PassengerDemand reset
+2026-02-09 09:42:51,249 - ENVIRONMENT - INFO - Environment reset with 3 buses on 5 stops
+2026-02-09 09:42:51,516 - ENVIRONMENT - DEBUG - Generated 2 passengers at library (peak=True)
+2026-02-09 09:42:51,516 - ENVIRONMENT - DEBUG - Generated 3 passengers at canteen (peak=False)
+2026-02-09 09:42:51,516 - ENVIRONMENT - DEBUG - Bus bus_1 heading from main_gate to library
+2026-02-09 09:42:51,516 - ENVIRONMENT - DEBUG - Bus bus_1 action: DEPART_NOW, reward: -0.05
+2026-02-09 09:42:51,517 - ENVIRONMENT - DEBUG - Bus bus_2 action: WAIT_30, reward: -4.5
+2026-02-09 09:42:51,517 - ENVIRONMENT - DEBUG - Bus bus_3 heading from main_gate to canteen
+2026-02-09 09:42:51,517 - ENVIRONMENT - DEBUG - Bus bus_3 action: DEPART_NOW, reward: -0.05
+2026-02-09 09:49:09,623 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-09 09:49:09,623 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-09 09:49:09,623 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-09 09:49:09,624 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-09 09:49:09,624 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-09 09:49:09,624 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-09 09:49:09,625 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-09 09:49:09,876 - ENVIRONMENT - INFO - Loaded 5 stops
+2026-02-09 09:49:09,876 - ENVIRONMENT - INFO - Loaded 1 routes
+2026-02-09 09:49:09,876 - ENVIRONMENT - INFO - RouteManager initialized with 5 stops and 1 routes
+2026-02-09 09:49:09,876 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-09 09:49:09,876 - ENVIRONMENT - INFO - PassengerDemand initialized
+2026-02-09 09:49:09,876 - ENVIRONMENT - INFO - TrafficEnvironment initialized
+2026-02-09 09:49:09,876 - ENVIRONMENT - INFO - PassengerDemand initialized

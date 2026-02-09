@@ -1,13 +1,17 @@
-import React from 'react';
-import { Play, Pause, RotateCcw } from 'lucide-react';
+import React, { useState } from 'react';
+import { Play, Pause, RotateCcw, Brain, Zap } from 'lucide-react';
 
 const ControlPanel = ({ 
   isRunning, 
   onStart, 
   onStop, 
   onReset, 
+  onTrain,
+  isTraining,
   stats 
 }) => {
+  const [useTrained, setUseTrained] = useState(false);
+
   return (
     <div className="control-panel">
       <div className="control-card glass-card">
@@ -29,7 +33,7 @@ const ControlPanel = ({
         <div className="btn-group">
           <button 
             className="btn btn-success" 
-            onClick={onStart}
+            onClick={() => onStart(useTrained)}
             disabled={isRunning}
           >
             <Play size={16} />
@@ -51,6 +55,33 @@ const ControlPanel = ({
             Reset
           </button>
         </div>
+
+        {/* Use Trained Agents */}
+        <div className="train-options" style={{ marginTop: '12px', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontSize: '13px' }}>
+            <input 
+              type="checkbox" 
+              checked={useTrained} 
+              onChange={(e) => setUseTrained(e.target.checked)}
+              disabled={isRunning}
+            />
+            <Zap size={14} />
+            Use trained agents
+          </label>
+        </div>
+
+        {/* Train Agents */}
+        <div className="divider"></div>
+        <div style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '8px' }}>Agent Training</div>
+        <button 
+          className="btn btn-outline" 
+          onClick={onTrain}
+          disabled={isRunning || isTraining}
+          style={{ width: '100%' }}
+        >
+          <Brain size={16} />
+          {isTraining ? 'Training...' : 'Train Agents (100 eps)'}
+        </button>
 
         {/* Statistics */}
         {stats && (

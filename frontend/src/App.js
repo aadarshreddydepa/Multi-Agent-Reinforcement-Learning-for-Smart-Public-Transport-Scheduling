@@ -19,6 +19,7 @@ function App() {
   const [state, setState] = useState(null);
   const [stats, setStats] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
+  const [isTraining, setIsTraining] = useState(false);
   const [loading, setLoading] = useState(true);
   const [statsHistory, setStatsHistory] = useState([]);
   const [stopsData, setStopsData] = useState([]);
@@ -68,12 +69,24 @@ function App() {
       // Check for alerts
       checkForAlerts(newStats);
     });
+
+    socket.on('training_complete', (data) => {
+      setIsTraining(false);
+      addAlert(`Training complete! ${data.episodes || 100} episodes finished.`, 'success');
+    });
+
+    socket.on('training_error', (data) => {
+      setIsTraining(false);
+      addAlert(`Training error: ${data.message || 'Unknown'}`, 'error');
+    });
     
     return () => {
       socket.off('connect');
       socket.off('disconnect');
       socket.off('state_update');
       socket.off('statistics_update');
+      socket.off('training_complete');
+      socket.off('training_error');
     };
   }, []);
 
@@ -160,15 +173,27 @@ function App() {
     }
   };
 
-  const handleStart = async () => {
+  const handleStart = async (useTrained = false) => {
     try {
-      await apiService.startSimulation(false);
+      await apiService.startSimulation(useTrained);
       setIsRunning(true);
       setStatsHistory([]);
-      addAlert('Simulation started successfully', 'success');
+      addAlert(useTrained ? 'Simulation started with trained agents!' : 'Simulation started successfully', 'success');
     } catch (error) {
       console.error('Failed to start simulation:', error);
       addAlert('Failed to start simulation. Make sure backend is running!', 'error');
+    }
+  };
+
+  const handleTrain = async () => {
+    try {
+      setIsTraining(true);
+      await apiService.startTraining(100);
+      addAlert('Training started (100 episodes). This runs in background.', 'info');
+    } catch (error) {
+      console.error('Failed to start training:', error);
+      setIsTraining(false);
+      addAlert('Failed to start training. Make sure backend is running!', 'error');
     }
   };
 
@@ -312,6 +337,8 @@ function App() {
             onStart={handleStart}
             onStop={handleStop}
             onReset={handleReset}
+            onTrain={handleTrain}
+            isTraining={isTraining}
             stats={stats}
             systemHealth={systemHealth}
           />

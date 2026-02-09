@@ -33,15 +33,15 @@ class Config:
     # Passenger Settings
     MIN_PASSENGERS_PER_STOP = 0
     MAX_PASSENGERS_PER_STOP = 20
-    PASSENGER_ARRIVAL_RATE = 0.5  # passengers per second (average)
+    PASSENGER_ARRIVAL_RATE = 0.8  # passengers per second (increased for more activity)
     BUS_CAPACITY = 50  # maximum passengers per bus
     
-    # RL Agent Settings
-    LEARNING_RATE = 0.1
+    # RL Agent Settings (tuned for effective learning)
+    LEARNING_RATE = 0.15  # Slightly higher for faster adaptation
     DISCOUNT_FACTOR = 0.95
-    EPSILON = 0.2  # exploration rate
-    EPSILON_DECAY = 0.995
-    MIN_EPSILON = 0.01
+    EPSILON = 0.3  # Start with more exploration
+    EPSILON_DECAY = 0.9985  # Slower decay = more exploration before convergence
+    MIN_EPSILON = 0.02  # Small exploration in deployment
     
     # Action Space (what buses can do)
     ACTIONS = [
@@ -51,12 +51,13 @@ class Config:
         'SKIP_STOP'        # Skip if no passengers
     ]
     
-    # Reward Parameters
-    REWARD_PASSENGER_PICKUP = 10
-    PENALTY_WAIT_TIME = -1  # per passenger per second
-    PENALTY_FUEL = -5
-    REWARD_OPTIMAL_OCCUPANCY = 20  # 80-100% full
-    PENALTY_OVERCROWDING = -15  # >100% capacity
+    # Reward Parameters (balanced for effective learning)
+    REWARD_PASSENGER_PICKUP = 12  # Strong signal for serving passengers
+    PENALTY_WAIT_TIME = -0.5  # Per passenger left waiting (moderate penalty)
+    PENALTY_FUEL = -3  # Reduced - idling is sometimes necessary
+    REWARD_OPTIMAL_OCCUPANCY = 15  # 80-100% full
+    REWARD_GOOD_OCCUPANCY = 8  # 60-80% - efficient utilization
+    PENALTY_OVERCROWDING = -20  # >100% capacity - stronger penalty
     
     # File Paths
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))

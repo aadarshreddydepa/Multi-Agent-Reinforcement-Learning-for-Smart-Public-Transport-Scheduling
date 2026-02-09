@@ -35,3 +35,42 @@
 2026-02-07 19:53:06,134 - SYSTEM - INFO - Flask app initialized
 2026-02-07 19:53:18,580 - SYSTEM - INFO - Trainer initialized
 2026-02-07 19:53:18,591 - SYSTEM - INFO - Flask app initialized
+2026-02-07 19:58:38,091 - SYSTEM - INFO - Trainer initialized
+2026-02-07 19:58:38,107 - SYSTEM - INFO - Flask app initialized
+2026-02-07 19:58:38,376 - SYSTEM - INFO - Trainer initialized
+2026-02-07 19:58:38,387 - SYSTEM - INFO - Flask app initialized
+2026-02-07 20:02:19,877 - SYSTEM - INFO - Client connected: WriHcRcsFGroW9frAAAB
+2026-02-07 20:02:24,688 - SYSTEM - INFO - Initializing agents...
+2026-02-07 20:02:24,690 - SYSTEM - INFO - Initialized 3 agents
+2026-02-07 20:02:24,690 - SYSTEM - INFO - Simulation loop started
+2026-02-07 20:02:24,690 - SYSTEM - INFO - Simulation started
+2026-02-07 20:02:47,699 - SYSTEM - INFO - Manual bus added via API
+2026-02-07 20:02:58,045 - SYSTEM - INFO - Manual bus added via API
+2026-02-07 20:02:59,029 - SYSTEM - INFO - Manual bus added via API
+2026-02-07 20:03:00,681 - SYSTEM - INFO - Manual bus added via API
+2026-02-07 20:03:00,978 - SYSTEM - INFO - Manual bus added via API
+2026-02-07 20:03:02,332 - SYSTEM - INFO - Manual bus added via API
+2026-02-07 20:03:15,323 - SYSTEM - INFO - Client disconnected: WriHcRcsFGroW9frAAAB
+2026-02-07 20:14:07,408 - SYSTEM - INFO - Trainer initialized
+2026-02-07 20:14:07,423 - SYSTEM - INFO - Flask app initialized
+2026-02-07 20:14:07,639 - SYSTEM - INFO - Trainer initialized
+2026-02-07 20:14:07,650 - SYSTEM - INFO - Flask app initialized
+2026-02-07 20:14:20,877 - SYSTEM - INFO - Client connected: 4EA52m6ebESXC0MlAAAB
+2026-02-07 20:15:11,813 - SYSTEM - INFO - Initializing agents...
+2026-02-07 20:15:11,814 - SYSTEM - INFO - Initialized 3 agents
+2026-02-07 20:15:11,815 - SYSTEM - INFO - Simulation loop started
+2026-02-07 20:15:11,815 - SYSTEM - INFO - Simulation started
+2026-02-07 20:15:52,071 - SYSTEM - INFO - Manual bus added via API
+2026-02-07 20:16:09,283 - SYSTEM - INFO - Client disconnected: 4EA52m6ebESXC0MlAAAB
+2026-02-07 20:17:23,657 - SYSTEM - INFO - Trainer initialized
+2026-02-07 20:17:23,668 - SYSTEM - INFO - Flask app initialized
+2026-02-07 20:17:35,135 - SYSTEM - INFO - Trainer initialized
+2026-02-07 20:17:35,146 - SYSTEM - INFO - Flask app initialized
+2026-02-07 20:18:49,277 - SYSTEM - INFO - Trainer initialized
+2026-02-07 20:18:49,288 - SYSTEM - INFO - Flask app initialized
+2026-02-07 20:18:54,625 - SYSTEM - INFO - Trainer initialized
+2026-02-07 20:18:54,636 - SYSTEM - INFO - Flask app initialized
+2026-02-07 20:18:59,966 - SYSTEM - INFO - Trainer initialized
+2026-02-07 20:18:59,977 - SYSTEM - INFO - Flask app initialized
+2026-02-07 20:19:06,319 - SYSTEM - INFO - Trainer initialized
+2026-02-07 20:19:06,330 - SYSTEM - INFO - Flask app initialized
