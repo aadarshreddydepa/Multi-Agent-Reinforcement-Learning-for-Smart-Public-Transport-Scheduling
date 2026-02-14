@@ -12,6 +12,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils.config import Config
 from utils.logger import env_logger
+from services.road_pathfinder import road_pathfinder
 
 class RouteManager:
     """Manages bus routes and stops"""
@@ -187,6 +188,20 @@ class RouteManager:
         lng = lng1 + (lng2 - lng1) * progress
         
         return lat, lng
+    
+    def get_road_path(self, route_id: str) -> List[Tuple[float, float]]:
+        """Get road-based path coordinates for a route"""
+        route = self.routes.get(route_id)
+        if not route or 'stops' not in route:
+            return []
+        
+        stops = route['stops']
+        return road_pathfinder.get_route_path(stops, self.stops)
+    
+    def get_interpolated_path(self, route_id: str, num_points: int = 100) -> List[Tuple[float, float]]:
+        """Get interpolated road path for smooth bus movement"""
+        road_path = self.get_road_path(route_id)
+        return road_pathfinder.interpolate_path_points(road_path, num_points)
 
 # Create singleton instance
 route_manager = RouteManager()

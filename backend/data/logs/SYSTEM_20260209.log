@@ -3,3 +3,98 @@
 2026-02-09 09:49:09,877 - SYSTEM - INFO - Trainer initialized
 2026-02-09 09:49:09,888 - SYSTEM - INFO - Flask app initialized
 2026-02-09 09:49:25,563 - SYSTEM - INFO - Client connected: 3KlkrJ3zRtMWJ-0nAAAB
+2026-02-09 09:51:06,692 - SYSTEM - INFO - Initializing agents...
+2026-02-09 09:51:06,694 - SYSTEM - INFO - Initialized 3 agents
+2026-02-09 09:51:06,694 - SYSTEM - INFO - Starting training for 100 episodes
+2026-02-09 09:51:06,695 - SYSTEM - INFO - Initialized 3 agents
+2026-02-09 09:51:06,696 - SYSTEM - INFO - Starting training: 100 episodes, max 500 steps each
+2026-02-09 09:51:06,736 - SYSTEM - ERROR - Error during training: 'dynamic_0'
+2026-02-09 09:52:43,319 - SYSTEM - INFO - Trainer initialized
+2026-02-09 09:52:43,336 - SYSTEM - INFO - Flask app initialized
+2026-02-09 09:52:43,535 - SYSTEM - INFO - Client connected: qoAdz-vOvFkkjifKAAAB
+2026-02-09 09:55:51,106 - SYSTEM - INFO - Client connected: vxK872Cge5dpanATAAAD
+2026-02-09 10:02:59,327 - SYSTEM - INFO - Client disconnected: qoAdz-vOvFkkjifKAAAB
+2026-02-09 10:02:59,328 - SYSTEM - INFO - Client disconnected: vxK872Cge5dpanATAAAD
+2026-02-09 10:02:59,448 - SYSTEM - INFO - Client connected: gZR3Nfxy3JLLd76TAAAF
+2026-02-09 10:03:00,237 - SYSTEM - INFO - Client disconnected: gZR3Nfxy3JLLd76TAAAF
+2026-02-09 10:03:00,320 - SYSTEM - INFO - Client connected: FLXAv7kYwenYoGB5AAAH
+2026-02-09 10:03:00,397 - SYSTEM - INFO - Client disconnected: FLXAv7kYwenYoGB5AAAH
+2026-02-09 10:03:00,427 - SYSTEM - INFO - Client connected: sOoIbtG8INmnNaEdAAAJ
+2026-02-09 10:03:05,882 - SYSTEM - INFO - Initializing agents...
+2026-02-09 10:03:05,883 - SYSTEM - INFO - Initialized 3 agents
+2026-02-09 10:03:05,883 - SYSTEM - INFO - Simulation loop started
+2026-02-09 10:03:05,884 - SYSTEM - INFO - Simulation started
+2026-02-09 10:03:37,913 - SYSTEM - INFO - Manual bus added via API
+2026-02-09 10:03:49,407 - SYSTEM - INFO - Client disconnected: sOoIbtG8INmnNaEdAAAJ
+2026-02-09 10:16:09,950 - SYSTEM - INFO - Trainer initialized
+2026-02-09 10:16:09,964 - SYSTEM - INFO - Flask app initialized
+2026-02-09 10:16:11,280 - SYSTEM - INFO - Trainer initialized
+2026-02-09 10:16:11,291 - SYSTEM - INFO - Flask app initialized
+2026-02-09 10:16:12,589 - SYSTEM - INFO - Trainer initialized
+2026-02-09 10:16:12,599 - SYSTEM - INFO - Flask app initialized
+2026-02-09 10:16:17,955 - SYSTEM - INFO - Trainer initialized
+2026-02-09 10:16:17,965 - SYSTEM - INFO - Flask app initialized
+2026-02-09 10:16:31,510 - SYSTEM - INFO - Trainer initialized
+2026-02-09 10:16:31,525 - SYSTEM - INFO - Flask app initialized
+2026-02-09 10:16:37,888 - SYSTEM - INFO - Trainer initialized
+2026-02-09 10:16:37,899 - SYSTEM - INFO - Flask app initialized
+2026-02-09 10:18:20,724 - SYSTEM - INFO - Trainer initialized
+2026-02-09 10:18:20,736 - SYSTEM - INFO - Flask app initialized
+2026-02-09 10:19:15,181 - SYSTEM - INFO - Trainer initialized
+2026-02-09 10:19:15,191 - SYSTEM - INFO - Flask app initialized
+2026-02-09 10:19:15,398 - SYSTEM - INFO - Trainer initialized
+2026-02-09 10:19:15,408 - SYSTEM - INFO - Flask app initialized
+2026-02-09 10:19:30,332 - SYSTEM - INFO - Client connected: xU0Z2UhJ7Vb358ArAAAB
+2026-02-09 10:19:39,606 - SYSTEM - INFO - Client disconnected: xU0Z2UhJ7Vb358ArAAAB
+2026-02-09 10:19:39,674 - SYSTEM - INFO - Client connected: 9XlAy3-Z6LAEgQONAAAD
+2026-02-09 10:20:24,897 - SYSTEM - INFO - Initializing agents...
+2026-02-09 10:20:24,898 - SYSTEM - INFO - Initialized 3 agents
+2026-02-09 10:20:24,899 - SYSTEM - INFO - Simulation loop started
+2026-02-09 10:20:24,899 - SYSTEM - INFO - Simulation started
+2026-02-09 10:20:59,278 - SYSTEM - INFO - Manual bus added via API
+2026-02-09 10:21:12,367 - SYSTEM - INFO - Client disconnected: 9XlAy3-Z6LAEgQONAAAD
+2026-02-09 10:25:09,357 - SYSTEM - INFO - Client connected: zBHZ4kycER3Q7yfxAAAF
+2026-02-09 10:25:15,509 - SYSTEM - INFO - Simulation stopped
+2026-02-09 10:25:16,013 - SYSTEM - INFO - Simulation loop ended
+2026-02-09 10:25:38,699 - SYSTEM - INFO - Simulation reset
+2026-02-09 10:25:41,493 - SYSTEM - INFO - Client disconnected: zBHZ4kycER3Q7yfxAAAF
+2026-02-09 10:25:41,582 - SYSTEM - INFO - Client connected: btQ74aKlZjCe6YpnAAAH
+2026-02-09 10:26:21,714 - SYSTEM - INFO - Client disconnected: btQ74aKlZjCe6YpnAAAH
+2026-02-09 10:45:38,204 - SYSTEM - INFO - Client connected: yzd3OUzTrvEbzG-wAAAJ
+2026-02-09 10:46:14,592 - SYSTEM - INFO - Trainer initialized
+2026-02-09 10:46:14,607 - SYSTEM - INFO - Flask app initialized
+2026-02-09 10:47:36,921 - SYSTEM - INFO - Client disconnected: yzd3OUzTrvEbzG-wAAAJ
+2026-02-09 10:47:37,034 - SYSTEM - INFO - Client connected: jS22G_dfN7z76cIPAAAL
+2026-02-09 10:49:22,946 - SYSTEM - INFO - Trainer initialized
+2026-02-09 10:49:22,961 - SYSTEM - INFO - Flask app initialized
+2026-02-09 10:49:23,194 - SYSTEM - INFO - Trainer initialized
+2026-02-09 10:49:23,205 - SYSTEM - INFO - Flask app initialized
+2026-02-09 10:49:27,428 - SYSTEM - INFO - Client connected: oLZM2QwGvb6bGla_AAAB
+2026-02-09 10:49:46,033 - SYSTEM - INFO - Client connected: -N9huFPc5HfLtS1sAAAD
+2026-02-09 10:50:21,671 - SYSTEM - INFO - Client connected: 4zqDB6tlK22u16lQAAAF
+2026-02-09 10:50:25,329 - SYSTEM - INFO - Initializing agents...
+2026-02-09 10:50:25,330 - SYSTEM - INFO - Initialized 3 agents
+2026-02-09 10:50:25,331 - SYSTEM - INFO - Simulation loop started
+2026-02-09 10:50:25,331 - SYSTEM - INFO - Simulation started
+2026-02-09 10:50:41,028 - SYSTEM - INFO - Simulation reset
+2026-02-09 10:50:41,391 - SYSTEM - INFO - Simulation loop ended
+2026-02-09 10:50:41,616 - SYSTEM - INFO - Simulation reset
+2026-02-09 10:50:45,960 - SYSTEM - INFO - Starting training for 100 episodes
+2026-02-09 10:50:45,962 - SYSTEM - INFO - Initialized 3 agents
+2026-02-09 10:50:45,962 - SYSTEM - INFO - Starting training: 100 episodes, max 500 steps each
+2026-02-09 10:50:46,193 - SYSTEM - INFO - Episode 1/100 | Reward: -12952.4 | Avg(20): -12952.4 | Wait: 448.4s | Served: 219 | ε: 0.300 | Time: 0.2s
+2026-02-09 10:50:48,159 - SYSTEM - INFO - Episode 10/100 | Reward: -10975.1 | Avg(20): -11519.7 | Wait: 448.5s | Served: 220 | ε: 0.296 | Time: 0.2s
+2026-02-09 10:50:50,255 - SYSTEM - INFO - Episode 20/100 | Reward: -10982.7 | Avg(20): -11316.6 | Wait: 447.9s | Served: 209 | ε: 0.291 | Time: 0.2s
+2026-02-09 10:50:52,425 - SYSTEM - INFO - Episode 30/100 | Reward: -10180.9 | Avg(20): -11218.4 | Wait: 446.1s | Served: 242 | ε: 0.287 | Time: 0.2s
+2026-02-09 10:50:54,520 - SYSTEM - INFO - Episode 40/100 | Reward: -9000.7 | Avg(20): -11198.8 | Wait: 447.0s | Served: 200 | ε: 0.283 | Time: 0.2s
+2026-02-09 10:50:56,698 - SYSTEM - INFO - Episode 50/100 | Reward: -11718.4 | Avg(20): -11117.9 | Wait: 449.3s | Served: 216 | ε: 0.278 | Time: 0.2s
+2026-02-09 10:50:58,284 - SYSTEM - INFO - Simulation loop started
+2026-02-09 10:50:58,285 - SYSTEM - INFO - Simulation started
+2026-02-09 10:50:58,903 - SYSTEM - INFO - Episode 60/100 | Reward: -10467.7 | Avg(20): -10533.4 | Wait: 447.7s | Served: 227 | ε: 0.274 | Time: 0.3s
+2026-02-09 10:51:01,103 - SYSTEM - INFO - Episode 70/100 | Reward: -8899.9 | Avg(20): -10200.2 | Wait: 447.8s | Served: 223 | ε: 0.270 | Time: 0.2s
+2026-02-09 10:51:03,325 - SYSTEM - INFO - Episode 80/100 | Reward: -12559.7 | Avg(20): -10713.2 | Wait: 450.9s | Served: 214 | ε: 0.266 | Time: 0.2s
+2026-02-09 10:51:05,601 - SYSTEM - INFO - Episode 90/100 | Reward: -10348.0 | Avg(20): -10736.5 | Wait: 448.3s | Served: 217 | ε: 0.262 | Time: 0.2s
+2026-02-09 10:51:06,329 - SYSTEM - ERROR - Error during training: dictionary changed size during iteration
+2026-02-09 10:51:14,774 - SYSTEM - INFO - Client disconnected: 4zqDB6tlK22u16lQAAAF
+2026-02-09 10:51:15,245 - SYSTEM - INFO - Client disconnected: -N9huFPc5HfLtS1sAAAD
+2026-02-09 10:51:15,246 - SYSTEM - INFO - Client disconnected: oLZM2QwGvb6bGla_AAAB

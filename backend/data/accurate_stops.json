@@ -1,0 +1,148 @@
+{
+  "stops": [
+    {
+      "id": "cbit",
+      "name": "CBIT - Chaitanya Bharathi Institute of Technology",
+      "location": {"lat": 17.395, "lng": 78.4967},
+      "capacity": 100,
+      "amenities": ["shelter", "seating", "lighting", "information_display"],
+      "description": "Main destination - Chaitanya Bharathi Institute of Technology, Gandipet"
+    },
+    {
+      "id": "uppal_depot",
+      "name": "Uppal Depot",
+      "location": {"lat": 17.4045, "lng": 78.5896},
+      "capacity": 80,
+      "amenities": ["shelter", "seating", "ticket_counter"],
+      "description": "Uppal Bus Depot - Major transportation hub"
+    },
+    {
+      "id": "uppal_xroads",
+      "name": "Uppal X Roads",
+      "location": {"lat": 17.4018, "lng": 78.5602},
+      "capacity": 60,
+      "amenities": ["shelter", "seating"],
+      "description": "Uppal Cross Roads - Major intersection"
+    },
+    {
+      "id": "survey_of_india",
+      "name": "Survey of India",
+      "location": {"lat": 17.398, "lng": 78.545},
+      "capacity": 50,
+      "amenities": ["shelter", "seating"],
+      "description": "Survey of India Office"
+    },
+    {
+      "id": "habsiguda",
+      "name": "Habsiguda",
+      "location": {"lat": 17.395, "lng": 78.53},
+      "capacity": 60,
+      "amenities": ["shelter", "seating"],
+      "description": "Habsiguda Bus Stop"
+    },
+    {
+      "id": "tarnaka_xroads",
+      "name": "Tarnaka X Roads",
+      "location": {"lat": 17.392, "lng": 78.515},
+      "capacity": 70,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Tarnaka Cross Roads - Near University of Hyderabad"
+    },
+    {
+      "id": "vidyanagar_sves",
+      "name": "Vidyanagar (SVES)",
+      "location": {"lat": 17.389, "lng": 78.5},
+      "capacity": 55,
+      "amenities": ["shelter", "seating"],
+      "description": "Vidyanagar - Sri Venkateswara Educational Society"
+    },
+    {
+      "id": "nallakunta",
+      "name": "Nallakunta",
+      "location": {"lat": 17.386, "lng": 78.485},
+      "capacity": 65,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Nallakunta Bus Stop"
+    },
+    {
+      "id": "fever_hospital",
+      "name": "Fever Hospital",
+      "location": {"lat": 17.383, "lng": 78.47},
+      "capacity": 45,
+      "amenities": ["shelter", "seating"],
+      "description": "Fever Hospital Bus Stop"
+    },
+    {
+      "id": "barkatpura",
+      "name": "Barkatpura",
+      "location": {"lat": 17.38, "lng": 78.455},
+      "capacity": 55,
+      "amenities": ["shelter", "seating"],
+      "description": "Barkatpura Bus Stop"
+    },
+    {
+      "id": "narayanguda",
+      "name": "Narayanguda",
+      "location": {"lat": 17.377, "lng": 78.44},
+      "capacity": 60,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Narayanguda Bus Stop - Commercial area"
+    },
+    {
+      "id": "himayath_nagar",
+      "name": "Himayath Nagar",
+      "location": {"lat": 17.374, "lng": 78.425},
+      "capacity": 70,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Himayath Nagar Bus Stop - Shopping district"
+    },
+    {
+      "id": "lakdi_ka_pool",
+      "name": "Lakdi Ka Pool",
+      "location": {"lat": 17.371, "lng": 78.41},
+      "capacity": 65,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Lakdi Ka Pool - Major junction"
+    },
+    {
+      "id": "masab_tank",
+      "name": "Masab Tank",
+      "location": {"lat": 17.368, "lng": 78.395},
+      "capacity": 60,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Masab Tank Bus Stop"
+    },
+    {
+      "id": "nmdc",
+      "name": "NMDC",
+      "location": {"lat": 17.365, "lng": 78.38},
+      "capacity": 50,
+      "amenities": ["shelter", "seating"],
+      "description": "NMDC Office Bus Stop"
+    },
+    {
+      "id": "mehdipatnam",
+      "name": "Mehdipatnam",
+      "location": {"lat": 17.362, "lng": 78.365},
+      "capacity": 75,
+      "amenities": ["shelter", "seating", "lighting", "ticket_counter"],
+      "description": "Mehdipatnam - Major bus junction"
+    },
+    {
+      "id": "kakatiya_nagar",
+      "name": "Kakatiya Nagar",
+      "location": {"lat": 17.359, "lng": 78.35},
+      "capacity": 45,
+      "amenities": ["shelter", "seating"],
+      "description": "Kakatiya Nagar Bus Stop"
+    },
+    {
+      "id": "langarhouse",
+      "name": "Langarhouse",
+      "location": {"lat": 17.356, "lng": 78.335},
+      "capacity": 50,
+      "amenities": ["shelter", "seating"],
+      "description": "Langarhouse Bus Stop"
+    }
+  ]
+}

@@ -1,64 +1,500 @@
 {
   "stops": [
     {
-      "id": "main_gate",
-      "name": "Main Gate",
-      "description": "College main entrance - High traffic area",
-      "location": {
-        "lat": 17.3850,
-        "lng": 78.4867
-      },
-      "capacity": 30,
-      "peak_demand_hours": ["08:00-09:00", "17:00-18:00"],
-      "amenities": ["shelter", "seating", "display_board"]
+      "id": "cbit",
+      "name": "CBIT - Chaitanya Bharathi Institute of Technology",
+      "location": {"lat": 17.3950, "lng": 78.4967},
+      "capacity": 100,
+      "amenities": ["shelter", "seating", "lighting", "information_display"],
+      "description": "Main destination - Chaitanya Bharathi Institute of Technology, Gandipet"
     },
     {
-      "id": "library",
-      "name": "Central Library",
-      "description": "Main library building",
-      "location": {
-        "lat": 17.3855,
-        "lng": 78.4872
-      },
-      "capacity": 20,
-      "peak_demand_hours": ["09:00-10:00", "14:00-15:00"],
-      "amenities": ["shelter", "seating"]
+      "id": "uppal_depot",
+      "name": "Uppal Depot",
+      "location": {"lat": 17.4045, "lng": 78.5896},
+      "capacity": 80,
+      "amenities": ["shelter", "seating", "ticket_counter"],
+      "description": "Uppal Bus Depot - Major transportation hub"
     },
     {
-      "id": "canteen",
-      "name": "Student Canteen",
-      "description": "Main dining facility",
-      "location": {
-        "lat": 17.3860,
-        "lng": 78.4877
-      },
-      "capacity": 25,
-      "peak_demand_hours": ["12:00-14:00", "18:00-19:00"],
-      "amenities": ["shelter", "seating", "water_fountain"]
+      "id": "uppal_xroads",
+      "name": "Uppal X Roads",
+      "location": {"lat": 17.4018, "lng": 78.5602},
+      "capacity": 60,
+      "amenities": ["shelter", "seating"],
+      "description": "Uppal Cross Roads - Major intersection"
     },
     {
-      "id": "hostel_block_a",
-      "name": "Hostel Block A",
-      "description": "Student residential area",
-      "location": {
-        "lat": 17.3865,
-        "lng": 78.4882
-      },
-      "capacity": 35,
-      "peak_demand_hours": ["07:00-08:00", "19:00-20:00"],
-      "amenities": ["shelter", "seating", "lighting"]
+      "id": "survey_of_india",
+      "name": "Survey of India",
+      "location": {"lat": 17.3980, "lng": 78.5450},
+      "capacity": 50,
+      "amenities": ["shelter", "seating"],
+      "description": "Survey of India Office"
     },
     {
-      "id": "sports_complex",
-      "name": "Sports Complex",
-      "description": "Athletic facilities and gymnasium",
-      "location": {
-        "lat": 17.3870,
-        "lng": 78.4875
-      },
-      "capacity": 15,
-      "peak_demand_hours": ["16:00-18:00"],
-      "amenities": ["shelter", "seating"]
+      "id": "habsiguda",
+      "name": "Habsiguda",
+      "location": {"lat": 17.3950, "lng": 78.5300},
+      "capacity": 60,
+      "amenities": ["shelter", "seating"],
+      "description": "Habsiguda Bus Stop"
+    },
+    {
+      "id": "tarnaka_xroads",
+      "name": "Tarnaka X Roads",
+      "location": {"lat": 17.3920, "lng": 78.5150},
+      "capacity": 70,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Tarnaka Cross Roads - Near University of Hyderabad"
+    },
+    {
+      "id": "vidyanagar_sves",
+      "name": "Vidyanagar (SVES)",
+      "location": {"lat": 17.3890, "lng": 78.5000},
+      "capacity": 55,
+      "amenities": ["shelter", "seating"],
+      "description": "Vidyanagar - Sri Venkateswara Educational Society"
+    },
+    {
+      "id": "nallakunta",
+      "name": "Nallakunta",
+      "location": {"lat": 17.3860, "lng": 78.4850},
+      "capacity": 65,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Nallakunta Bus Stop"
+    },
+    {
+      "id": "fever_hospital",
+      "name": "Fever Hospital",
+      "location": {"lat": 17.3830, "lng": 78.4700},
+      "capacity": 45,
+      "amenities": ["shelter", "seating"],
+      "description": "Fever Hospital Bus Stop"
+    },
+    {
+      "id": "barkatpura",
+      "name": "Barkatpura",
+      "location": {"lat": 17.3800, "lng": 78.4550},
+      "capacity": 55,
+      "amenities": ["shelter", "seating"],
+      "description": "Barkatpura Bus Stop"
+    },
+    {
+      "id": "narayanguda",
+      "name": "Narayanguda",
+      "location": {"lat": 17.3770, "lng": 78.4400},
+      "capacity": 60,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Narayanguda Bus Stop - Commercial area"
+    },
+    {
+      "id": "himayath_nagar",
+      "name": "Himayath Nagar",
+      "location": {"lat": 17.3740, "lng": 78.4250},
+      "capacity": 70,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Himayath Nagar Bus Stop - Shopping district"
+    },
+    {
+      "id": "lakdi_ka_pool",
+      "name": "Lakdi Ka Pool",
+      "location": {"lat": 17.3710, "lng": 78.4100},
+      "capacity": 65,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Lakdi Ka Pool - Major junction"
+    },
+    {
+      "id": "masab_tank",
+      "name": "Masab Tank",
+      "location": {"lat": 17.3680, "lng": 78.3950},
+      "capacity": 60,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Masab Tank Bus Stop"
+    },
+    {
+      "id": "nmdc",
+      "name": "NMDC",
+      "location": {"lat": 17.3650, "lng": 78.3800},
+      "capacity": 50,
+      "amenities": ["shelter", "seating"],
+      "description": "NMDC Office Bus Stop"
+    },
+    {
+      "id": "mehdipatnam",
+      "name": "Mehdipatnam",
+      "location": {"lat": 17.3620, "lng": 78.3650},
+      "capacity": 75,
+      "amenities": ["shelter", "seating", "lighting", "ticket_counter"],
+      "description": "Mehdipatnam - Major bus junction"
+    },
+    {
+      "id": "kakatiya_nagar",
+      "name": "Kakatiya Nagar",
+      "location": {"lat": 17.3590, "lng": 78.3500},
+      "capacity": 45,
+      "amenities": ["shelter", "seating"],
+      "description": "Kakatiya Nagar Bus Stop"
+    },
+    {
+      "id": "langarhouse",
+      "name": "Langarhouse",
+      "location": {"lat": 17.3560, "lng": 78.3350},
+      "capacity": 50,
+      "amenities": ["shelter", "seating"],
+      "description": "Langarhouse Bus Stop"
+    },
+    {
+      "id": "uppal",
+      "name": "Uppal",
+      "location": {"lat": 17.4018, "lng": 78.5602},
+      "capacity": 60,
+      "amenities": ["shelter", "seating"],
+      "description": "Uppal Bus Stop"
+    },
+    {
+      "id": "modern_bakery",
+      "name": "Modern Bakery",
+      "location": {"lat": 17.3990, "lng": 78.5500},
+      "capacity": 40,
+      "amenities": ["shelter", "seating"],
+      "description": "Modern Bakery Bus Stop"
+    },
+    {
+      "id": "church",
+      "name": "Church",
+      "location": {"lat": 17.3960, "lng": 78.5400},
+      "capacity": 45,
+      "amenities": ["shelter", "seating"],
+      "description": "Church Bus Stop"
+    },
+    {
+      "id": "ramanthapur",
+      "name": "Ramanthapur",
+      "location": {"lat": 17.3930, "lng": 78.5250},
+      "capacity": 55,
+      "amenities": ["shelter", "seating"],
+      "description": "Ramanthapur Bus Stop"
+    },
+    {
+      "id": "amberpet",
+      "name": "Amberpet",
+      "location": {"lat": 17.3900, "lng": 78.5100},
+      "capacity": 60,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Amberpet Bus Stop"
+    },
+    {
+      "id": "6_no_junction",
+      "name": "6 No. Junction",
+      "location": {"lat": 17.3870, "lng": 78.4950},
+      "capacity": 50,
+      "amenities": ["shelter", "seating"],
+      "description": "6 No. Junction Bus Stop"
+    },
+    {
+      "id": "syndicate_bank",
+      "name": "Syndicate Bank",
+      "location": {"lat": 17.3840, "lng": 78.4800},
+      "capacity": 40,
+      "amenities": ["shelter", "seating"],
+      "description": "Syndicate Bank Bus Stop"
+    },
+    {
+      "id": "iskcon",
+      "name": "ISKCON",
+      "location": {"lat": 17.4100, "lng": 78.6000},
+      "capacity": 55,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "ISKCON Temple Bus Stop"
+    },
+    {
+      "id": "patny_police_station",
+      "name": "Patny Police Station",
+      "location": {"lat": 17.4070, "lng": 78.5850},
+      "capacity": 50,
+      "amenities": ["shelter", "seating"],
+      "description": "Patny Police Station Bus Stop"
+    },
+    {
+      "id": "paradise_fire_station",
+      "name": "Paradise Fire Station",
+      "location": {"lat": 17.4040, "lng": 78.5700},
+      "capacity": 45,
+      "amenities": ["shelter", "seating"],
+      "description": "Paradise Fire Station Bus Stop"
+    },
+    {
+      "id": "airport",
+      "name": "Airport",
+      "location": {"lat": 17.4010, "lng": 78.5550},
+      "capacity": 80,
+      "amenities": ["shelter", "seating", "lighting", "information_display"],
+      "description": "Old Airport Bus Stop"
+    },
+    {
+      "id": "hps",
+      "name": "HPS",
+      "location": {"lat": 17.3980, "lng": 78.5400},
+      "capacity": 60,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Hyderabad Public School Bus Stop"
+    },
+    {
+      "id": "life_style",
+      "name": "Life Style",
+      "location": {"lat": 17.3950, "lng": 78.5250},
+      "capacity": 50,
+      "amenities": ["shelter", "seating"],
+      "description": "Life Style Building Bus Stop"
+    },
+    {
+      "id": "jvr_park",
+      "name": "JVR Park",
+      "location": {"lat": 17.3920, "lng": 78.5100},
+      "capacity": 45,
+      "amenities": ["shelter", "seating"],
+      "description": "JVR Park Bus Stop"
+    },
+    {
+      "id": "care_hospital",
+      "name": "Care Hospital",
+      "location": {"lat": 17.3890, "lng": 78.4950},
+      "capacity": 55,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Care Hospital Bus Stop"
+    },
+    {
+      "id": "tolichowki",
+      "name": "Tolichowki",
+      "location": {"lat": 17.3860, "lng": 78.3800},
+      "capacity": 60,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Tolichowki Bus Stop"
+    },
+    {
+      "id": "tolichowki_cross_road",
+      "name": "Tolichowki Cross Road",
+      "location": {"lat": 17.3830, "lng": 78.3650},
+      "capacity": 55,
+      "amenities": ["shelter", "seating"],
+      "description": "Tolichowki Cross Road Bus Stop"
+    },
+    {
+      "id": "narayanamma_college",
+      "name": "Narayanamma College",
+      "location": {"lat": 17.3800, "lng": 78.3500},
+      "capacity": 50,
+      "amenities": ["shelter", "seating"],
+      "description": "Narayanamma College Bus Stop"
+    },
+    {
+      "id": "dargah",
+      "name": "Dargah",
+      "location": {"lat": 17.3770, "lng": 78.3350},
+      "capacity": 45,
+      "amenities": ["shelter", "seating"],
+      "description": "Dargah Bus Stop"
+    },
+    {
+      "id": "delhi_public_school",
+      "name": "Delhi Public School",
+      "location": {"lat": 17.3740, "lng": 78.3200},
+      "capacity": 55,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Delhi Public School Bus Stop"
+    },
+    {
+      "id": "radhika_ecil",
+      "name": "Radhika (ECIL)",
+      "location": {"lat": 17.4200, "lng": 78.6200},
+      "capacity": 65,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Radhika Theatre ECIL Bus Stop"
+    },
+    {
+      "id": "officers_colony",
+      "name": "Officers Colony",
+      "location": {"lat": 17.4170, "lng": 78.6050},
+      "capacity": 50,
+      "amenities": ["shelter", "seating"],
+      "description": "Officers Colony Bus Stop"
+    },
+    {
+      "id": "sainikpuri_x_road",
+      "name": "Sainikpuri X Road",
+      "location": {"lat": 17.4140, "lng": 78.5900},
+      "capacity": 55,
+      "amenities": ["shelter", "seating"],
+      "description": "Sainikpuri Cross Road Bus Stop"
+    },
+    {
+      "id": "neredmet_x_road",
+      "name": "Neredmet X Road",
+      "location": {"lat": 17.4110, "lng": 78.5750},
+      "capacity": 60,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Neredmet Cross Road Bus Stop"
+    },
+    {
+      "id": "vinayak_nagar",
+      "name": "Vinayak Nagar",
+      "location": {"lat": 17.4080, "lng": 78.5600},
+      "capacity": 45,
+      "amenities": ["shelter", "seating"],
+      "description": "Vinayak Nagar Bus Stop"
+    },
+    {
+      "id": "krupa_complex",
+      "name": "Krupa Complex",
+      "location": {"lat": 17.4050, "lng": 78.5450},
+      "capacity": 40,
+      "amenities": ["shelter", "seating"],
+      "description": "Krupa Complex Bus Stop"
+    },
+    {
+      "id": "as_rao_nagar",
+      "name": "AS Rao Nagar",
+      "location": {"lat": 17.4020, "lng": 78.5300},
+      "capacity": 70,
+      "amenities": ["shelter", "seating", "lighting", "ticket_counter"],
+      "description": "AS Rao Nagar Bus Stop - Commercial hub"
+    },
+    {
+      "id": "sbi_bank",
+      "name": "SBI Bank",
+      "location": {"lat": 17.3990, "lng": 78.5150},
+      "capacity": 40,
+      "amenities": ["shelter", "seating"],
+      "description": "SBI Bank Bus Stop"
+    },
+    {
+      "id": "kushaiguda",
+      "name": "Kushaiguda",
+      "location": {"lat": 17.3960, "lng": 78.5000},
+      "capacity": 55,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Kushaiguda Bus Stop"
+    },
+    {
+      "id": "bharath_nagar",
+      "name": "Bharath Nagar",
+      "location": {"lat": 17.3500, "lng": 78.4500},
+      "capacity": 60,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Bharath Nagar Bus Stop"
+    },
+    {
+      "id": "erragadda",
+      "name": "Erragadda",
+      "location": {"lat": 17.3530, "lng": 78.4650},
+      "capacity": 55,
+      "amenities": ["shelter", "seating"],
+      "description": "Erragadda Bus Stop"
+    },
+    {
+      "id": "esi",
+      "name": "ESI",
+      "location": {"lat": 17.3560, "lng": 78.4800},
+      "capacity": 50,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "ESI Hospital Bus Stop"
+    },
+    {
+      "id": "s_r_nagar",
+      "name": "S R Nagar",
+      "location": {"lat": 17.3590, "lng": 78.4950},
+      "capacity": 60,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "S R Nagar Bus Stop"
+    },
+    {
+      "id": "maitrivanam",
+      "name": "Maitrivanam",
+      "location": {"lat": 17.3620, "lng": 78.5100},
+      "capacity": 65,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Maitrivanam Bus Stop - Commercial area"
+    },
+    {
+      "id": "yousufguda",
+      "name": "Yousufguda",
+      "location": {"lat": 17.3650, "lng": 78.5250},
+      "capacity": 55,
+      "amenities": ["shelter", "seating"],
+      "description": "Yousufguda Bus Stop"
+    },
+    {
+      "id": "yousufguda_check_post",
+      "name": "Yousufguda Check Post",
+      "location": {"lat": 17.3680, "lng": 78.5400},
+      "capacity": 50,
+      "amenities": ["shelter", "seating"],
+      "description": "Yousufguda Check Post Bus Stop"
+    },
+    {
+      "id": "krishna_nagar",
+      "name": "Krishna Nagar",
+      "location": {"lat": 17.3710, "lng": 78.5550},
+      "capacity": 45,
+      "amenities": ["shelter", "seating"],
+      "description": "Krishna Nagar Bus Stop"
+    },
+    {
+      "id": "venkatagiri_gate",
+      "name": "Venkatagiri Gate",
+      "location": {"lat": 17.3740, "lng": 78.5700},
+      "capacity": 40,
+      "amenities": ["shelter", "seating"],
+      "description": "Venkatagiri Gate Bus Stop"
+    },
+    {
+      "id": "jubilee_check_post",
+      "name": "Jubilee Check Post",
+      "location": {"lat": 17.3770, "lng": 78.5850},
+      "capacity": 60,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Jubilee Check Post Bus Stop"
+    },
+    {
+      "id": "peddamma_temple",
+      "name": "Peddamma Temple",
+      "location": {"lat": 17.3800, "lng": 78.6000},
+      "capacity": 55,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Peddamma Temple Bus Stop"
+    },
+    {
+      "id": "madhapur",
+      "name": "Madhapur",
+      "location": {"lat": 17.3830, "lng": 78.6150},
+      "capacity": 70,
+      "amenities": ["shelter", "seating", "lighting", "ticket_counter"],
+      "description": "Madhapur Bus Stop - IT hub"
+    },
+    {
+      "id": "hitech_city",
+      "name": "Hi-tech City",
+      "location": {"lat": 17.3860, "lng": 78.6300},
+      "capacity": 75,
+      "amenities": ["shelter", "seating", "lighting", "information_display"],
+      "description": "Hi-tech City Bus Stop - Major IT destination"
+    },
+    {
+      "id": "kothaguda_xroads",
+      "name": "Kothaguda X Roads",
+      "location": {"lat": 17.3890, "lng": 78.6450},
+      "capacity": 60,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Kothaguda Cross Roads Bus Stop"
+    },
+    {
+      "id": "gachibowli_orr",
+      "name": "Gachibowli ORR",
+      "location": {"lat": 17.3920, "lng": 78.6600},
+      "capacity": 65,
+      "amenities": ["shelter", "seating", "lighting"],
+      "description": "Gachibowli Outer Ring Road Bus Stop"
     }
   ]
 }

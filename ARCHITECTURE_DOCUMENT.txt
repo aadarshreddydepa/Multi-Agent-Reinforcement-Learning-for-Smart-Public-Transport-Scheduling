@@ -1,0 +1,285 @@
+SMART BUS MARL SYSTEM - ARCHITECTURE DOCUMENT
+====================================================
+
+1. SYSTEM OVERVIEW
+================
+The Smart Bus Multi-Agent Reinforcement Learning (MARL) system is an intelligent public transport 
+management platform that uses reinforcement learning agents to optimize bus operations, passenger 
+flow, and route efficiency in real-time.
+
+2. TECHNOLOGY STACK
+==================
+Frontend:
+- Framework: Next.js 14 with React 18
+- Language: TypeScript
+- UI Library: Tailwind CSS, Lucide Icons
+- Mapping: Leaflet with React-Leaflet
+- State Management: React Hooks, WebSocket
+- Build Tool: Vite/Turbopack
+
+Backend:
+- Framework: Flask (Python)
+- Language: Python 3.9+
+- Machine Learning: PyTorch, Stable-Baselines3
+- Data: JSON, SQLite
+- Real-time: WebSocket (Socket.IO)
+- API: RESTful endpoints
+
+3. SYSTEM ARCHITECTURE
+=====================
+
+3.1 Frontend Architecture
+------------------------
+┌─────────────────────────────────────────────────────────────┐
+│                    FRONTEND LAYER                          │
+├─────────────────────────────────────────────────────────────┤
+│  Components:                                               │
+│  ├── Dashboard (ControlPanel, FleetManager, Statistics)    │
+│  ├── Map (LiveMap, BusMarker, StopMarker, RouteVisualization)│
+│  ├── Notifications (Professional Alert System)            │
+│  └── Layout (Header, Sidebar, Full-Screen Map)            │
+├─────────────────────────────────────────────────────────────┤
+│  Services:                                                 │
+│  ├── API Service (REST calls to backend)                  │
+│  ├── WebSocket Service (Real-time updates)                 │
+│  └── Data Processing (Bus/Stop/Route management)           │
+├─────────────────────────────────────────────────────────────┤
+│  State Management:                                         │
+│  ├── Bus States (position, occupancy, route)               │
+│  ├── Simulation States (running, paused, reset)            │
+│  └── Alert States (notifications, system health)            │
+└─────────────────────────────────────────────────────────────┘
+
+3.2 Backend Architecture
+------------------------
+┌─────────────────────────────────────────────────────────────┐
+│                     BACKEND LAYER                          │
+├─────────────────────────────────────────────────────────────┤
+│  API Layer:                                                 │
+│  ├── Simulation Control (/api/simulation/*)               │
+│  ├── Bus Management (/api/buses)                           │
+│  ├── Stop Management (/api/stops)                          │
+│  ├── Route Management (/api/routes)                        │
+│  └── Statistics (/api/stats)                               │
+├─────────────────────────────────────────────────────────────┤
+│  Core Components:                                           │
+│  ├── Traffic Environment (traffic_env.py)                  │
+│  ├── Route Manager (route_manager.py)                       │
+│  ├── Passenger Demand (passenger_demand.py)                │
+│  ├── MARL Agents (marl_agents.py)                           │
+│  └── Reward Calculator (reward_calculator.py)              │
+├─────────────────────────────────────────────────────────────┤
+│  Machine Learning Layer:                                    │
+│  ├── PPO (Proximal Policy Optimization) Agents              │
+│  ├── State Representation (bus positions, passenger counts) │
+│  ├── Action Space (depart_now, wait_30, wait_60, skip_stop)│
+│  └── Reward System (efficiency, passenger satisfaction)     │
+├─────────────────────────────────────────────────────────────┤
+│  Data Layer:                                                │
+│  ├── Routes JSON (route definitions, stop sequences)        │
+│  ├── Stops JSON (stop locations, capacities)               │
+│  ├── Bus States (real-time bus positions and status)        │
+│  └── Simulation Logs (performance metrics)                  │
+└─────────────────────────────────────────────────────────────┘
+
+3.3 Data Flow Architecture
+--------------------------
+┌─────────────────────────────────────────────────────────────┐
+│                    DATA FLOW                                │
+├─────────────────────────────────────────────────────────────┤
+│  Frontend → Backend:                                        │
+│  ├── Control Commands (start, stop, reset simulation)        │
+│  ├── Bus Operations (add, remove buses)                    │
+│  └── Training Requests (MARL agent training)                │
+│                                                             │
+│  Backend → Frontend:                                        │
+│  ├── Real-time Bus Positions (WebSocket)                    │
+│  ├── Passenger Updates (waiting counts)                    │
+│  ├── Route Information (paths, colors)                      │
+│  └── Statistics (performance metrics)                       │
+│                                                             │
+│  Internal Backend Flow:                                     │
+│  ├── MARL Agents → Environment → Bus States                │
+│  ├── Passenger Demand → Reward Calculator → Agents         │
+│  ├── Route Manager → Bus Movement Logic                     │
+│  └── Statistics Collector → API Response                   │
+└─────────────────────────────────────────────────────────────┘
+
+4. COMPONENT ARCHITECTURE
+=========================
+
+4.1 Frontend Components
+----------------------
+• App Layout (app/page.tsx)
+  - Main application container
+  - WebSocket connection management
+  - State management hub
+
+• Map Components (components/map/)
+  - LiveMap.tsx: Main map container
+  - BusMarker.tsx: Individual bus visualization
+  - StopMarker.tsx: Bus stop visualization
+  - RouteVisualization.tsx: Route path rendering
+
+• Dashboard Components (components/dashboard/)
+  - ControlPanel.tsx: Simulation controls
+  - FleetManager.tsx: Bus fleet management
+  - StatisticsPanel.tsx: Performance metrics
+
+• Services (services/)
+  - api.ts: Backend API communication
+  - websocket.ts: Real-time data streaming
+
+4.2 Backend Components
+---------------------
+• Traffic Environment (environment/traffic_env.py)
+  - Simulation state management
+  - Bus position updates
+  - Passenger demand simulation
+
+• Route Manager (environment/route_manager.py)
+  - Route definition management
+  - Stop-to-stop navigation
+  - Path calculation
+
+• MARL Agents (environment/marl_agents.py)
+  - Reinforcement learning agents
+  - Decision-making logic
+  - Policy optimization
+
+• Passenger Demand (environment/passenger_demand.py)
+  - Passenger generation
+  - Queue management
+  - Wait time tracking
+
+5. DATA MODELS
+==============
+
+5.1 Bus Model
+-------------
+{
+  "id": "bus_1",
+  "position": {"lat": 17.3850, "lng": 78.4867},
+  "route_id": "route_15",
+  "assigned_route": ["stop1", "stop2", "stop3"],
+  "route_color": "#FF5722",
+  "current_stop": "stop1",
+  "current_stop_index": 0,
+  "state": "AT_STOP",
+  "capacity": 50,
+  "passengers": [{"id": "p1", "destination": "stop3"}],
+  "speed": 0.015,
+  "total_served": 25
+}
+
+5.2 Stop Model
+--------------
+{
+  "id": "cbit",
+  "name": "CBIT",
+  "location": {"lat": 17.3950, "lng": 78.4967},
+  "capacity": 100,
+  "passengerCount": 5,
+  "amenities": ["shelter", "seating", "lighting"]
+}
+
+5.3 Route Model
+---------------
+{
+  "id": "route_15",
+  "name": "Route 15 (UPPAL)",
+  "description": "Uppal Depot to CBIT",
+  "color": "#FF5722",
+  "stops": ["uppal_depot", "uppal_xroads", "...", "cbit"],
+  "frequency_minutes": 15,
+  "operating_hours": {"start": "07:00", "end": "22:00"}
+}
+
+6. REINFORCEMENT LEARNING ARCHITECTURE
+======================================
+
+6.1 Agent Architecture
+----------------------
+• Type: PPO (Proximal Policy Optimization)
+• State Space: Bus positions, passenger counts, wait times
+• Action Space: DEPART_NOW, WAIT_30, WAIT_60, SKIP_STOP
+• Reward Function: Efficiency + passenger satisfaction
+• Training: On-policy with experience replay
+
+6.2 Multi-Agent Coordination
+-----------------------------
+• Decentralized agents per bus
+• Shared environment state
+• Competitive reward structure
+• Communication through environment
+
+7. COMMUNICATION PROTOCOLS
+=========================
+
+7.1 WebSocket Events
+-------------------
+• 'state_update': Real-time simulation state
+• 'bus_update': Individual bus position changes
+• 'passenger_update': Waiting passenger counts
+• 'system_alert': System notifications
+
+7.2 REST API Endpoints
+----------------------
+• GET /api/status: System status
+• POST /api/simulation/start: Start simulation
+• POST /api/simulation/stop: Stop simulation
+• GET /api/buses: All bus data
+• GET /api/stops: All stop data
+• GET /api/routes: All route data
+• GET /api/stats: Performance statistics
+
+8. DEPLOYMENT ARCHITECTURE
+==========================
+
+8.1 Development Environment
+---------------------------
+• Frontend: localhost:3000 (Next.js dev server)
+• Backend: localhost:5001 (Flask development server)
+• Database: JSON files (development)
+• WebSocket: Real-time connection
+
+8.2 Production Considerations
+-----------------------------
+• Frontend: Static hosting (Vercel/Netlify)
+• Backend: Containerized deployment (Docker)
+• Database: PostgreSQL/Redis for production
+• Load Balancer: Nginx/AWS ALB
+• Monitoring: Application performance tracking
+
+9. SECURITY CONSIDERATIONS
+=========================
+• API rate limiting
+• WebSocket authentication
+• CORS configuration
+• Input validation
+• Error handling and logging
+
+10. PERFORMANCE OPTIMIZATION
+===========================
+• Frontend: Code splitting, lazy loading
+• Backend: Caching, database indexing
+• WebSocket: Connection pooling
+• Map: Tile caching, marker clustering
+
+11. FUTURE ENHANCEMENTS
+======================
+• Real-time GPS integration
+• Mobile application
+• Advanced analytics dashboard
+• Predictive maintenance
+• Dynamic route optimization
+• Multi-city support
+
+12. CONCLUSION
+=============
+This architecture provides a scalable, maintainable, and intelligent public transport 
+management system that leverages modern web technologies and advanced machine learning 
+techniques to optimize urban mobility.
+
+Document Version: 1.0
+Last Updated: February 2025

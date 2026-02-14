@@ -1,0 +1,62 @@
+{
+  "routes": [
+    {
+      "id": "route_15",
+      "name": "Route 15 (UPPAL)",
+      "description": "Uppal Depot to CBIT - Covers Survey of India, Habsiguda, Tarnaka, Vidyanagar, Nallakunta, Fever hospital, Barkatpura, Narayanguda, Himayath nagar, Lakdi ka pool, Masab Tank, NMDC, Mehdipatnam, Kakatiya Nagar, Langarhouse",
+      "color": "#FF5722",
+      "stops": [
+        "uppal_depot",
+        "uppal_xroads",
+        "survey_of_india",
+        "habsiguda",
+        "tarnaka_xroads",
+        "vidyanagar_sves",
+        "nallakunta",
+        "fever_hospital",
+        "barkatpura",
+        "narayanguda",
+        "himayath_nagar",
+        "lakdi_ka_pool",
+        "masab_tank",
+        "nmdc",
+        "mehdipatnam",
+        "kakatiya_nagar",
+        "langarhouse",
+        "cbit"
+      ],
+      "frequency_minutes": 15,
+      "operating_hours": {"start": "07:00", "end": "22:00"},
+      "start_point_id": "uppal_depot",
+      "end_point_id": "cbit"
+    },
+    {
+      "id": "route_59",
+      "name": "Route 59 (ESI-YG)",
+      "description": "Bharath Nagar to CBIT - Covers Erragadda, ESI, S R Nagar, Maitrivanam, Yousufguda, Jubilee Check Post, Peddamma Temple, Madhapur, Hi-tech city, Gachibowli ORR",
+      "color": "#2196F3",
+      "stops": [
+        "bharath_nagar",
+        "erragadda",
+        "esi",
+        "s_r_nagar",
+        "maitrivanam",
+        "yousufguda",
+        "yousufguda_check_post",
+        "krishna_nagar",
+        "venkatagiri_gate",
+        "jubilee_check_post",
+        "peddamma_temple",
+        "madhapur",
+        "hitech_city",
+        "kothaguda_xroads",
+        "gachibowli_orr",
+        "cbit"
+      ],
+      "frequency_minutes": 15,
+      "operating_hours": {"start": "07:00", "end": "22:00"},
+      "start_point_id": "bharath_nagar",
+      "end_point_id": "cbit"
+    }
+  ]
+}

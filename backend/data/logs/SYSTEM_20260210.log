@@ -1,0 +1,23 @@
+2026-02-10 10:05:22,883 - SYSTEM - INFO - Trainer initialized
+2026-02-10 10:05:22,895 - SYSTEM - INFO - Flask app initialized
+2026-02-10 10:05:23,111 - SYSTEM - INFO - Trainer initialized
+2026-02-10 10:05:23,125 - SYSTEM - INFO - Flask app initialized
+2026-02-10 10:05:35,066 - SYSTEM - INFO - Client connected: d0wwf5CoVEJFqnPvAAAB
+2026-02-10 10:05:59,699 - SYSTEM - INFO - Manual bus added via API
+2026-02-10 10:06:34,504 - SYSTEM - INFO - Client disconnected: d0wwf5CoVEJFqnPvAAAB
+2026-02-10 10:07:31,237 - SYSTEM - INFO - Trainer initialized
+2026-02-10 10:07:31,249 - SYSTEM - INFO - Flask app initialized
+2026-02-10 10:07:31,459 - SYSTEM - INFO - Trainer initialized
+2026-02-10 10:07:31,471 - SYSTEM - INFO - Flask app initialized
+2026-02-10 10:07:39,350 - SYSTEM - INFO - Client connected: ga_RWFUdFO6XeZmlAAAB
+2026-02-10 10:07:57,118 - SYSTEM - INFO - Initializing agents...
+2026-02-10 10:07:57,120 - SYSTEM - INFO - Initialized 3 agents
+2026-02-10 10:07:57,120 - SYSTEM - INFO - Simulation loop started
+2026-02-10 10:07:57,120 - SYSTEM - INFO - Simulation started
+2026-02-10 10:14:58,091 - SYSTEM - INFO - Client disconnected: ga_RWFUdFO6XeZmlAAAB
+2026-02-10 10:20:49,554 - SYSTEM - INFO - Client connected: X_TuGVZ3bLPl4qJwAAAD
+2026-02-10 10:20:51,160 - SYSTEM - INFO - Client disconnected: X_TuGVZ3bLPl4qJwAAAD
+2026-02-10 10:20:51,185 - SYSTEM - INFO - Client connected: XGTTongvA_NrxfAkAAAF
+2026-02-10 10:20:52,932 - SYSTEM - INFO - Client disconnected: XGTTongvA_NrxfAkAAAF
+2026-02-10 10:20:52,984 - SYSTEM - INFO - Client connected: ChSNSXt-mQsFyeuKAAAH
+2026-02-10 10:20:54,430 - SYSTEM - INFO - Client disconnected: ChSNSXt-mQsFyeuKAAAH

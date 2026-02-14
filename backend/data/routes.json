@@ -1,23 +1,57 @@
-{
-  "routes": [
-    {
-      "id": "route_1",
-      "name": "College Campus Circuit",
-      "description": "Main campus circular route covering all key locations",
-      "color": "#FF5722",
-      "stops": [
-        "main_gate",
-        "library",
-        "canteen",
-        "hostel_block_a",
-        "sports_complex",
-        "main_gate"
-      ],
-      "frequency_minutes": 15,
-      "operating_hours": {
-        "start": "07:00",
-        "end": "22:00"
-      }
-    }
-  ]
-}
+{"routes": [
+  {
+    "id": "route_15",
+    "name": "Route 15 (UPPAL)",
+    "description": "Uppal Depot to CBIT - Covers Survey of India, Habsiguda, Tarnaka, Vidyanagar, Nallakunta, Fever hospital, Barkatpura, Narayanguda, Himayath nagar, Lakdi ka pool, Masab Tank, NMDC, Mehdipatnam, Kakatiya Nagar, Langarhouse",
+    "color": "#FF5722",
+    "stops": ["uppal_depot", "uppal_xroads", "survey_of_india", "habsiguda", "tarnaka_xroads", "vidyanagar_sves", "nallakunta", "fever_hospital", "barkatpura", "narayanguda", "himayath_nagar", "lakdi_ka_pool", "masab_tank", "nmdc", "mehdipatnam", "kakatiya_nagar", "langarhouse", "cbit"],
+    "frequency_minutes": 15,
+    "operating_hours": {"start": "07:00", "end": "22:00"},
+    "start_point_id": "uppal_depot",
+    "end_point_id": "cbit"
+  },
+  {
+    "id": "route_19",
+    "name": "Route 19 (UPPAL)",
+    "description": "Uppal to CBIT - Covers Modern Bakery, Church, Ramanthapur, Amberpet, 6 No. Junction, Syndicate bank, Vidyanagar, Nallakunta, Fever hospital, Barkatpura, Narayanguda, Himayath nagar, Lakdi ka pool, Masab Tank, NMDC, Mehdipatnam",
+    "color": "#4CAF50",
+    "stops": ["uppal", "modern_bakery", "church", "ramanthapur", "amberpet", "6_no_junction", "syndicate_bank", "vidyanagar_sves", "nallakunta", "fever_hospital", "barkatpura", "narayanguda", "himayath_nagar", "lakdi_ka_pool", "masab_tank", "nmdc", "mehdipatnam", "cbit"],
+    "frequency_minutes": 15,
+    "operating_hours": {"start": "07:00", "end": "22:00"},
+    "start_point_id": "uppal",
+    "end_point_id": "cbit"
+  },
+  {
+    "id": "route_28",
+    "name": "Route 28 (SECUNDERABAD)",
+    "description": "ISKCON to CBIT - Covers Patny Police Station, Paradise Fire station, Airport, HPS, Life style, JVR park, Care hospital, Mehdipatnam, Tolichowki, Tolichowki cross road, Narayanamma college, Dargah, Delhi Public School",
+    "color": "#2196F3",
+    "stops": ["iskcon", "patny_police_station", "paradise_fire_station", "airport", "hps", "life_style", "jvr_park", "care_hospital", "mehdipatnam", "tolichowki", "tolichowki_cross_road", "narayanamma_college", "dargah", "delhi_public_school", "cbit"],
+    "frequency_minutes": 15,
+    "operating_hours": {"start": "07:00", "end": "22:00"},
+    "start_point_id": "iskcon",
+    "end_point_id": "cbit"
+  },
+  {
+    "id": "route_29",
+    "name": "Route 29 (AS RAO NAGAR / ECIL)",
+    "description": "Radhika (ECIL) to CBIT - Covers Officers colony, Sainikpuri x Road, Neredmet x Road, Vinayak Nagar, Krupa Complex, AS Rao Nagar, SBI Bank, Kushaiguda, Ramanthapur, Amberpet, Vidyanagar, Nallakunta, Barkatpura, Narayanguda, Himayath nagar, Lakdi ka pool, Masab Tank, NMDC, Mehdipatnam",
+    "color": "#9C27B0",
+    "stops": ["radhika_ecil", "officers_colony", "sainikpuri_x_road", "neredmet_x_road", "vinayak_nagar", "krupa_complex", "as_rao_nagar", "sbi_bank", "kushaiguda", "ramanthapur", "amberpet", "vidyanagar_sves", "nallakunta", "barkatpura", "narayanguda", "himayath_nagar", "lakdi_ka_pool", "masab_tank", "nmdc", "mehdipatnam", "cbit"],
+    "frequency_minutes": 15,
+    "operating_hours": {"start": "07:00", "end": "22:00"},
+    "start_point_id": "radhika_ecil",
+    "end_point_id": "cbit"
+  },
+  {
+    "id": "route_59",
+    "name": "Route 59 (ESI-YG)",
+    "description": "Bharath Nagar to CBIT - Covers Erragadda, ESI, S R Nagar, Maitrivanam, Yousufguda, Jubilee Check Post, Peddamma Temple, Madhapur, Hi-tech city, Gachibowli ORR",
+    "color": "#FF9800",
+    "stops": ["bharath_nagar", "erragadda", "esi", "s_r_nagar", "maitrivanam", "yousufguda", "yousufguda_check_post", "krishna_nagar", "venkatagiri_gate", "jubilee_check_post", "peddamma_temple", "madhapur", "hitech_city", "kothaguda_xroads", "gachibowli_orr", "cbit"],
+    "frequency_minutes": 15,
+    "operating_hours": {"start": "07:00", "end": "22:00"},
+    "start_point_id": "bharath_nagar",
+    "end_point_id": "cbit"
+  }
+]}

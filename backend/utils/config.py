@@ -27,7 +27,7 @@ class Config:
     
     # Route Settings
     NUM_BUSES = 3  # Number of buses per route
-    NUM_ROUTES = 1  # Number of routes (start with 1)
+    NUM_ROUTES = 2  # From Bus route details PDF (route_15 UPPAL, route_59 ESI-YG)
     AVERAGE_SPEED = 30  # km/h
     
     # Passenger Settings

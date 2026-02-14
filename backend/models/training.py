@@ -87,9 +87,10 @@ class Trainer:
                 # Update agents
                 coordinator.update_agents(next_observations, rewards)
                 
-                # Track episode rewards
+                # Track episode rewards (only for buses with agents - ignore dynamic buses)
                 for bus_id, reward in rewards.items():
-                    episode_rewards[bus_id] += reward
+                    if bus_id in episode_rewards:
+                        episode_rewards[bus_id] += reward
                 
                 if done:
                     break

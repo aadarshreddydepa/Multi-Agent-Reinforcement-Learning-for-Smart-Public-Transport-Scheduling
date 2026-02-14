@@ -1,0 +1,319 @@
+@import "tailwindcss";
+
+:root {
+  /* Uber/Rapido Professional Color Palette */
+  --primary-black: #000000;
+  --primary-white: #FFFFFF;
+  --primary-gray: #6B7280;
+  --light-gray: #F3F4F6;
+  --border-gray: #E5E7EB;
+  
+  /* Brand Colors - Modern & Professional */
+  --brand-primary: #000000;
+  --brand-secondary: #FFFFFF;
+  --accent-blue: #0081FF;
+  --accent-green: #00D474;
+  --accent-orange: #FF6B00;
+  --accent-red: #FF0000;
+  
+  /* Uber-style Gradients */
+  --gradient-primary: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  --gradient-secondary: linear-gradient(135deg, #FFFFFF 0%, #F3F4F6 100%);
+  --gradient-accent: linear-gradient(135deg, #0081FF 0%, #00D474 100%);
+  
+  /* Professional Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Typography */
+  --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+@theme {
+  --font-display: var(--font-jakarta);
+  --font-body: var(--font-jakarta);
+}
+
+/* Professional Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--primary-white);
+  color: var(--primary-black);
+  margin: 0;
+  padding: 0;
+}
+
+/* Professional Button Styles */
+.btn-primary {
+  background: var(--brand-primary);
+  color: var(--primary-white);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+  background: #1a1a1a;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  background: var(--primary-white);
+  color: var(--brand-primary);
+  border: 1px solid var(--border-gray);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--light-gray);
+  transform: translateY(-1px);
+}
+
+/* Custom scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #e5e7eb #f3f4f6;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #e5e7eb;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #d1d5db;
+}
+
+/* Enhanced animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce-subtle {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40%, 43% {
+    transform: translateY(-8px);
+  }
+  70% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Enhanced glass morphism */
+.glass-enhanced {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Premium button styles */
+.premium-button {
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.premium-button:hover::before {
+  left: 100%;
+}
+
+/* Enhanced card styles */
+.premium-card {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.06),
+    0 8px 16px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.08),
+    0 12px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Map enhancements */
+.leaflet-container {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.bus-marker-enhanced {
+  animation: pulse-glow 2s infinite;
+}
+
+.stop-marker-enhanced {
+  transition: all 0.3s ease;
+}
+
+.stop-marker-enhanced:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+}
+
+/* Leaflet Fixes */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Professional Animations */
+@keyframes pulse-ring {
+  0% { transform: scale(0.33); opacity: 0.8; }
+  80%, 100% { opacity: 0; }
+}
+.animate-pulse-ring {
+  animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+@keyframes slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.animate-slide-up {
+  animation: slide-up 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes scale-in {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.animate-scale-in {
+  animation: scale-in 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.glass-card {
+  background-color: rgb(255 255 255 / 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgb(255 255 255 / 0.2);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* Leaflet Popup Customization */
+.premium-popup .leaflet-popup-content-wrapper {
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+.premium-popup .leaflet-popup-content {
+  margin: 0;
+  width: auto !important;
+}
+.premium-popup .leaflet-popup-tip {
+  background: white;
+}
+.premium-popup a.leaflet-popup-close-button {
+  top: 8px;
+  right: 8px;
+  color: #9ca3af;
+  font-size: 16px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+.premium-popup a.leaflet-popup-close-button:hover {
+  background: #f3f4f6;
+  color: #ef4444;
+}

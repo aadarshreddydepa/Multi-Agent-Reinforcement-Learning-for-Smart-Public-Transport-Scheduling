@@ -1,0 +1,95 @@
+2026-02-11 19:17:06,087 - SYSTEM - INFO - Trainer initialized
+2026-02-11 19:17:06,103 - SYSTEM - INFO - Flask app initialized
+2026-02-11 19:17:29,960 - SYSTEM - INFO - Trainer initialized
+2026-02-11 19:17:29,972 - SYSTEM - INFO - Flask app initialized
+2026-02-11 19:18:09,262 - SYSTEM - INFO - Trainer initialized
+2026-02-11 19:18:09,274 - SYSTEM - INFO - Flask app initialized
+2026-02-11 19:18:09,504 - SYSTEM - INFO - Trainer initialized
+2026-02-11 19:18:09,518 - SYSTEM - INFO - Flask app initialized
+2026-02-11 19:32:50,084 - SYSTEM - INFO - Trainer initialized
+2026-02-11 19:32:50,096 - SYSTEM - INFO - Flask app initialized
+2026-02-11 19:33:00,845 - SYSTEM - INFO - Client connected: YPc3ZaHyZM7cAWS9AAAB
+2026-02-11 19:33:07,845 - SYSTEM - INFO - Initializing agents...
+2026-02-11 19:33:07,847 - SYSTEM - INFO - Initialized 3 agents
+2026-02-11 19:33:07,847 - SYSTEM - INFO - Simulation loop started
+2026-02-11 19:33:07,847 - SYSTEM - INFO - Simulation started
+2026-02-11 19:33:25,842 - SYSTEM - INFO - Manual bus added via API
+2026-02-11 19:33:37,545 - SYSTEM - INFO - Client disconnected: YPc3ZaHyZM7cAWS9AAAB
+2026-02-11 19:54:28,060 - SYSTEM - INFO - Trainer initialized
+2026-02-11 19:54:28,075 - SYSTEM - INFO - Flask app initialized
+2026-02-11 19:54:28,311 - SYSTEM - INFO - Trainer initialized
+2026-02-11 19:54:28,323 - SYSTEM - INFO - Flask app initialized
+2026-02-11 19:54:53,050 - SYSTEM - ERROR - Error starting simulation: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2026-02-11 19:54:56,061 - SYSTEM - INFO - Initializing agents...
+2026-02-11 19:54:56,061 - SYSTEM - INFO - Initialized 3 agents
+2026-02-11 19:54:56,061 - SYSTEM - INFO - Simulation loop started
+2026-02-11 19:54:56,061 - SYSTEM - INFO - Simulation started
+2026-02-11 19:55:33,046 - SYSTEM - INFO - Client connected: lyeIh7ptwyv6EYgJAAAB
+2026-02-11 19:56:17,439 - SYSTEM - INFO - Client disconnected: lyeIh7ptwyv6EYgJAAAB
+2026-02-11 20:03:13,562 - SYSTEM - INFO - Trainer initialized
+2026-02-11 20:03:13,577 - SYSTEM - INFO - Flask app initialized
+2026-02-11 20:03:32,050 - SYSTEM - INFO - Trainer initialized
+2026-02-11 20:03:32,062 - SYSTEM - INFO - Flask app initialized
+2026-02-11 20:05:07,357 - SYSTEM - INFO - Trainer initialized
+2026-02-11 20:05:07,368 - SYSTEM - INFO - Flask app initialized
+2026-02-11 20:05:07,608 - SYSTEM - INFO - Trainer initialized
+2026-02-11 20:05:07,620 - SYSTEM - INFO - Flask app initialized
+2026-02-11 20:05:26,938 - SYSTEM - INFO - Initializing agents...
+2026-02-11 20:05:26,939 - SYSTEM - INFO - Initialized 3 agents
+2026-02-11 20:05:26,939 - SYSTEM - INFO - Simulation loop started
+2026-02-11 20:05:26,939 - SYSTEM - INFO - Simulation started
+2026-02-11 20:05:52,922 - SYSTEM - INFO - Client connected: jBQbQSaWWgDKj8sbAAAB
+2026-02-11 20:05:52,962 - SYSTEM - INFO - Client connected: gG7DKaF1jm5E7mhRAAAD
+2026-02-11 20:06:26,170 - SYSTEM - INFO - Simulation stopped
+2026-02-11 20:06:27,004 - SYSTEM - INFO - Simulation loop ended
+2026-02-11 20:06:39,900 - SYSTEM - INFO - Client disconnected: jBQbQSaWWgDKj8sbAAAB
+2026-02-11 20:06:39,903 - SYSTEM - INFO - Client disconnected: gG7DKaF1jm5E7mhRAAAD
+2026-02-11 21:30:46,929 - SYSTEM - INFO - Trainer initialized
+2026-02-11 21:30:46,944 - SYSTEM - INFO - Flask app initialized
+2026-02-11 21:30:47,156 - SYSTEM - INFO - Trainer initialized
+2026-02-11 21:30:47,167 - SYSTEM - INFO - Flask app initialized
+2026-02-11 21:31:08,487 - SYSTEM - INFO - Client connected: PaWWRBO5qwwgym-WAAAB
+2026-02-11 21:31:19,219 - SYSTEM - INFO - Initializing agents...
+2026-02-11 21:31:19,220 - SYSTEM - INFO - Initialized 3 agents
+2026-02-11 21:31:19,220 - SYSTEM - INFO - Simulation loop started
+2026-02-11 21:31:19,220 - SYSTEM - INFO - Simulation started
+2026-02-11 21:39:27,731 - SYSTEM - INFO - Trainer initialized
+2026-02-11 21:39:27,748 - SYSTEM - INFO - Flask app initialized
+2026-02-11 21:39:28,116 - SYSTEM - INFO - Client connected: fw9J6lqCnhSRTNJ3AAAB
+2026-02-11 21:39:40,345 - SYSTEM - INFO - Trainer initialized
+2026-02-11 21:39:40,356 - SYSTEM - INFO - Flask app initialized
+2026-02-11 21:39:40,666 - SYSTEM - INFO - Client connected: 0pYn87vbWd5yY6dGAAAB
+2026-02-11 21:44:36,581 - SYSTEM - INFO - Trainer initialized
+2026-02-11 21:44:36,592 - SYSTEM - INFO - Flask app initialized
+2026-02-11 21:44:36,804 - SYSTEM - INFO - Trainer initialized
+2026-02-11 21:44:36,815 - SYSTEM - INFO - Flask app initialized
+2026-02-11 21:44:36,842 - SYSTEM - INFO - Client connected: dmObHCTvR30PYQ3BAAAB
+2026-02-11 21:44:39,634 - SYSTEM - INFO - Client connected: WEz14CVyt5eUH0KmAAAD
+2026-02-11 21:44:39,831 - SYSTEM - INFO - Client disconnected: dmObHCTvR30PYQ3BAAAB
+2026-02-11 21:44:39,879 - SYSTEM - INFO - Client connected: 9biEHao5XKWw5Zd-AAAF
+2026-02-11 21:44:47,837 - SYSTEM - INFO - Initializing agents...
+2026-02-11 21:44:47,838 - SYSTEM - INFO - Initialized 3 agents
+2026-02-11 21:44:47,839 - SYSTEM - INFO - Simulation loop started
+2026-02-11 21:44:47,839 - SYSTEM - INFO - Simulation started
+2026-02-11 21:46:15,752 - SYSTEM - INFO - Trainer initialized
+2026-02-11 21:46:15,763 - SYSTEM - INFO - Flask app initialized
+2026-02-11 21:46:25,203 - SYSTEM - INFO - Client disconnected: 9biEHao5XKWw5Zd-AAAF
+2026-02-11 21:46:26,155 - SYSTEM - INFO - Client disconnected: WEz14CVyt5eUH0KmAAAD
+2026-02-11 21:48:05,701 - SYSTEM - INFO - Trainer initialized
+2026-02-11 21:48:05,713 - SYSTEM - INFO - Flask app initialized
+2026-02-11 21:48:14,137 - SYSTEM - INFO - Trainer initialized
+2026-02-11 21:48:14,148 - SYSTEM - INFO - Flask app initialized
+2026-02-11 21:48:54,930 - SYSTEM - INFO - Initializing agents...
+2026-02-11 21:48:54,931 - SYSTEM - INFO - Initialized 3 agents
+2026-02-11 21:48:54,931 - SYSTEM - INFO - Simulation loop started
+2026-02-11 21:48:54,931 - SYSTEM - INFO - Simulation started
+2026-02-11 21:49:27,654 - SYSTEM - INFO - Client connected: DDui-JwY2sgthINTAAAB
+2026-02-11 21:49:30,490 - SYSTEM - INFO - Client disconnected: DDui-JwY2sgthINTAAAB
+2026-02-11 21:49:30,519 - SYSTEM - INFO - Client connected: YsnqKHhbwpi-ftVsAAAD
+2026-02-11 21:49:31,001 - SYSTEM - INFO - Client disconnected: YsnqKHhbwpi-ftVsAAAD
+2026-02-11 21:49:31,033 - SYSTEM - INFO - Client connected: rM9HLwDMnhG6YGIiAAAF
+2026-02-11 21:49:31,158 - SYSTEM - INFO - Client disconnected: rM9HLwDMnhG6YGIiAAAF
+2026-02-11 21:49:31,178 - SYSTEM - INFO - Client connected: ZEp52Ykn6iicGGcVAAAH
+2026-02-11 21:49:31,289 - SYSTEM - INFO - Client disconnected: ZEp52Ykn6iicGGcVAAAH
+2026-02-11 21:49:31,315 - SYSTEM - INFO - Client connected: foYYZXX89dXVWPHeAAAJ
+2026-02-11 21:49:33,129 - SYSTEM - INFO - Client disconnected: foYYZXX89dXVWPHeAAAJ

@@ -259,16 +259,18 @@ def get_buses():
     try:
         buses_info = []
         for bus_id, bus in traffic_env.buses.items():
+            occupancy_rate = len(bus.get('passengers', [])) / bus.get('capacity', 50) * 100
             buses_info.append({
                 'id': bus['id'],
                 'route_id': bus['route_id'],
+                'current_route_id': bus['route_id'],  # Add this for frontend compatibility
                 'state': bus['state'],
                 'current_stop': bus['current_stop'],
                 'target_stop': bus.get('target_stop'),
-                'passengers_count': len(bus['passengers']),
-                'capacity': bus['capacity'],
-                'occupancy_rate': len(bus['passengers']) / bus['capacity'] * 100,
-                'position': bus['position'],
+                'position': bus.get('position'),
+                'passengers': bus.get('passengers', []),
+                'capacity': bus.get('capacity', 50),
+                'occupancy_rate': occupancy_rate,
                 'is_dynamic': bus.get('is_dynamic', False)
             })
         

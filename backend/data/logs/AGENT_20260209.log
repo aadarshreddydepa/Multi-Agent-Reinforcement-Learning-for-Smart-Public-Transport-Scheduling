@@ -1,8 +1,0 @@
-2026-02-09 09:42:51,248 - AGENT - INFO - RewardCalculator initialized
-2026-02-09 09:42:51,516 - AGENT - DEBUG - Reward for DEPART_NOW: -0.1 (boarded=0, occupancy=0%)
-2026-02-09 09:42:51,517 - AGENT - DEBUG - Reward for WAIT_30: -4.5 (boarded=0, occupancy=0%)
-2026-02-09 09:42:51,517 - AGENT - DEBUG - Reward for DEPART_NOW: -0.1 (boarded=0, occupancy=0%)
-2026-02-09 09:49:09,624 - AGENT - INFO - RewardCalculator initialized
-2026-02-09 09:49:09,626 - AGENT - INFO - MultiAgentCoordinator initialized
-2026-02-09 09:49:09,876 - AGENT - INFO - RewardCalculator initialized
-2026-02-09 09:49:09,877 - AGENT - INFO - MultiAgentCoordinator initialized
