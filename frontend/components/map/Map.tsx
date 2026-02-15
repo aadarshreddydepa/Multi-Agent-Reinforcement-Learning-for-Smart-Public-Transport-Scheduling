@@ -34,11 +34,41 @@ const Map: React.FC<MapProps> = ({ buses, stops, center }) => {
 
   const defaultCenter: [number, number] = center || [17.385, 78.4867];
 
+  // Calculate appropriate zoom level based on stop distribution
+  const calculateZoom = () => {
+    if (stops.length === 0) return 15;
+    
+    const validStops = stops.filter(stop => stop.location);
+    if (validStops.length === 0) return 15;
+    
+    const lats = validStops.map(stop => stop.location.lat);
+    const lngs = validStops.map(stop => stop.location.lng);
+    
+    const maxLat = Math.max(...lats);
+    const minLat = Math.min(...lats);
+    const maxLng = Math.max(...lngs);
+    const minLng = Math.min(...lngs);
+    
+    const latDiff = maxLat - minLat;
+    const lngDiff = maxLng - minLng;
+    
+    // Adjust zoom based on the spread of coordinates
+    const maxDiff = Math.max(latDiff, lngDiff);
+    
+    if (maxDiff > 0.3) return 11;  // Very spread out
+    if (maxDiff > 0.2) return 12;  // Spread out
+    if (maxDiff > 0.1) return 13;  // Moderately spread
+    if (maxDiff > 0.05) return 14; // Somewhat spread
+    return 15; // Close together
+  };
+
+  const zoom = calculateZoom();
+
   return (
     <div className="w-full h-full relative rounded-xl overflow-hidden shadow-lg border border-gray-200">
       <MapContainer
         center={defaultCenter}
-        zoom={15}
+        zoom={zoom}
         scrollWheelZoom={true}
         className="w-full h-full z-0"
         zoomControl={false} // Custom zoom control maybe later

@@ -54,19 +54,16 @@ const BusMarker: React.FC<BusMarkerProps> = ({ bus }) => {
                 <div style="
                     background: linear-gradient(135deg, ${color} 0%, ${color}dd 100%);
                     border-radius: 50%;
-                    padding: 4px;
-                    width: 36px;
-                    height: 36px;
+                    width: 32px;
+                    height: 32px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    font-size: 18px;
+                    font-size: 16px;
                     box-shadow: 
-                        0 4px 8px rgba(0,0,0,0.15),
-                        0 2px 4px rgba(0,0,0,0.1),
-                        inset 0 1px 0 rgba(255,255,255,0.2);
-                    border: 2px solid rgba(255,255,255,0.3);
-                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                        0 2px 4px rgba(0,0,0,0.2);
+                    border: 2px solid white;
+                    transition: all 0.3s ease;
                 ">
                     🚌
                 </div>
@@ -76,15 +73,17 @@ const BusMarker: React.FC<BusMarkerProps> = ({ bus }) => {
                 ${bus.state === 'MOVING' || bus.state === 'IN_TRANSIT' ? `
                     <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
                 ` : ''}
+                ${occupancyRate > 0 ? `
+                <div class="absolute -top-2 left-1/2 transform -translate-x-1/2 text-xs font-bold" style="
                     background: ${color};
                     color: white;
                     font-size: 9px;
-                    font-weight: 600;
-                    padding: 2px 4px;
-                    border-radius: 8px;
-                    border: 2px solid white;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+                    padding: 1px 3px;
+                    border-radius: 4px;
+                    border: 1px solid white;
+                    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
                 ">${(occupancyRate * 100).toFixed(0)}%</div>
+                ` : ''}
             </div>
         `,
     iconSize: [size, size],
@@ -99,7 +98,7 @@ const BusMarker: React.FC<BusMarkerProps> = ({ bus }) => {
   return (
     <DriftMarker
       position={[busPosition.lat, busPosition.lng]}
-      duration={1000}
+      duration={400}
       icon={busIcon}
     >
       <Tooltip

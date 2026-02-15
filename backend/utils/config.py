@@ -16,7 +16,7 @@ class Config:
     
     # Simulation Parameters
     SIMULATION_SPEED = 1.0  # 1.0 = real-time, 2.0 = 2x faster
-    UPDATE_INTERVAL = 1.0  # seconds between updates
+    UPDATE_INTERVAL = 0.3  # seconds between updates (faster simulation)
     
     # Map Settings (College Campus - You can modify these coordinates)
     MAP_CENTER = {
@@ -28,7 +28,7 @@ class Config:
     # Route Settings
     NUM_BUSES = 3  # Number of buses per route
     NUM_ROUTES = 2  # From Bus route details PDF (route_15 UPPAL, route_59 ESI-YG)
-    AVERAGE_SPEED = 30  # km/h
+    AVERAGE_SPEED = 60  # km/h (increased for faster movement)
     
     # Passenger Settings
     MIN_PASSENGERS_PER_STOP = 0

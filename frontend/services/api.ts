@@ -39,6 +39,7 @@ export const apiService = {
   getStatus: async () => (await api.get<{ simulation_running: boolean }>('/api/status')).data,
   getConfig: async () => (await api.get<unknown>('/api/config')).data, // Type later
   getRoutes: async () => (await api.get<unknown>('/api/routes')).data,
+  getRoadPaths: async () => (await api.get<unknown>('/api/routes/road-paths')).data,
   getStops: async () => (await api.get<{ stops: Stop[] }>('/api/stops')).data,
   getState: async () => (await api.get<SimulationState>('/api/state')).data,
   getStatistics: async () => (await api.get<Statistics>('/api/statistics')).data,

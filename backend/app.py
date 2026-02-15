@@ -85,6 +85,38 @@ def get_routes():
         'routes': route_manager.get_all_routes_info()
     })
 
+@app.route('/api/routes/road-paths', methods=['GET'])
+def get_road_paths():
+    """Get road-based route paths with real coordinates"""
+    try:
+        routes = route_manager.get_all_routes_info()
+        road_paths = {}
+        
+        for route in routes:
+            route_id = route['id']
+            stops = route['stops']
+            
+            # Get road path using the pathfinder
+            road_path = route_manager.get_road_path(route_id)
+            if road_path:
+                road_paths[route_id] = {
+                    'stops': stops,
+                    'path': road_path,
+                    'color': route.get('color', '#3B82F6')
+                }
+        
+        return jsonify({
+            'success': True,
+            'road_paths': road_paths
+        })
+        
+    except Exception as e:
+        system_logger.error(f"Error getting road paths: {e}")
+        return jsonify({
+            'success': False,
+            'message': f'Error getting road paths: {str(e)}'
+        }), 500
+
 @app.route('/api/stops', methods=['GET'])
 def get_stops():
     """Get all stop information"""
@@ -270,6 +302,7 @@ def get_buses():
                 'position': bus.get('position'),
                 'passengers': bus.get('passengers', []),
                 'capacity': bus.get('capacity', 50),
+                'route_color': bus.get('route_color', '#3B82F6'),
                 'occupancy_rate': occupancy_rate,
                 'is_dynamic': bus.get('is_dynamic', False)
             })

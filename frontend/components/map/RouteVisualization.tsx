@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { Polyline } from "react-leaflet";
 import { Bus, Stop } from "../../types";
+import apiService from "../../services/api";
 
 interface RouteVisualizationProps {
   buses: Bus[];
@@ -10,11 +11,43 @@ interface RouteVisualizationProps {
 }
 
 const RouteVisualization: React.FC<RouteVisualizationProps> = ({ buses, stops }) => {
+  const [roadPaths, setRoadPaths] = useState<any>({});
+  const [loading, setLoading] = useState(true);
+
+  // Fetch road paths on component mount
+  useEffect(() => {
+    const fetchRoadPaths = async () => {
+      try {
+        const response = await apiService.getRoadPaths() as any;
+        if (response.success) {
+          setRoadPaths(response.road_paths || {});
+        }
+      } catch (error) {
+        console.error('Error fetching road paths:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRoadPaths();
+  }, []);
+
   // Group buses by route
   const routes = useMemo(() => {
     const routeMap: { [key: string]: Bus[] } = {};
     buses.forEach((bus) => {
-      const routeId = bus.current_route_id || bus.assigned_route || 'default';
+      let routeId: string;
+      if (bus.current_route_id) {
+        routeId = bus.current_route_id;
+      } else if (bus.assigned_route) {
+        // Handle assigned_route as either string or array
+        routeId = Array.isArray(bus.assigned_route) 
+          ? bus.assigned_route.join('-') 
+          : bus.assigned_route;
+      } else {
+        routeId = 'default';
+      }
+      
       if (!routeMap[routeId]) {
         routeMap[routeId] = [];
       }
@@ -29,8 +62,14 @@ const RouteVisualization: React.FC<RouteVisualizationProps> = ({ buses, stops })
     return bus?.route_color || '#3B82F6';
   };
 
-  // Create enhanced route path with road visualization
-  const createRoutePath = (routeStops: string[]) => {
+  // Create route path using real road data when available, fallback to straight lines
+  const createRoutePath = (routeId: string, routeStops: string[]) => {
+    // Try to use road paths first
+    if (roadPaths[routeId] && roadPaths[routeId].path) {
+      return roadPaths[routeId].path;
+    }
+    
+    // Fallback to straight-line paths
     const coordinates: [number, number][] = [];
     routeStops.forEach(stopId => {
       const stop = stops.find(s => s.id === stopId);
@@ -41,54 +80,10 @@ const RouteVisualization: React.FC<RouteVisualizationProps> = ({ buses, stops })
     return coordinates;
   };
 
-  // Create smooth curved path for better road visualization
-  const createSmoothPath = (coordinates: [number, number][]) => {
-    if (coordinates.length < 2) return coordinates;
-    
-    // Add intermediate points for smoother curves
-    const smoothPath: [number, number][] = [];
-    
-    for (let i = 0; i < coordinates.length - 1; i++) {
-      const start = coordinates[i];
-      const end = coordinates[i + 1];
-      
-      // Add start point
-      smoothPath.push(start);
-      
-      // Add intermediate points for smooth curves
-      const steps = 3;
-      for (let j = 1; j < steps; j++) {
-        const t = j / steps;
-        const lat = start[0] + (end[0] - start[0]) * t;
-        const lng = start[1] + (end[1] - start[1]) * t;
-        smoothPath.push([lat, lng]);
-      }
-    }
-    
-    // Add final point
-    smoothPath.push(coordinates[coordinates.length - 1]);
-    
-    return smoothPath;
-  };
-
-  // Build stop coordinates map
-  const stopCoordinates = useMemo(() => {
-    const coords: Record<string, [number, number]> = {};
-    stops.forEach((stop) => {
-      if (stop.location) {
-        coords[stop.id] = [stop.location.lat, stop.location.lng];
-      }
-    });
-    return coords;
-  }, [stops]);
-
-  // Generate route lines - assumes bus has assigned_route (id array) and route_color
-  // The Bus interface I defined earlier might need assigned_route.
-  // Let me update the Bus interface in types/index.ts to include these if they are present in backend.
-
-  // For now I will assume they are partial or passed in Bus object
-
+  // Generate route lines using road paths
   const routeLines = useMemo(() => {
+    if (loading) return [];
+    
     return Object.keys(routes).map(routeId => {
       const routeBuses = routes[routeId];
       if (!routeBuses || routeBuses.length === 0) {
@@ -99,13 +94,12 @@ const RouteVisualization: React.FC<RouteVisualizationProps> = ({ buses, stops })
       const color = getRouteColor(routeId);
       
       if (routeStops && Array.isArray(routeStops)) {
-        const positions = createRoutePath(routeStops);
-        const smoothPositions = createSmoothPath(positions);
-        if (smoothPositions.length >= 2) {
+        const positions = createRoutePath(routeId, routeStops);
+        if (positions.length >= 2) {
           return {
             id: routeId,
-            positions: smoothPositions,
-            color,
+            positions,
+            color: roadPaths[routeId]?.color || color,
           };
         }
       }
@@ -116,36 +110,27 @@ const RouteVisualization: React.FC<RouteVisualizationProps> = ({ buses, stops })
       positions: [number, number][];
       color: string;
     }[];
-  }, [routes, stopCoordinates, getRouteColor]);
+  }, [routes, roadPaths, loading, getRouteColor]);
+
+  if (loading) {
+    return null; // Don't render anything while loading
+  }
 
   return (
     <>
       {routeLines.map((line) => (
-        <div key={line.id}>
-          {/* Main route line */}
-          <Polyline
-            positions={line.positions}
-            pathOptions={{
-              color: "#000000",
-              opacity: 0.8,
-              weight: 6,
-              lineCap: "round",
-              lineJoin: "round",
-            }}
-          />
-          {/* Accent route line */}
-          <Polyline
-            positions={line.positions}
-            pathOptions={{
-              color: line.color || "#0081FF",
-              opacity: 0.9,
-              weight: 3,
-              dashArray: "12, 8",
-              lineCap: "round",
-              lineJoin: "round",
-            }}
-          />
-        </div>
+        <Polyline
+          key={line.id}
+          positions={line.positions}
+          pathOptions={{
+            color: line.color || "#3B82F6",
+            opacity: 0.8,
+            weight: 3,
+            dashArray: "10, 5",
+            lineCap: "round",
+            lineJoin: "round",
+          }}
+        />
       ))}
     </>
   );

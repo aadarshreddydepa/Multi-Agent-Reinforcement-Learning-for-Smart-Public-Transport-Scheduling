@@ -246,7 +246,7 @@ class TrafficEnvironment:
         self.dynamic_buses = []  # List of dynamically added buses
         self.demand_threshold = 12  # Total passengers waiting to trigger new bus
         self.demand_threshold_per_stop = 8  # High demand at single stop
-        self.max_buses = 8  # Maximum buses allowed
+        self.max_buses = 20  # Maximum buses allowed (increased for manual addition)
         self._last_bus_add_time = -999  # Cooldown for adding buses
         env_logger.info("TrafficEnvironment initialized")
 
@@ -262,27 +262,20 @@ class TrafficEnvironment:
         # Reset passenger demand
         self.passenger_demand.reset()
 
-        # Get stops from route_manager (main_gate, library, canteen, hostel_block_a, sports_complex)
-        route_1 = self.route_manager.get_route('route_1')
-        base_stops = route_1['stops'] if route_1 else list(self.route_manager.stops.keys())
-        # Remove duplicate main_gate at end for circular route
-        if base_stops and base_stops[0] == base_stops[-1]:
-            base_stops = base_stops[:-1]
+        # Get actual defined routes from route_manager
+        defined_routes = list(route_manager.routes.keys())
+        if not defined_routes:
+            env_logger.warning("No routes defined in route_manager")
+            return self.get_state()
 
-        # Create route variations: forward, reverse, and alternate (skip pattern)
-        n = len(base_stops)
-        alternate_route = base_stops + [base_stops[0]]  # Default to forward
-        if n >= 5:
-            alternate_route = [base_stops[0], base_stops[2 % n], base_stops[4 % n], base_stops[1], base_stops[3], base_stops[0]]
-        bus_routes_config = [
-            {'route': base_stops + [base_stops[0]], 'color': '#0ea5e9'},
-            {'route': list(reversed(base_stops)) + [base_stops[-1]], 'color': '#10b981'},
-            {'route': alternate_route, 'color': '#f59e0b'},
-        ]
-
+        # Create buses for each defined route
         bus_id = 1
-        for route_config in bus_routes_config:
-            first_stop_id = route_config['route'][0]
+        for route_id in defined_routes:
+            route = route_manager.get_route(route_id)
+            if not route or 'stops' not in route or len(route['stops']) == 0:
+                continue
+                
+            first_stop_id = route['stops'][0]
             first_stop = self.route_manager.stops.get(first_stop_id, {
                 'location': {'lat': 17.3850 + (bus_id * 0.01), 'lng': 78.4867 + (bus_id * 0.01)}
             })
@@ -293,9 +286,9 @@ class TrafficEnvironment:
 
             bus = {
                 'id': f'bus_{bus_id}',
-                'route_id': f'route_{bus_id}',
-                'assigned_route': route_config['route'],
-                'route_color': route_config['color'],
+                'route_id': route_id,  # Use actual route ID
+                'assigned_route': route['stops'],
+                'route_color': route.get('color', '#3B82F6'),
                 'current_stop_index': 0,
                 'current_stop': first_stop_id,
                 'capacity': Config.BUS_CAPACITY,
@@ -303,7 +296,7 @@ class TrafficEnvironment:
                 'state': 'AT_STOP',
                 'position': {'lat': loc.get('lat', 17.3850), 'lng': loc.get('lng', 78.4867)},
                 'total_served': 0,
-                'speed': 0.025,
+                'speed': 0.08,
                 'last_departure_time': 0,
                 'arrival_time': 0,
                 'schedule_adherence': 0,
@@ -313,16 +306,16 @@ class TrafficEnvironment:
             self.buses[bus['id']] = bus
 
             self.bus_routes[bus['id']] = {
-                'route': route_config['route'],
+                'route': route['stops'],
                 'current_index': 0,
                 'target_index': 1,
                 'progress': 0.0,
                 'direction': 1,
-                'color': route_config['color']
+                'color': route.get('color', '#3B82F6')
             }
             bus_id += 1
 
-        env_logger.info(f"Environment reset with {len(self.buses)} buses on {len(base_stops)} stops")
+        env_logger.info(f"Environment reset with {len(self.buses)} buses on {len(self.route_manager.stops)} stops")
         return self.get_state()
 
     def step(self, actions: dict = None):
@@ -550,20 +543,28 @@ class TrafficEnvironment:
     def _add_dynamic_bus(self):
         """Add a new bus to handle high demand"""
         bus_id = f'dynamic_{len(self.dynamic_buses)}'
-        route_1 = self.route_manager.get_route('route_1')
-        base_stops = route_1['stops'] if route_1 else list(self.route_manager.stops.keys())
-        if base_stops and base_stops[0] == base_stops[-1]:
-            base_stops = base_stops[:-1]
-        route = base_stops + [base_stops[0]]
-        first_stop_id = route[0]
+        
+        # Get a random route from the defined routes
+        defined_routes = list(self.route_manager.routes.keys())
+        if not defined_routes:
+            return
+            
+        import random
+        route_id = random.choice(defined_routes)
+        route = self.route_manager.get_route(route_id)
+        
+        if not route or 'stops' not in route:
+            return
+            
+        first_stop_id = route['stops'][0]
         first_stop = self.route_manager.stops.get(first_stop_id, {})
         loc = first_stop.get('location', {'lat': 17.3850, 'lng': 78.4867})
 
         new_bus = {
             'id': bus_id,
-            'route_id': 'route_1',
-            'assigned_route': route,
-            'route_color': '#ef4444',
+            'route_id': route_id,
+            'assigned_route': route['stops'],
+            'route_color': route.get('color', '#ef4444'),
             'state': 'AT_STOP',
             'current_stop': first_stop_id,
             'passengers': [],
@@ -571,7 +572,7 @@ class TrafficEnvironment:
             'position': {'lat': loc.get('lat', 17.3850), 'lng': loc.get('lng', 78.4867)},
             'arrival_time': self.simulation_time,
             'total_served': 0,
-            'speed': 0.025,
+            'speed': 0.08,
             'last_departure_time': 0,
             'is_dynamic': True
         }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { Bus, Stop, Statistics, SimulationState, Alert } from "../types";
 import apiService, { initializeSocket } from "../services/api";
@@ -28,6 +28,20 @@ export default function Home() {
   >("optimal");
 
   const stateRef = useRef(state);
+
+  // Calculate center relative to stops if available
+  const center: [number, number] = useMemo(() => {
+    if (stopsData.length > 0 && stopsData[0].location) {
+      // Calculate the actual center point of all stops
+      const validStops = stopsData.filter(stop => stop.location);
+      if (validStops.length > 0) {
+        const avgLat = validStops.reduce((sum, stop) => sum + stop.location.lat, 0) / validStops.length;
+        const avgLng = validStops.reduce((sum, stop) => sum + stop.location.lng, 0) / validStops.length;
+        return [avgLat, avgLng];
+      }
+    }
+    return [17.385, 78.4867]; // Default Hyderabad center
+  }, [stopsData]);
 
   const addAlert = useCallback(
     (
@@ -343,12 +357,6 @@ export default function Home() {
       </div>
     );
   }
-
-  // Calculate center relative to stops if available
-  const center: [number, number] =
-    stopsData.length > 0 && stopsData[0].location
-      ? [stopsData[0].location.lat, stopsData[0].location.lng]
-      : [17.385, 78.4867];
 
   // Buses to display: use real-time state if running, else static/initial data
   // Convert object of buses from state to array if needed
