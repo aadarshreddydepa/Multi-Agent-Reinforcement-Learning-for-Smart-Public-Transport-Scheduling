@@ -86,6 +86,38 @@ const FleetManager: React.FC<FleetManagerProps> = ({
               ? "bg-gray-100 text-gray-400 cursor-not-allowed"
               : "bg-black text-white hover:bg-gray-800",
         )}
+      >
+        {loading ? (
+          <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
+        ) : (
+          <Plus className="w-4 h-4" />
+        )}
+        {loading ? "Adding..." : totalBuses >= 20 ? "Fleet Full" : "Add Bus"}
+      </button>
+
+      {/* Bus List */}
+      <div className="space-y-3">
+        {buses.map((bus) => {
+          const occupancy = bus.capacity ? ((bus.passengers?.length || 0) / bus.capacity) * 100 : 0;
+          
+          return (
+            <div key={bus.id} className="glass-enhanced p-4 rounded-xl border border-gray-200">
+              {/* Bus Header */}
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: bus.route_color || '#000000' }}>
+                    <BusIcon className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-black">Bus {bus.id}</div>
+                    <div className="text-xs text-gray-500">
+                      {bus.state === 'MOVING' || bus.state === 'IN_TRANSIT' ? 'In Service' : bus.state === 'IDLE' ? 'Inactive' : bus.state}
+                    </div>
+                  </div>
+                </div>
+                <button
+                  onClick={() => onRemoveBus(bus.id)}
+                  className="p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>

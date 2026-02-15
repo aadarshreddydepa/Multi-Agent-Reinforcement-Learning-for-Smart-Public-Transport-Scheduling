@@ -1,7 +1,7 @@
 /setup.sh
 /setups
 /quick_start.sh
-backend/venv
-
+backend/ve
+backend/data/logs
 node_modules
 
