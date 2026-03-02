@@ -317,3 +317,148 @@ body {
   background: #f3f4f6;
   color: #ef4444;
 }
+
+/* Route Animation Styles */
+@keyframes pulse-arrow {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.route-active {
+  animation: route-flow 2s linear infinite;
+}
+
+.route-inactive {
+  opacity: 0.4;
+}
+
+@keyframes route-flow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 40;
+  }
+}
+
+/* Bus marker animations */
+.bus-marker-icon {
+  transition: all 0.3s ease;
+}
+
+.bus-marker-icon:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+/* Direction arrow animations */
+.direction-arrow {
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* Enhanced map interactions */
+.leaflet-container {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.leaflet-container a {
+  color: #3b82f6;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.leaflet-container a:hover {
+  color: #2563eb;
+}
+
+/* Custom tooltip styles */
+.custom-tooltip.leaflet-tooltip {
+  background: rgba(0, 0, 0, 0.9);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 8px 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-tooltip.leaflet-tooltip:before {
+  border-top-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Enhanced stop markers */
+.stop-marker-enhanced {
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.stop-marker-enhanced:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* Loading animations */
+@keyframes route-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    stroke-width: 3;
+  }
+  50% {
+    opacity: 1;
+    stroke-width: 4;
+  }
+}
+
+.route-animated {
+  animation: route-pulse 3s ease-in-out infinite;
+}
+
+/* Dark mode map adjustments */
+.dark .leaflet-container {
+  background: #1a1a1a;
+}
+
+.dark .leaflet-control-zoom a {
+  background: #2d2d2d;
+  color: #ffffff;
+  border-color: #404040;
+}
+
+.dark .leaflet-control-zoom a:hover {
+  background: #404040;
+}
+
+/* Route selection highlight */
+.route-selected {
+  stroke-width: 5;
+  opacity: 1;
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+/* Performance optimizations */
+.leaflet-tile {
+  transition: opacity 0.3s ease;
+}
+
+.leaflet-tile-loaded {
+  opacity: 1;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .leaflet-popup-content {
+    font-size: 14px;
+  }
+  
+  .direction-arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+}

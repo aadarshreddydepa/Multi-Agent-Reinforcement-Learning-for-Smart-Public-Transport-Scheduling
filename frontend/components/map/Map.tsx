@@ -7,7 +7,9 @@ import "leaflet/dist/leaflet.css";
 import BusMarker from "./BusMarker";
 import StopMarker from "./StopMarker";
 import RouteVisualization from './RouteVisualization';
+import AnimatedRouteVisualization from './AnimatedRouteVisualization';
 import { Bus, Stop } from "../../types";
+import { useDarkModeMap } from "../../hooks/useDarkModeMap";
 
 // Fix Leaflet's default icon path issues
 const fixLeafletIcon = () => {
@@ -33,6 +35,7 @@ const Map: React.FC<MapProps> = ({ buses, stops, center }) => {
   }, []);
 
   const defaultCenter: [number, number] = center || [17.385, 78.4867];
+  const mapTileUrl = useDarkModeMap();
 
   // Calculate appropriate zoom level based on stop distribution
   const calculateZoom = () => {
@@ -65,7 +68,7 @@ const Map: React.FC<MapProps> = ({ buses, stops, center }) => {
   const zoom = calculateZoom();
 
   return (
-    <div className="w-full h-full relative rounded-xl overflow-hidden shadow-lg border border-gray-200">
+    <div className="w-full h-full relative rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transition-colors duration-300">
       <MapContainer
         center={defaultCenter}
         zoom={zoom}
@@ -74,12 +77,11 @@ const Map: React.FC<MapProps> = ({ buses, stops, center }) => {
         zoomControl={false} // Custom zoom control maybe later
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          // Use a darker/cleaner map style if possible, but standard OSM is fine for now.
-          // Could use CartoDB Positron for "professional" look.
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          url={mapTileUrl}
         />
 
+        <AnimatedRouteVisualization buses={buses} stops={stops} />
         <RouteVisualization buses={buses} stops={stops} />
 
         {stops.map((stop) => (
