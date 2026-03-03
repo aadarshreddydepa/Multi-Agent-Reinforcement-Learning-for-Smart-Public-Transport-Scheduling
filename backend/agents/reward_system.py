@@ -57,11 +57,14 @@ class RewardCalculator:
             # Underutilized bus (minor penalty)
             reward -= 3
         
-        # 3. PENALTY: Passengers waiting
-        # Each passenger waiting incurs a small penalty per second
+        # 3. PENALTY: Passengers waiting (Social Welfare/Fairness)
         if queue_length_after > 0:
             wait_penalty = Config.PENALTY_WAIT_TIME * queue_length_after
             reward += wait_penalty
+            
+        # 4. COORDINATION REWARD: Throughput bonus
+        # (Placeholder for global coordination - could be passed from environment)
+        reward += getattr(Config, 'COORDINATION_BONUS', 0)
         
         # 4. ACTION-SPECIFIC REWARDS/PENALTIES
         if action == 'DEPART_NOW':

@@ -1,5 +1,5 @@
 """
-Passenger Demand Generator - Simulates realistic passenger arrivals
+Traffic Environment - Main simulation logic
 """
 import random
 import numpy as np
@@ -14,224 +14,7 @@ from utils.config import Config
 from utils.logger import env_logger
 from environment.route_manager import route_manager
 from agents.reward_system import reward_calculator
-
-class PassengerDemand:
-    """Generates and manages passenger demand at bus stops"""
-    
-    def __init__(self):
-        """Initialize passenger demand generator"""
-        self.stop_queues = {}  # {stop_id: [passenger1, passenger2, ...]}
-        self.passenger_id_counter = 0
-        self.total_passengers_generated = 0
-        self.total_passengers_served = 0
-        
-        # Initialize queues for all stops
-        for stop_id in route_manager.stops.keys():
-            self.stop_queues[stop_id] = []
-        
-        env_logger.info("PassengerDemand initialized")
-    
-    def generate_passengers(self, stop_id: str, current_time: str = None, delta_time: float = 1.0) -> int:
-        """
-        Generate new passengers at a stop based on time and demand patterns
-        
-        Args:
-            stop_id: ID of the bus stop
-            current_time: Current time in "HH:MM" format (None = use random)
-            delta_time: Time elapsed since last generation (seconds)
-        
-        Returns:
-            Number of new passengers generated
-        """
-        if current_time is None:
-            current_time = self._get_current_time_string()
-        
-        # Base arrival rate (passengers per second)
-        base_rate = Config.PASSENGER_ARRIVAL_RATE
-        
-        # Check if peak hour - increase rate
-        is_peak = route_manager.is_peak_hour(stop_id, current_time)
-        multiplier = 3.0 if is_peak else 1.0
-        
-        # Calculate expected number of passengers
-        arrival_rate = base_rate * multiplier
-        expected_passengers = arrival_rate * delta_time
-        
-        # Use Poisson distribution for realistic arrivals
-        num_new_passengers = np.random.poisson(expected_passengers)
-        
-        # Add some randomness (±20%)
-        randomness = random.uniform(0.8, 1.2)
-        num_new_passengers = int(num_new_passengers * randomness)
-        
-        # Don't exceed stop capacity
-        current_queue = len(self.stop_queues[stop_id])
-        stop_capacity = route_manager.get_stop_capacity(stop_id)
-        
-        if current_queue >= stop_capacity:
-            num_new_passengers = 0  # Stop is full
-        elif current_queue + num_new_passengers > stop_capacity:
-            num_new_passengers = stop_capacity - current_queue
-        
-        # Create passenger objects
-        for _ in range(num_new_passengers):
-            passenger = self._create_passenger(stop_id, current_time)
-            self.stop_queues[stop_id].append(passenger)
-            self.total_passengers_generated += 1
-        
-        if num_new_passengers > 0:
-            env_logger.debug(f"Generated {num_new_passengers} passengers at {stop_id} (peak={is_peak})")
-        
-        return num_new_passengers
-    
-    def _create_passenger(self, stop_id: str, arrival_time: str) -> Dict:
-        """Create a passenger object"""
-        self.passenger_id_counter += 1
-        
-        return {
-            'id': f'passenger_{self.passenger_id_counter}',
-            'stop_id': stop_id,
-            'arrival_time': arrival_time,
-            'wait_time': 0,  # Updated each simulation step
-            'destination': None,  # Could add destination logic later
-            'boarded': False
-        }
-    
-    def get_queue_length(self, stop_id: str) -> int:
-        """Get number of passengers waiting at a stop"""
-        return len(self.stop_queues.get(stop_id, []))
-    
-    def get_passengers_at_stop(self, stop_id: str) -> List[Dict]:
-        """Get all passengers waiting at a stop"""
-        return self.stop_queues.get(stop_id, [])
-    
-    def board_passengers(self, stop_id: str, num_passengers: int) -> List[Dict]:
-        """
-        Board passengers onto a bus
-        
-        Args:
-            stop_id: Stop where bus is located
-            num_passengers: Maximum number of passengers to board
-        
-        Returns:
-            List of boarded passengers
-        """
-        queue = self.stop_queues.get(stop_id, [])
-        
-        # Take first N passengers (FIFO)
-        boarded = queue[:num_passengers]
-        self.stop_queues[stop_id] = queue[num_passengers:]
-        
-        # Mark as boarded
-        for passenger in boarded:
-            passenger['boarded'] = True
-        
-        self.total_passengers_served += len(boarded)
-        
-        if len(boarded) > 0:
-            env_logger.debug(f"Boarded {len(boarded)} passengers at {stop_id}")
-        
-        return boarded
-    
-    def update_wait_times(self, delta_time: float):
-        """
-        Update wait times for all passengers
-        
-        Args:
-            delta_time: Time elapsed (seconds)
-        """
-        for stop_id, queue in self.stop_queues.items():
-            for passenger in queue:
-                passenger['wait_time'] += delta_time
-    
-    def get_average_wait_time(self, stop_id: str = None) -> float:
-        """
-        Calculate average wait time
-        
-        Args:
-            stop_id: Specific stop (None = all stops)
-        
-        Returns:
-            Average wait time in seconds
-        """
-        if stop_id:
-            queue = self.stop_queues.get(stop_id, [])
-            if not queue:
-                return 0
-            return sum(p['wait_time'] for p in queue) / len(queue)
-        else:
-            # Average across all stops
-            all_passengers = []
-            for queue in self.stop_queues.values():
-                all_passengers.extend(queue)
-            
-            if not all_passengers:
-                return 0
-            
-            return sum(p['wait_time'] for p in all_passengers) / len(all_passengers)
-    
-    def get_total_waiting(self) -> int:
-        """Get total number of passengers waiting across all stops"""
-        return sum(len(queue) for queue in self.stop_queues.values())
-    
-    def get_statistics(self) -> Dict:
-        """Get comprehensive statistics about passenger demand"""
-        total_waiting = self.get_total_waiting()
-        avg_wait = self.get_average_wait_time()
-        
-        # Per-stop statistics
-        stop_stats = {}
-        for stop_id, queue in self.stop_queues.items():
-            stop_stats[stop_id] = {
-                'waiting': len(queue),
-                'avg_wait_time': self.get_average_wait_time(stop_id)
-            }
-        
-        return {
-            'total_generated': self.total_passengers_generated,
-            'total_served': self.total_passengers_served,
-            'total_waiting': total_waiting,
-            'average_wait_time': avg_wait,
-            'stops': stop_stats
-        }
-    
-    def reset(self):
-        """Reset all passenger queues and statistics"""
-        for stop_id in self.stop_queues.keys():
-            self.stop_queues[stop_id] = []
-        
-        self.passenger_id_counter = 0
-        self.total_passengers_generated = 0
-        self.total_passengers_served = 0
-        
-        env_logger.info("PassengerDemand reset")
-    
-    def _get_current_time_string(self) -> str:
-        """Get current time as HH:MM string"""
-        now = datetime.now()
-        return now.strftime("%H:%M")
-    
-    def simulate_rush_hour(self, stop_id: str, duration_seconds: float = 60):
-        """
-        Simulate a rush hour burst at a specific stop
-        Useful for testing agent behavior under stress
-        """
-        num_passengers = random.randint(10, 20)
-        current_time = self._get_current_time_string()
-        
-        for _ in range(num_passengers):
-            passenger = self._create_passenger(stop_id, current_time)
-            self.stop_queues[stop_id].append(passenger)
-            self.total_passengers_generated += 1
-        
-        env_logger.info(f"Rush hour simulated at {stop_id}: {num_passengers} passengers")
-
-    def generate_passengers_all(self, current_time: str = None, delta_time: float = 1.0) -> int:
-        """Generate passengers at all stops. Returns total generated."""
-        total = 0
-        for stop_id in self.stop_queues.keys():
-            total += self.generate_passengers(stop_id, current_time, delta_time)
-        return total
+from environment.passenger_demand import passenger_demand
 
 class TrafficEnvironment:
     """Main traffic environment for bus simulation with intelligent movement"""
@@ -240,7 +23,7 @@ class TrafficEnvironment:
         """Initialize traffic environment"""
         self.buses = {}
         self.simulation_time = 0.0
-        self.passenger_demand = PassengerDemand()
+        self.passenger_demand = passenger_demand
         self.route_manager = route_manager
         self.bus_routes = {}  # Track each bus's route progress
         self.dynamic_buses = []  # List of dynamically added buses
@@ -248,19 +31,49 @@ class TrafficEnvironment:
         self.demand_threshold_per_stop = 8  # High demand at single stop
         self.max_buses = 20  # Maximum buses allowed (increased for manual addition)
         self._last_bus_add_time = -999  # Cooldown for adding buses
+        self.agents = {}  # Store agents bound to buses
+        self.agents_initialized = False
+        self.simulation_running = False
         env_logger.info("TrafficEnvironment initialized")
 
-    def reset(self):
-        """Reset the environment with routes from route_manager (routes.json, stops.json)"""
+    def reset(self, preserve_fleet=False):
+        """Reset the environment state"""
         self.simulation_time = 0
         self.is_running = True
+        self.passenger_demand.reset()
+        self._last_bus_add_time = -999
+
+        if preserve_fleet and self.buses:
+            env_logger.info("Preserving current bus fleet during reset")
+            # Reset existing buses to initial states
+            for bus_id, bus in self.buses.items():
+                route = self.route_manager.get_route(bus['route_id'])
+                if not route: continue
+                first_stop_id = route['stops'][0]
+                first_stop = self.route_manager.get_stop(first_stop_id)
+                loc = first_stop['location'] if first_stop else {'lat': 17.3850, 'lng': 78.4867}
+                
+                bus.update({
+                    'state': 'AT_STOP',
+                    'current_stop': first_stop_id,
+                    'current_stop_index': 0,
+                    'passengers': [],
+                    'position': {'lat': loc['lat'], 'lng': loc['lng']},
+                    'total_served': 0,
+                    'last_departure_time': 0,
+                    'route_progress': 0.0
+                })
+                self.bus_routes[bus_id].update({
+                    'current_index': 0,
+                    'target_index': 1,
+                    'progress': 0.0
+                })
+            return self.get_state()
+
+        # Full reset: Create buses for each defined route
         self.buses = {}
         self.bus_routes = {}
         self.dynamic_buses = []
-        self._last_bus_add_time = -999
-
-        # Reset passenger demand
-        self.passenger_demand.reset()
 
         # Get actual defined routes from route_manager
         defined_routes = list(route_manager.routes.keys())
@@ -306,9 +119,9 @@ class TrafficEnvironment:
             self.buses[bus['id']] = bus
 
             self.bus_routes[bus['id']] = {
-                'route': route['stops'],
-                'current_index': 0,
-                'target_index': 1,
+                'route': route, 
+                'current_index': 0, 
+                'target_index': 1, 
                 'progress': 0.0,
                 'direction': 1,
                 'color': route.get('color', '#3B82F6')
@@ -346,10 +159,15 @@ class TrafficEnvironment:
             env_logger.debug(f"Bus {bus_id} action: {action}, reward: {rewards[bus_id]}")
 
         # Update bus positions
-        self._update_bus_positions()
+        self.update_positions()
 
         # Manage dynamic buses based on demand
         self._manage_dynamic_buses()
+
+        # Summary log every 10 steps
+        if self.simulation_time % 10 == 0:
+            stats = self.get_statistics()
+            env_logger.info(f"SIM STATUS: Wait={stats['total_waiting']}, OnBoard={stats['total_passengers_on_buses']}, Served={stats['total_passengers_served']}")
 
         # Get observations AFTER step (next state for RL)
         next_observations = self.get_observations()
@@ -367,68 +185,79 @@ class TrafficEnvironment:
     def _execute_bus_action(self, bus, action):
         """Execute bus action using reward system for effective learning"""
         current_stop = bus['current_stop']
+        
+        # Always deboard passengers reaching their destination when at a stop
+        deboarded_count = 0
+        if bus['state'] == 'AT_STOP':
+            deboarded_count = self._deboard_passengers(bus)
+
         queue_before = len(self.passenger_demand.stop_queues.get(current_stop, []))
         time_at_stop = self.simulation_time - bus.get('arrival_time', self.simulation_time) if bus['state'] == 'AT_STOP' else 0
-
-        if action == 'DEPART_NOW':
-            boarded = []
+        
+        boarded_count = 0
+        if action in ['DEPART_NOW', 'WAIT_30', 'WAIT_60']:
             available_space = bus['capacity'] - len(bus['passengers'])
             if queue_before > 0 and available_space > 0:
-                boarded = self.passenger_demand.board_passengers(current_stop, min(queue_before, available_space))
+                num_to_board = min(queue_before, available_space)
+                boarded = self.passenger_demand.board_passengers(current_stop, num_to_board)
                 bus['passengers'].extend(boarded)
                 bus['total_served'] = bus.get('total_served', 0) + len(boarded)
-            queue_after = len(self.passenger_demand.stop_queues.get(current_stop, []))
-            occupancy = len(bus['passengers']) / max(bus['capacity'], 1)
-            reward = reward_calculator.calculate_reward(action, len(boarded), queue_before, queue_after, occupancy, time_at_stop)
-            bus['state'] = 'IN_TRANSIT'
-            self._set_next_destination(bus)
-
-        elif action == 'WAIT_30':
-            available_space = bus['capacity'] - len(bus['passengers'])
-            queue_now = len(self.passenger_demand.stop_queues.get(current_stop, []))
-            boarded = []
-            if queue_now > 0 and available_space > 0:
-                boarded = self.passenger_demand.board_passengers(current_stop, min(queue_now, available_space))
-                bus['passengers'].extend(boarded)
-                bus['total_served'] = bus.get('total_served', 0) + len(boarded)
-            queue_after = len(self.passenger_demand.stop_queues.get(current_stop, []))
-            occupancy = len(bus['passengers']) / max(bus['capacity'], 1)
-            reward = reward_calculator.calculate_reward(action, len(boarded), queue_before, queue_after, occupancy, 30)
-
-        elif action == 'WAIT_60':
-            available_space = bus['capacity'] - len(bus['passengers'])
-            queue_now = len(self.passenger_demand.stop_queues.get(current_stop, []))
-            boarded = []
-            if queue_now > 0 and available_space > 0:
-                boarded = self.passenger_demand.board_passengers(current_stop, min(queue_now, available_space))
-                bus['passengers'].extend(boarded)
-                bus['total_served'] = bus.get('total_served', 0) + len(boarded)
-            queue_after = len(self.passenger_demand.stop_queues.get(current_stop, []))
-            occupancy = len(bus['passengers']) / max(bus['capacity'], 1)
-            reward = reward_calculator.calculate_reward(action, len(boarded), queue_before, queue_after, occupancy, 60)
-
+                boarded_count = len(boarded)
+            
+            if action == 'DEPART_NOW':
+                bus['state'] = 'IN_TRANSIT'
+                self._set_next_destination(bus)
+        
         elif action == 'SKIP_STOP':
-            reward = reward_calculator.calculate_reward(action, 0, queue_before, queue_before, len(bus['passengers']) / max(bus['capacity'], 1), 0)
+            if queue_before > 0:
+                env_logger.info(f"Bus {bus['id']} skipped stop {current_stop} despite {queue_before} passengers waiting")
             bus['state'] = 'IN_TRANSIT'
             self._set_next_destination(bus)
 
-        elif action == 'CONTINUE':
-            reward = 0.1 if bus['state'] == 'IN_TRANSIT' else 0.0
+        # Calculate reward
+        queue_after = len(self.passenger_demand.stop_queues.get(current_stop, []))
+        occupancy = len(bus['passengers']) / max(bus['capacity'], 1)
+        
+        # Map wait actions to dwell times for reward calculation
+        dwell_time = 0
+        if action == 'WAIT_30': dwell_time = 30
+        elif action == 'WAIT_60': dwell_time = 60
+        elif action == 'DEPART_NOW' and time_at_stop > 0: dwell_time = time_at_stop
+        
+        reward = reward_calculator.calculate_reward(action, boarded_count, queue_before, queue_after, occupancy, dwell_time)
 
-        else:
-            reward = 0.0
+        # Log load details as requested
+        env_logger.info(
+            f"LOG: bus_id={bus['id']}, current_load={len(bus['passengers'])}, capacity={bus['capacity']}, "
+            f"boarded={boarded_count}, deboarded={deboarded_count}, stop={current_stop}"
+        )
 
         return reward
+
+    def _deboard_passengers(self, bus):
+        """Unload passengers whose destination is the current stop"""
+        current_stop = bus['current_stop']
+        passengers_before = len(bus['passengers'])
+        
+        # Keep passengers who haven't reached their destination
+        bus['passengers'] = [p for p in bus['passengers'] if p.get('destination') != current_stop]
+        
+        deboarded_count = passengers_before - len(bus['passengers'])
+        if deboarded_count > 0:
+            env_logger.info(f"Bus {bus['id']} DEBOARDED {deboarded_count} at {current_stop}")
+            
+        return deboarded_count
     
     def _set_next_destination(self, bus):
         """Set next destination for bus based on its assigned route"""
         route_info = self.bus_routes[bus['id']]
         current_index = route_info['current_index']
         route = route_info['route']
+        stops = route['stops']
         
         # Calculate next stop index based on direction
         if route_info['direction'] == 1:
-            next_index = (current_index + 1) % len(route)
+            next_index = (current_index + 1) % len(stops)
             if next_index == 0:  # Reached end, reverse direction
                 route_info['direction'] = -1
                 next_index = current_index - 1
@@ -438,10 +267,11 @@ class TrafficEnvironment:
                 route_info['direction'] = 1
                 next_index = 1
         
-        next_stop = route[next_index]
+        # Ensure next_index is valid
+        next_index = max(0, min(next_index, len(stops) - 1))
+        next_stop = stops[next_index]
         
         # Update route tracking
-        route_info['current_index'] = current_index
         route_info['target_index'] = next_index
         route_info['progress'] = 0.0
         
@@ -449,24 +279,36 @@ class TrafficEnvironment:
         bus['next_stop'] = next_stop
         bus['last_departure_time'] = self.simulation_time
         
-        env_logger.debug(f"Bus {bus['id']} heading from {route[current_index]} to {next_stop}")
+        env_logger.debug(f"Bus {bus['id']} heading from {stops[current_index]} to {next_stop}")
     
-    def _update_bus_positions(self):
+    def update_positions(self):
         """Update bus positions with smooth transitions"""
         for bus_id, bus in self.buses.items():
             if bus['state'] == 'IN_TRANSIT':
                 route_info = self.bus_routes.get(bus_id)
                 if route_info:
-                    # Update progress towards next stop with realistic speed
-                    # Calculate distance-based movement
-                    distance_factor = bus['speed'] * 0.1  # Adjust for realistic movement
-                    route_info['progress'] += distance_factor
+                    # Update progress towards next stop
+                    base_speed = bus.get('speed', 0.08)
+                    traffic_factor = np.random.uniform(0.5, 1.2)
+                    
+                    # Peak hour congestion
+                    now_str = datetime.now().strftime("%H:%M")
+                    if self.route_manager.is_peak_hour(bus['current_stop'], now_str):
+                        traffic_factor *= 0.7
+                        
+                    distance_factor = base_speed * 0.1 * traffic_factor
+                    route_info['progress'] += float(distance_factor)
                     
                     if route_info['progress'] >= 1.0:
                         # Arrived at next stop
+                        route = route_info['route']
+                        stops = route['stops']
+                        
                         route_info['current_index'] = route_info['target_index']
+                        route_info['target_index'] = (route_info['current_index'] + route_info['direction']) % len(stops)
+                        
                         bus['current_stop_index'] = route_info['current_index']
-                        bus['current_stop'] = route_info['route'][route_info['current_index']]
+                        bus['current_stop'] = stops[bus['current_stop_index']]
                         bus['state'] = 'AT_STOP'
                         bus['arrival_time'] = self.simulation_time
                         route_info['progress'] = 0.0
@@ -475,7 +317,7 @@ class TrafficEnvironment:
                         stop_data = self.route_manager.stops.get(bus['current_stop'], {})
                         loc = stop_data.get('location', {'lat': 17.3850, 'lng': 78.4867})
                         bus['position'] = {'lat': loc.get('lat', 17.3850), 'lng': loc.get('lng', 78.4867)}
-                        env_logger.debug(f"Bus {bus_id} arrived at {bus['current_stop']} (stop {route_info['current_index']})")
+                        env_logger.debug(f"Bus {bus_id} arrived at {bus['current_stop']}")
                     else:
                         # Interpolate position between stops
                         self._interpolate_bus_position(bus)
@@ -492,8 +334,9 @@ class TrafficEnvironment:
         target_index = route_info['target_index']
         
         # Get stop coordinates
-        current_stop_id = route[current_index]
-        target_stop_id = route[target_index]
+        stops = route['stops']
+        current_stop_id = stops[current_index]
+        target_stop_id = stops[target_index]
         
         def _get_coords(stop_id, idx):
             s = self.route_manager.stops.get(stop_id, {})
@@ -505,8 +348,8 @@ class TrafficEnvironment:
         progress = route_info['progress']
         eased = self._ease_in_out_cubic(progress)
         bus['position'] = {
-            'lat': lat1 + (lat2 - lat1) * eased,
-            'lng': lng1 + (lng2 - lng1) * eased
+            'lat': float(lat1 + (lat2 - lat1) * eased),
+            'lng': float(lng1 + (lng2 - lng1) * eased)
         }
     
     def _ease_in_out_cubic(self, t):
@@ -682,6 +525,25 @@ class TrafficEnvironment:
             'total_passengers_waiting': sum(len(queue) for queue in self.passenger_demand.stop_queues.values())
         }
     
+    def apply_action(self, bus_id, action_name):
+        """Apply individual action to a specific bus"""
+        if bus_id in self.buses:
+            return self._execute_bus_action(self.buses[bus_id], action_name)
+        return 0
+
+    def update_passengers(self):
+        """Update passenger demand for the whole network"""
+        self.passenger_demand.generate_passengers_all(delta_time=1.0)
+        self.passenger_demand.update_wait_times(1.0)
+
+    def serialize(self):
+        """Serialize current state to dictionary for WebSocket/API"""
+        return self.get_state()
+
+    def get_state_for_bus(self, bus_id):
+        """Get processed state/observation for an individual bus agent"""
+        return self._get_observation_for_bus(bus_id)
+
     def get_statistics(self):
         """Get environment statistics"""
         total_passengers_on_buses = sum(len(bus['passengers']) for bus in self.buses.values())
@@ -705,5 +567,5 @@ class TrafficEnvironment:
         }
 
 # Create singleton instance
-passenger_demand = PassengerDemand()
+# Singleton instance already imported
 traffic_env = TrafficEnvironment()

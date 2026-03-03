@@ -5,6 +5,7 @@ Uses OpenStreetMap data and realistic road networks
 import requests
 import json
 import math
+import os
 from typing import List, Tuple, Dict, Optional
 from utils.logger import env_logger
 
@@ -13,14 +14,34 @@ class RoadPathfinder:
     
     def __init__(self):
         self.base_url = "https://router.project-osrm.org"
-        self.cache = {}  # Cache for route calculations
+        self.cache_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "road_cache.json")
+        self.cache = self._load_cache()
         
+    def _load_cache(self) -> Dict:
+        """Load cache from disk"""
+        try:
+            if os.path.exists(self.cache_file):
+                with open(self.cache_file, 'r') as f:
+                    return json.load(f)
+        except Exception as e:
+            env_logger.error(f"Error loading road cache: {e}")
+        return {}
+
+    def _save_cache(self):
+        """Save cache to disk"""
+        try:
+            os.makedirs(os.path.dirname(self.cache_file), exist_ok=True)
+            with open(self.cache_file, 'w') as f:
+                json.dump(self.cache, f)
+        except Exception as e:
+            env_logger.error(f"Error saving road cache: {e}")
+
     def calculate_road_distance(self, start_lat: float, start_lng: float, 
                               end_lat: float, end_lng: float) -> Dict:
         """
         Calculate road-based distance and path between two points using OSRM
         """
-        cache_key = f"{start_lat},{start_lng}_{end_lat},{end_lng}"
+        cache_key = f"{round(start_lat, 5)},{round(start_lng, 5)}_{round(end_lat, 5)},{round(end_lng, 5)}"
         
         if cache_key in self.cache:
             return self.cache[cache_key]
@@ -34,7 +55,7 @@ class RoadPathfinder:
                 'alternatives': 'false'
             }
             
-            response = requests.get(url, params=params, timeout=10)
+            response = requests.get(url, params=params, timeout=2)
             
             if response.status_code == 200:
                 data = response.json()
@@ -47,6 +68,7 @@ class RoadPathfinder:
                         'coordinates': route['geometry']['coordinates']
                     }
                     self.cache[cache_key] = result
+                    self._save_cache() # Save after each new calculation
                     return result
             else:
                 env_logger.error(f"OSRM API error: {response.status_code}")
