@@ -8,11 +8,11 @@ class Config:
     
     # Application Settings
     DEBUG = True
-    HOST = '0.0.0.0'
+    HOST = '127.0.0.1'
     PORT = 5001
     
     # CORS Settings
-    CORS_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:3000']
+    CORS_ORIGINS = '*'
     
     # Simulation Parameters
     SIMULATION_SPEED = 1.0  # 1.0 = real-time, 2.0 = 2x faster
@@ -33,7 +33,7 @@ class Config:
     # Passenger Settings
     MIN_PASSENGERS_PER_STOP = 0
     MAX_PASSENGERS_PER_STOP = 20
-    PASSENGER_ARRIVAL_RATE = 0.8  # passengers per second (increased for more activity)
+    PASSENGER_ARRIVAL_RATE = 1.0  # Balanced value after verification (originally 0.8)
     BUS_CAPACITY = 50  # maximum passengers per bus
     
     # RL Agent Settings (tuned for effective learning)

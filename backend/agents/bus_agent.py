@@ -9,105 +9,78 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils.config import Config
 from utils.logger import agent_logger
-from models.q_table import QTable
+from models.ppo_agent import PPOAgent
+from models.memory import Memory
 from agents.reward_system import reward_calculator
+import torch
 
 class BusAgent:
-    """Reinforcement Learning agent for bus control"""
+    """Reinforcement Learning agent for bus control using PPO"""
     
     def __init__(self, agent_id: str, route_id: str):
         """
-        Initialize bus agent
-        
-        Args:
-            agent_id: Unique identifier (e.g., 'route_1_bus_1')
-            route_id: Route this agent operates on
+        Initialize bus agent with PPO
         """
         self.agent_id = agent_id
         self.route_id = route_id
         
-        # Q-learning components
-        self.q_table = QTable(agent_id)
-        self.epsilon = Config.EPSILON  # Exploration rate
+        # PPO components (4 inputs: queue, occupancy, time, traffic; 4 outputs: ACTIONS)
+        self.state_dim = 4
+        self.action_dim = len(Config.ACTIONS)
+        self.ppo_agent = PPOAgent(self.state_dim, self.action_dim)
+        self.memory = Memory()
         
-        # Experience tracking
-        self.last_state = None
-        self.last_action = None
-        self.last_reward = 0
-        
-        # Episode statistics
+        # Metrics
         self.episode_reward = 0
         self.episode_steps = 0
         self.episodes_completed = 0
-        
-        # Performance metrics
         self.total_rewards = []
         self.avg_rewards = []
+        self.last_reward = 0
+        self.epsilon = Config.EPSILON  # Initial exploration rate
         
-        agent_logger.info(f"BusAgent {agent_id} initialized for {route_id}")
+        agent_logger.info(f"BusAgent {agent_id} (PPO) initialized for {route_id}")
     
     def select_action(self, observation: tuple, training: bool = True) -> int:
         """
         Select action based on current observation
-        
-        Args:
-            observation: (queue_length, occupancy, time_since_last_bus, traffic_level)
-            training: Whether in training mode (uses epsilon-greedy)
-        
-        Returns:
-            Action index
         """
+        # Convert observation to numpy array
+        state = np.array(observation, dtype=np.float32)
+        
         if training:
-            # Epsilon-greedy exploration
-            action = self.q_table.get_action(observation, self.epsilon)
+            action, logprob = self.ppo_agent.select_action(state)
+            self.memory.states.append(torch.FloatTensor(state))
+            self.memory.actions.append(torch.tensor(action))
+            self.memory.logprobs.append(logprob)
         else:
-            # Pure exploitation (greedy)
-            state_hash = self.q_table.discretize_state(observation)
-            action = self.q_table.get_best_action(state_hash)
+            with torch.no_grad():
+                action_probs, _ = self.ppo_agent.policy_old(torch.FloatTensor(state).unsqueeze(0))
+                action = torch.argmax(action_probs).item()
         
-        # Store for learning
-        self.last_state = observation
-        self.last_action = action
-        
-        action_name = Config.ACTIONS[action]
-        agent_logger.debug(f"{self.agent_id} selected action: {action_name} (ε={self.epsilon:.3f})")
-        
+        agent_logger.debug(f"{self.agent_id} selected action: {Config.ACTIONS[action]}")
         return action
     
     def learn(self, next_observation: tuple, reward: float, done: bool = False):
         """
-        Learn from experience (update Q-values)
-        
-        Args:
-            next_observation: Observation after taking action
-            reward: Reward received
-            done: Whether episode ended
+        Store reward and learn if buffer is full or episode done
         """
-        if self.last_state is None or self.last_action is None:
-            return
+        self.memory.rewards.append(reward)
+        self.memory.is_terminals.append(done)
         
-        # Update Q-table
-        self.q_table.update(
-            state=self.last_state,
-            action=self.last_action,
-            reward=reward,
-            next_state=next_observation,
-            done=done
-        )
-        
-        # Track rewards
         self.episode_reward += reward
         self.episode_steps += 1
-        self.last_reward = reward
         
-        agent_logger.debug(f"{self.agent_id} learned: reward={reward:.2f}, total_episode_reward={self.episode_reward:.2f}")
+        # PPO usually updates in batches, but for simplicity we can trigger it here or in coordinator
+        if done:
+            self.ppo_agent.update(self.memory)
+            self.memory.clear()
     
     def end_episode(self):
         """Mark end of episode and update statistics"""
         self.episodes_completed += 1
         self.total_rewards.append(self.episode_reward)
         
-        # Calculate moving average reward (last 100 episodes)
         recent_rewards = self.total_rewards[-100:]
         avg_reward = np.mean(recent_rewards) if recent_rewards else 0
         self.avg_rewards.append(avg_reward)
@@ -116,36 +89,30 @@ class BusAgent:
                          f"reward={self.episode_reward:.1f}, steps={self.episode_steps}, "
                          f"avg_reward={avg_reward:.1f}")
         
-        # Decay epsilon (reduce exploration over time)
-        self.epsilon = max(Config.MIN_EPSILON, self.epsilon * Config.EPSILON_DECAY)
-        
         # Reset episode counters
         self.episode_reward = 0
         self.episode_steps = 0
-        self.last_state = None
-        self.last_action = None
-    
-    def get_action_name(self, action: int) -> str:
-        """Convert action index to name"""
-        return Config.ACTIONS[action]
     
     def save_model(self, filepath: str = None):
-        """Save agent's Q-table"""
-        self.q_table.save(filepath)
+        """Save agent's PPO model"""
+        if filepath is None:
+            os.makedirs(Config.MODELS_DIR, exist_ok=True)
+            filepath = os.path.join(Config.MODELS_DIR, f"{self.agent_id}_ppo.pt")
+        self.ppo_agent.save(filepath)
     
     def load_model(self, filepath: str = None) -> bool:
-        """Load agent's Q-table"""
-        success = self.q_table.load(filepath)
-        if success:
-            # Reset epsilon to low value for exploitation
-            self.epsilon = Config.MIN_EPSILON
-            agent_logger.info(f"{self.agent_id} loaded trained model, epsilon set to {self.epsilon}")
-        return success
+        """Load agent's PPO model"""
+        if filepath is None:
+            filepath = os.path.join(Config.MODELS_DIR, f"{self.agent_id}_ppo.pt")
+        
+        if os.path.exists(filepath):
+            self.ppo_agent.load(filepath)
+            agent_logger.info(f"{self.agent_id} loaded PPO model from {filepath}")
+            return True
+        return False
     
     def get_statistics(self) -> dict:
         """Get comprehensive agent statistics"""
-        q_stats = self.q_table.get_statistics()
-        
         recent_rewards = self.total_rewards[-100:] if self.total_rewards else []
         
         return {
@@ -157,8 +124,7 @@ class BusAgent:
             'episode_steps': self.episode_steps,
             'last_reward': self.last_reward,
             'avg_reward_last_100': np.mean(recent_rewards) if recent_rewards else 0,
-            'total_episodes': len(self.total_rewards),
-            'q_table_stats': q_stats
+            'total_episodes': len(self.total_rewards)
         }
     
     def reset(self):
@@ -179,36 +145,22 @@ class BusAgent:
     def get_policy(self, observation: tuple) -> dict:
         """
         Get policy (action probabilities) for current state
-        Useful for visualization
-        
-        Returns:
-            {action_name: probability}
         """
-        state_hash = self.q_table.discretize_state(observation)
-        q_values = self.q_table.get_q_values(state_hash)
-        
-        # Softmax for probabilities
-        exp_q = np.exp(q_values - np.max(q_values))  # Subtract max for numerical stability
-        probabilities = exp_q / np.sum(exp_q)
+        state = np.array(observation, dtype=np.float32)
+        with torch.no_grad():
+            action_probs, _ = self.ppo_agent.policy_old(torch.FloatTensor(state).unsqueeze(0))
+            probs = action_probs.squeeze().numpy()
         
         policy = {}
         for i, action_name in enumerate(Config.ACTIONS):
-            policy[action_name] = float(probabilities[i])
+            policy[action_name] = float(probs[i])
         
         return policy
     
     def explain_decision(self, observation: tuple) -> dict:
         """
-        Explain why agent chose a particular action
-        Useful for debugging and presentations
-        
-        Returns:
-            Dictionary with explanation
+        Explain decision based on state
         """
-        state_hash = self.q_table.discretize_state(observation)
-        q_values = self.q_table.get_q_values(state_hash)
-        best_action = self.q_table.get_best_action(state_hash)
-        
         queue_length, occupancy, time_since_last, traffic = observation
         
         explanation = {
@@ -218,14 +170,7 @@ class BusAgent:
                 'time_since_last_bus': f"{time_since_last:.0f}s",
                 'traffic_level': f"{traffic:.0%}"
             },
-            'state_hash': state_hash,
-            'q_values': {
-                Config.ACTIONS[i]: float(q_values[i]) 
-                for i in range(len(Config.ACTIONS))
-            },
-            'best_action': Config.ACTIONS[best_action],
-            'exploration_rate': self.epsilon,
-            'reasoning': self._generate_reasoning(observation, q_values, best_action)
+            'reasoning': "PPO neural network decision based on policy gradient optimization."
         }
         
         return explanation

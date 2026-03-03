@@ -1,0 +1,24 @@
+# PPO Hyperparameters
+ppo:
+  learning_rate: 0.0003
+  gamma: 0.99
+  gae_lambda: 0.95
+  eps_clip: 0.2
+  k_epochs: 10
+  hidden_dim: 128
+  entropy_coef: 0.01
+  vf_coef: 0.5
+
+# Environment Stochasticity
+environment:
+  traffic_noise_std: 0.1
+  demand_variance: 0.2
+  peak_hour_multiplier: 1.5
+
+# Reward Weights
+rewards:
+  pickup_weight: 12.0
+  waiting_penalty: -0.5
+  occupancy_bonus: 15.0
+  efficiency_bonus: 5.0
+  fairness_penalty: -2.0

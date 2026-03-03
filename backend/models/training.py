@@ -45,13 +45,9 @@ class Trainer:
     
     def train(self, num_episodes: int = 100, max_steps_per_episode: int = 500):
         """
-        Train agents for specified number of episodes
-        
-        Args:
-            num_episodes: Number of training episodes
-            max_steps_per_episode: Maximum steps per episode
+        Train agents for specified number of episodes using PPO
         """
-        system_logger.info(f"Starting training: {num_episodes} episodes, max {max_steps_per_episode} steps each")
+        system_logger.info(f"Starting PPO training: {num_episodes} episodes, max {max_steps_per_episode} steps each")
         
         start_time = time.time()
         
@@ -73,35 +69,30 @@ class Trainer:
                 observations = traffic_env.get_observations()
                 
                 # Get actions from agents
-                action_indices = coordinator.get_actions(observations, training=True)
-                
-                # Convert action indices to action names
-                actions = {
-                    bus_id: Config.ACTIONS[action_idx]
-                    for bus_id, action_idx in action_indices.items()
-                }
+                actions = {}
+                for agent_id, obs in observations.items():
+                    if agent_id in self.agents:
+                        actions[agent_id] = Config.ACTIONS[self.agents[agent_id].select_action(obs, training=True)]
                 
                 # Execute actions in environment
                 next_observations, rewards, done = traffic_env.step(actions)
                 
-                # Update agents
-                coordinator.update_agents(next_observations, rewards)
-                
-                # Track episode rewards (only for buses with agents - ignore dynamic buses)
-                for bus_id, reward in rewards.items():
-                    if bus_id in episode_rewards:
-                        episode_rewards[bus_id] += reward
+                # Update agents and store rewards
+                for agent_id, agent in self.agents.items():
+                    if agent_id in rewards:
+                        agent.learn(next_observations[agent_id], rewards[agent_id], done)
+                        episode_rewards[agent_id] += rewards[agent_id]
                 
                 if done:
                     break
             
-            # End episode for all agents
+            # End episode for all agents (stats update)
             for agent in self.agents.values():
                 agent.end_episode()
             
             # Get episode statistics
             stats = traffic_env.get_statistics()
-            avg_episode_reward = np.mean(list(episode_rewards.values()))
+            avg_episode_reward = np.mean(list(episode_rewards.values())) if episode_rewards else 0
             
             # Track training history
             self.training_history['episode_rewards'].append(avg_episode_reward)
@@ -123,7 +114,6 @@ class Trainer:
                     f"Avg(20): {avg_reward:.1f} | "
                     f"Wait: {stats['average_wait_time']:.1f}s | "
                     f"Served: {stats['total_passengers_served']} | "
-                    f"ε: {self.agents[list(self.agents.keys())[0]].epsilon:.3f} | "
                     f"Time: {episode_time:.1f}s"
                 )
             

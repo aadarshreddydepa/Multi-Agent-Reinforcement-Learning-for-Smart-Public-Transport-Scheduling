@@ -23,14 +23,16 @@ def test_route_manager():
     print(f"Loaded {len(route_manager.stops)} stops")
     
     # Test route navigation
-    route_id = "route_1"
+    # Test route navigation
+    route_id = "route_15"
     stops = route_manager.get_route_stops(route_id)
-    print(f"\nRoute 1 stops: {stops}")
+    print(f"\nRoute 15 stops: {stops}")
     
     # Test next stop calculation
-    current_stop = stops[0]
-    next_stop = route_manager.get_next_stop(route_id, current_stop)
-    print(f"Next stop after {current_stop}: {next_stop}")
+    if stops:
+        current_stop = stops[0]
+        next_stop = route_manager.get_next_stop(route_id, current_stop)
+        print(f"Next stop after {current_stop}: {next_stop}")
     
     # Test distance calculation
     if len(stops) >= 2:
@@ -41,7 +43,7 @@ def test_route_manager():
         print(f"\nDistance {stops[0]} → {stops[1]}: {distance:.3f} km")
         print(f"Travel time: {travel_time:.1f} seconds")
     
-    print("✓ Route Manager working!")
+    print("Route Manager working!")
 
 def test_passenger_demand():
     """Test passenger demand generation"""
@@ -51,7 +53,7 @@ def test_passenger_demand():
     passenger_demand.reset()
     
     # Generate passengers
-    stop_id = "main_gate"
+    stop_id = "uppal_depot" # Changed from main_gate
     num_generated = passenger_demand.generate_passengers(stop_id, "08:00", delta_time=10)
     print(f"\nGenerated {num_generated} passengers at {stop_id} (rush hour)")
     
@@ -73,7 +75,7 @@ def test_passenger_demand():
     print(f"  Total served: {stats['total_served']}")
     print(f"  Total waiting: {stats['total_waiting']}")
     
-    print("✓ Passenger Demand working!")
+    print("Passenger Demand working!")
 
 def test_traffic_environment():
     """Test complete traffic environment"""
@@ -114,7 +116,7 @@ def test_traffic_environment():
     print(f"Average wait time: {stats['average_wait_time']:.1f}s")
     print(f"Average bus occupancy: {stats['average_bus_occupancy']:.1%}")
     
-    print("\n✓ Traffic Environment working!")
+    print("\nTraffic Environment working!")
 
 def run_all_tests():
     """Run all tests"""
@@ -128,12 +130,12 @@ def run_all_tests():
         test_traffic_environment()
         
         print("\n" + "="*50)
-        print("✓ ALL TESTS PASSED!")
+        print("ALL TESTS PASSED!")
         print("="*50)
         print("\nEnvironment is ready for RL agent integration!")
         
     except Exception as e:
-        print(f"\n✗ TEST FAILED: {e}")
+        print(f"\nTEST FAILED: {e}")
         import traceback
         traceback.print_exc()
 

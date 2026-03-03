@@ -50,7 +50,7 @@ class PassengerDemand:
         
         # Check if peak hour - increase rate
         is_peak = route_manager.is_peak_hour(stop_id, current_time)
-        multiplier = 3.0 if is_peak else 1.0
+        multiplier = 4.0 if is_peak else 1.0 # Increased from 3.0
         
         # Calculate expected number of passengers
         arrival_rate = base_rate * multiplier
@@ -61,7 +61,9 @@ class PassengerDemand:
         
         # Add some randomness (±20%)
         randomness = random.uniform(0.8, 1.2)
-        num_new_passengers = int(num_new_passengers * randomness)
+        
+        # FIX: Use round() instead of int() to avoid 0.9 becoming 0
+        num_new_passengers = int(round(num_new_passengers * randomness))
         
         # Don't exceed stop capacity
         current_queue = len(self.stop_queues[stop_id])
@@ -79,7 +81,7 @@ class PassengerDemand:
             self.total_passengers_generated += 1
         
         if num_new_passengers > 0:
-            env_logger.debug(f"Generated {num_new_passengers} passengers at {stop_id} (peak={is_peak})")
+            env_logger.info(f"Generated {num_new_passengers} passengers at {stop_id} (peak={is_peak}, queue={len(self.stop_queues[stop_id])})")
         
         return num_new_passengers
     
@@ -87,12 +89,19 @@ class PassengerDemand:
         """Create a passenger object"""
         self.passenger_id_counter += 1
         
+        # Select random destination from all stops except the origin
+        all_stop_ids = list(route_manager.stops.keys())
+        destination = stop_id
+        if len(all_stop_ids) > 1:
+            possible_destinations = [s for s in all_stop_ids if s != stop_id]
+            destination = random.choice(possible_destinations)
+        
         return {
             'id': f'passenger_{self.passenger_id_counter}',
             'stop_id': stop_id,
             'arrival_time': arrival_time,
-            'wait_time': 0,  # Updated each simulation step
-            'destination': None,  # Could add destination logic later
+            'wait_time': 0,
+            'destination': destination,
             'boarded': False
         }
     
@@ -128,7 +137,7 @@ class PassengerDemand:
         self.total_passengers_served += len(boarded)
         
         if len(boarded) > 0:
-            env_logger.debug(f"Boarded {len(boarded)} passengers at {stop_id}")
+            env_logger.info(f"Boarded {len(boarded)} passengers at {stop_id}. Remaining in queue: {len(self.stop_queues[stop_id])}")
         
         return boarded
     
