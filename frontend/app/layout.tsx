@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google"; // Use Plus Jakarta Sans to match original premium feel
 import "./globals.css";
 import "leaflet/dist/leaflet.css";
+import { ThemeProvider } from "../contexts/ThemeContext";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -24,12 +25,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${jakarta.variable} font-sans antialiased text-gray-900 bg-gray-50 min-h-screen relative`}
+        className={`${jakarta.variable} font-sans antialiased text-gray-900 bg-gray-50 dark:text-gray-100 dark:bg-dark-950 min-h-screen relative transition-colors duration-300`}
       >
-        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-40 -z-10 pointer-events-none"></div>
-        {children}
+        <ThemeProvider>
+          <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] dark:[mask-image:linear-gradient(180deg,rgba(15,23,42,1),rgba(15,23,42,0))] opacity-40 dark:opacity-20 -z-10 pointer-events-none"></div>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
