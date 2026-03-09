@@ -194,20 +194,35 @@ const StatisticsPanel: React.FC<StatisticsPanelProps> = ({
           subtext="All time"
         />
         <StatCard
-          label="Utilization"
-          value={`${((stats.average_bus_occupancy || 0) * 100).toFixed(0)}%`}
+          label="Fleet Use"
+          value={stats.fleet_utilization !== undefined ? `${stats.fleet_utilization.toFixed(0)}%` : `${((stats.buses_with_passengers || 0) / (stats.num_buses || 1) * 100).toFixed(0)}%`}
           icon={BusIcon}
           color=""
           subtext="Fleet average"
           trend={trends.occupancy}
         />
         <StatCard
-          label="Active Buses"
-          value={stats.buses_in_transit || 0}
-          icon={Clock}
+          label="High Demand Stops"
+          value={stats.num_high_demand_stops || 0}
+          icon={AlertCircle}
           color=""
-          subtext="In transit"
+          subtext="Hotspots (> 10 pax)"
         />
+      </div>
+
+      <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-xs font-bold text-gray-500 uppercase">Fleet Status</span>
+          <span className="text-[10px] font-mono bg-white px-2 py-0.5 rounded border border-gray-200">
+            {stats.buses_in_transit || 0}/{stats.num_buses || 0} ACTIVE
+          </span>
+        </div>
+        <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
+          <div
+            className="bg-black h-full transition-all duration-1000"
+            style={{ width: `${((stats.buses_in_transit || 0) / (stats.num_buses || 1)) * 100}%` }}
+          />
+        </div>
       </div>
 
       {/* Charts Section */}

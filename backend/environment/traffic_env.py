@@ -15,6 +15,7 @@ from utils.logger import env_logger
 from environment.route_manager import route_manager
 from agents.reward_system import reward_calculator
 from environment.passenger_demand import passenger_demand
+from flask_socketio import emit
 
 class TrafficEnvironment:
     """Main traffic environment for bus simulation with intelligent movement"""
@@ -34,12 +35,27 @@ class TrafficEnvironment:
         self.agents = {}  # Store agents bound to buses
         self.agents_initialized = False
         self.simulation_running = False
+        self.socketio = None  # Injected from app.py
         env_logger.info("TrafficEnvironment initialized")
+
+    def _emit(self, event, data, **kwargs):
+        """Thread-safe emission using injected socketio instance"""
+        if self.socketio:
+            # When using the socketio instance, we don't need 'broadcast=True' 
+            # as it broadcasts by default unless a room is specified.
+            # We also need to remove 'namespace' if it's '/' as it's the default.
+            self.socketio.emit(event, data)
+        else:
+            # Fallback to global emit (might fail if outside context)
+            try:
+                emit(event, data, **kwargs)
+            except:
+                pass
 
     def reset(self, preserve_fleet=False):
         """Reset the environment state"""
         self.simulation_time = 0
-        self.is_running = True
+        self.simulation_running = True
         self.passenger_demand.reset()
         self._last_bus_add_time = -999
 
@@ -114,7 +130,8 @@ class TrafficEnvironment:
                 'arrival_time': 0,
                 'schedule_adherence': 0,
                 'total_distance': 0,
-                'average_speed': 0
+                'average_speed': 0,
+                'last_action': 'WAIT_30'
             }
             self.buses[bus['id']] = bus
 
@@ -139,8 +156,10 @@ class TrafficEnvironment:
         Returns:
             (next_observations, rewards, done)
         """
-        if not self.is_running:
+        if not self.simulation_running:
             return {}, {}, False
+        
+        # print(f"Simulation step running: time={self.simulation_time}")
 
         self.simulation_time += 1
 
@@ -186,6 +205,24 @@ class TrafficEnvironment:
         """Execute bus action using reward system for effective learning"""
         current_stop = bus['current_stop']
         
+        # Priority 1: Movement Heuristics (Override WAITING if demand exists elsewhere)
+        if action in ['WAIT_30', 'WAIT_60'] and bus['state'] == 'AT_STOP':
+            # Check demand at the NEXT stop in the route
+            route_info = self.bus_routes[bus['id']]
+            stops = route_info['route']['stops']
+            next_idx = route_info['target_index']
+            next_stop_id = stops[next_idx]
+            
+            # Get demand at the next stop
+            next_stop_demand = len(self.passenger_demand.stop_queues.get(next_stop_id, []))
+            
+            # If next stop has demand >= 1 OR 10% random exploration
+            if next_stop_demand >= 1 or random.random() < 0.1:
+                action = 'DEPART_NOW'
+                env_logger.info(f"Bus {bus['id']} wait overridden: moving to {next_stop_id} (demand={next_stop_demand})")
+
+        bus['last_action'] = action
+        
         # Always deboard passengers reaching their destination when at a stop
         deboarded_count = 0
         if bus['state'] == 'AT_STOP':
@@ -203,16 +240,47 @@ class TrafficEnvironment:
                 bus['passengers'].extend(boarded)
                 bus['total_served'] = bus.get('total_served', 0) + len(boarded)
                 boarded_count = len(boarded)
+                
+                # Priority 2 & 3: Boarding Clarity and Events
+                bus['last_action'] = "BOARDING_PASSENGERS"
+                if boarded_count > 0:
+                    self._emit('passengers_served', {
+                        'bus_id': bus['id'],
+                        'count': boarded_count,
+                        'stop': current_stop,
+                        'time': self.simulation_time
+                    })
             
+            # Transition to IN_TRANSIT if DEPART_NOW is chosen
             if action == 'DEPART_NOW':
-                bus['state'] = 'IN_TRANSIT'
-                self._set_next_destination(bus)
+                # Only move if we aren't currently "boarding" in this exact step, 
+                # or if we want to board and move together.
+                # To make it visible, if we boarded, we stay one step, then move.
+                if boarded_count == 0:
+                    bus['last_action'] = "MOVING_TO_NEXT_STOP"
+                    bus['state'] = 'IN_TRANSIT'
+                    self._set_next_destination(bus)
+            elif action in ['WAIT_30', 'WAIT_60'] and boarded_count == 0:
+                bus['last_action'] = "WAITING_AT_STOP"
         
         elif action == 'SKIP_STOP':
+            bus['last_action'] = "SKIPPING_STOP"
             if queue_before > 0:
                 env_logger.info(f"Bus {bus['id']} skipped stop {current_stop} despite {queue_before} passengers waiting")
+            
+            # Priority 3: Skip Event
+            emit('stop_skipped', {
+                'bus_id': bus['id'],
+                'stop': current_stop,
+                'demand': queue_before,
+                'time': self.simulation_time
+            }, namespace='/', broadcast=True)
+            
             bus['state'] = 'IN_TRANSIT'
             self._set_next_destination(bus)
+        
+        elif bus['state'] == 'IN_TRANSIT':
+            bus['last_action'] = "MOVING TO NEXT STOP"
 
         # Calculate reward
         queue_after = len(self.passenger_demand.stop_queues.get(current_stop, []))
@@ -235,14 +303,29 @@ class TrafficEnvironment:
         return reward
 
     def _deboard_passengers(self, bus):
-        """Unload passengers whose destination is the current stop"""
+        """Unload passengers whose destination is the current stop with realistic logic"""
         current_stop = bus['current_stop']
         passengers_before = len(bus['passengers'])
         
-        # Keep passengers who haven't reached their destination
-        bus['passengers'] = [p for p in bus['passengers'] if p.get('destination') != current_stop]
+        # 1. Deboard those who reached their destination
+        remaining_passengers = [p for p in bus['passengers'] if p.get('destination') != current_stop]
         
+        # 2. Implement "Priority 2: 20-40% Deboarding Rule"
+        if len(remaining_passengers) > 0:
+            # Calculate random drop rate between 20% and 40%
+            drop_rate = random.uniform(0.20, 0.40)
+            num_random_drop = int(len(remaining_passengers) * drop_rate)
+            
+            # Ensure at least someone drops if the bus isn't empty and we're at a stop
+            if num_random_drop == 0 and len(remaining_passengers) > 2:
+                num_random_drop = 1
+                
+            if num_random_drop > 0:
+                remaining_passengers = remaining_passengers[:-num_random_drop]
+        
+        bus['passengers'] = remaining_passengers
         deboarded_count = passengers_before - len(bus['passengers'])
+        
         if deboarded_count > 0:
             env_logger.info(f"Bus {bus['id']} DEBOARDED {deboarded_count} at {current_stop}")
             
@@ -296,7 +379,7 @@ class TrafficEnvironment:
                     if self.route_manager.is_peak_hour(bus['current_stop'], now_str):
                         traffic_factor *= 0.7
                         
-                    distance_factor = base_speed * 0.1 * traffic_factor
+                    distance_factor = base_speed * 0.4 * traffic_factor
                     route_info['progress'] += float(distance_factor)
                     
                     if route_info['progress'] >= 1.0:
@@ -417,7 +500,8 @@ class TrafficEnvironment:
             'total_served': 0,
             'speed': 0.08,
             'last_departure_time': 0,
-            'is_dynamic': True
+            'is_dynamic': True,
+            'last_action': 'WAIT_30'
         }
 
         self.buses[bus_id] = new_bus
@@ -462,30 +546,18 @@ class TrafficEnvironment:
         
         if bus['state'] == 'AT_STOP':
             # Enhanced decision logic with schedule consideration
-            if queue_length > 15:
-                # Very high demand - board and depart immediately
+            if queue_length > 10:
+                # High demand - board and depart immediately
                 return 'DEPART_NOW'
-            elif queue_length > 8 and occupancy_rate < 0.9:
-                # High demand - board and depart quickly
-                return 'DEPART_NOW'
-            elif queue_length > 3 and occupancy_rate < 0.7:
-                # Moderate demand - consider schedule
-                if time_at_stop >= scheduled_wait_time:
+            elif queue_length >= 1:
+                # Any demand - respond quickly
+                if time_at_stop >= 10: # Minimum 10s wait for boarding
                     return 'DEPART_NOW'
-                else:
-                    return 'WAIT_30'
-            elif queue_length > 0 and occupancy_rate < 0.5:
-                # Some demand - wait for more passengers or schedule
-                if time_at_stop >= scheduled_wait_time * 1.5:
-                    return 'DEPART_NOW'  # Don't wait too long
                 else:
                     return 'WAIT_30'
             elif queue_length == 0 and time_at_stop >= scheduled_wait_time:
                 # No demand but schedule says depart
                 return 'DEPART_NOW'
-            elif queue_length == 0 and occupancy_rate < 0.3:
-                # No demand and low occupancy - wait for passengers
-                return 'WAIT_30'
             else:
                 # Default - depart if waited long enough
                 return 'DEPART_NOW' if time_at_stop >= scheduled_wait_time else 'WAIT_30'
@@ -533,8 +605,17 @@ class TrafficEnvironment:
 
     def update_passengers(self):
         """Update passenger demand for the whole network"""
-        self.passenger_demand.generate_passengers_all(delta_time=1.0)
+        total_generated = self.passenger_demand.generate_passengers_all(delta_time=1.0)
         self.passenger_demand.update_wait_times(1.0)
+        
+        # Priority 3: Detect and emit high demand events
+        for stop_id, queue in self.passenger_demand.stop_queues.items():
+            if len(queue) > 15:
+                self._emit('high_demand', {
+                    'stop_id': stop_id,
+                    'count': len(queue),
+                    'time': self.simulation_time
+                })
 
     def serialize(self):
         """Serialize current state to dictionary for WebSocket/API"""
@@ -553,6 +634,16 @@ class TrafficEnvironment:
         # Calculate average occupancy
         average_occupancy = total_passengers_on_buses / total_capacity if total_capacity > 0 else 0
         
+        # Identify high demand stops (> 10 passengers)
+        high_demand_stops = [
+            stop_id for stop_id, queue in self.passenger_demand.stop_queues.items()
+            if len(queue) > 10
+        ]
+        
+        # Calculate fleet utilization
+        buses_with_passengers = sum(1 for bus in self.buses.values() if len(bus.get('passengers', [])) > 0)
+        fleet_utilization = (buses_with_passengers / len(self.buses)) * 100 if self.buses else 0
+        
         return {
             'simulation_time': self.simulation_time,
             'total_passengers_served': self.passenger_demand.total_passengers_served,
@@ -563,7 +654,11 @@ class TrafficEnvironment:
             'average_bus_occupancy': average_occupancy,  # Added for test compatibility
             'num_buses': len(self.buses),
             'buses_at_stop': sum(1 for bus in self.buses.values() if bus['state'] == 'AT_STOP'),
-            'buses_in_transit': sum(1 for bus in self.buses.values() if bus['state'] == 'IN_TRANSIT')
+            'buses_in_transit': sum(1 for bus in self.buses.values() if bus['state'] == 'IN_TRANSIT'),
+            'buses_with_passengers': buses_with_passengers,
+            'fleet_utilization': fleet_utilization,
+            'high_demand_stops': high_demand_stops,
+            'num_high_demand_stops': len(high_demand_stops)
         }
 
 # Create singleton instance

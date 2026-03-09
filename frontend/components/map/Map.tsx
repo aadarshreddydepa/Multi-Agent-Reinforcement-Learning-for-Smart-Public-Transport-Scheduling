@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import BusMarker from "./BusMarker";
@@ -27,11 +27,47 @@ interface MapProps {
   buses: Bus[];
   stops: Stop[];
   center?: [number, number];
+  children?: React.ReactNode;
+  spawnIndicator?: {
+    pos: [number, number];
+    visible: boolean;
+  };
+  highlightedBusId?: string | null;
 }
 
-const Map: React.FC<MapProps> = ({ buses, stops, center }) => {
+// Child component to update map view when center changes (Priority 5)
+const MapViewUpdater: React.FC<{ center: [number, number] }> = ({ center }) => {
+  const map = useMap();
+  React.useEffect(() => {
+    map.setView(center, map.getZoom());
+  }, [center, map]);
+  return null;
+};
+
+const Map: React.FC<MapProps> = ({ buses, stops, center, children, spawnIndicator, highlightedBusId }) => {
   useEffect(() => {
     fixLeafletIcon();
+  }, []);
+
+  // Spawn indicator icon (Priority 4: Depot/New Bus Visibility)
+  const spawnIcon = React.useMemo(() => {
+    if (typeof window === 'undefined') return null;
+    return L.divIcon({
+      className: "spawn-indicator",
+      html: `
+        <div class="relative flex flex-col items-center">
+          <div class="bg-blue-600 text-white text-[10px] px-3 py-1 rounded-full font-extrabold whitespace-nowrap mb-2 shadow-xl border-2 border-white animate-bounce">
+            NEW BUS DISPATCHED 🚌
+          </div>
+          <div class="relative">
+            <div class="absolute -inset-4 bg-blue-500 opacity-20 rounded-full animate-ping"></div>
+            <div class="w-4 h-4 bg-blue-600 rounded-full border-2 border-white shadow-lg z-10"></div>
+          </div>
+        </div>
+      `,
+      iconSize: [120, 60],
+      iconAnchor: [60, 60],
+    });
   }, []);
 
   const defaultCenter: [number, number] = center || [17.385, 78.4867];
@@ -40,24 +76,24 @@ const Map: React.FC<MapProps> = ({ buses, stops, center }) => {
   // Calculate appropriate zoom level based on stop distribution
   const calculateZoom = () => {
     if (stops.length === 0) return 15;
-    
+
     const validStops = stops.filter(stop => stop.location);
     if (validStops.length === 0) return 15;
-    
+
     const lats = validStops.map(stop => stop.location.lat);
     const lngs = validStops.map(stop => stop.location.lng);
-    
+
     const maxLat = Math.max(...lats);
     const minLat = Math.min(...lats);
     const maxLng = Math.max(...lngs);
     const minLng = Math.min(...lngs);
-    
+
     const latDiff = maxLat - minLat;
     const lngDiff = maxLng - minLng;
-    
+
     // Adjust zoom based on the spread of coordinates
     const maxDiff = Math.max(latDiff, lngDiff);
-    
+
     if (maxDiff > 0.3) return 11;  // Very spread out
     if (maxDiff > 0.2) return 12;  // Spread out
     if (maxDiff > 0.1) return 13;  // Moderately spread
@@ -89,8 +125,22 @@ const Map: React.FC<MapProps> = ({ buses, stops, center }) => {
         ))}
 
         {buses.map(
-          (bus) => (bus.position || bus.location) && <BusMarker key={bus.id} bus={bus} />,
+          (bus) => (bus.position || bus.location) && (
+            <BusMarker
+              key={bus.id}
+              bus={bus}
+              isHighlighted={bus.id === highlightedBusId}
+            />
+          ),
         )}
+
+        {center && <MapViewUpdater center={center} />}
+
+        {spawnIndicator?.visible && spawnIcon && (
+          <Marker position={spawnIndicator.pos} icon={spawnIcon} />
+        )}
+
+        {children}
       </MapContainer>
 
       {/* Overlay controls or attribution if needed */}

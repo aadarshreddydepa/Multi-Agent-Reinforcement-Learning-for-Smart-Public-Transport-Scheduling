@@ -3,6 +3,7 @@
 import React from "react";
 import { Play, Pause, RotateCcw, Brain, Zap, Activity } from "lucide-react";
 import { Statistics } from "../../types";
+import clsx from "clsx";
 
 interface ControlPanelProps {
   isRunning: boolean;

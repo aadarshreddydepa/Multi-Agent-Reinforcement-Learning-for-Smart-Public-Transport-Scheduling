@@ -33,7 +33,9 @@ class Config:
     # Passenger Settings
     MIN_PASSENGERS_PER_STOP = 0
     MAX_PASSENGERS_PER_STOP = 20
-    PASSENGER_ARRIVAL_RATE = 1.0  # Balanced value after verification (originally 0.8)
+    PASSENGER_ARRIVAL_RATE = 1.2  # Higher base arrival rate for realistic demand
+    DEMAND_HOTSPOTS = ["mehdipatnam", "hitech_city", "uppal_depot", "cbit"]
+    DEMAND_MEDIUM = ["lakdi_ka_pool", "tarnaka_xroads", "madhapur", "habsiguda", "uppal_xroads", "narayanguda"]
     BUS_CAPACITY = 50  # maximum passengers per bus
     
     # RL Agent Settings (tuned for effective learning)

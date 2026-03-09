@@ -24,11 +24,20 @@ class PassengerDemand:
         self.total_passengers_generated = 0
         self.total_passengers_served = 0
         
-        # Initialize queues for all stops
+        # Initialize queues and multipliers for all stops
+        self.stop_multipliers = {}
         for stop_id in route_manager.stops.keys():
             self.stop_queues[stop_id] = []
+            
+            # Assign multiplier based on demand tier - calibrated for requested ranges
+            if stop_id in getattr(Config, 'DEMAND_HOTSPOTS', []):
+                self.stop_multipliers[stop_id] = 12.0  # High demand: 15-30 passengers
+            elif stop_id in getattr(Config, 'DEMAND_MEDIUM', []):
+                self.stop_multipliers[stop_id] = 5.0   # Medium demand: 5-15 passengers
+            else:
+                self.stop_multipliers[stop_id] = 0.05  # Quiet/Low: 1-5 passengers
         
-        env_logger.info("PassengerDemand initialized")
+        env_logger.info(f"PassengerDemand initialized with {len(self.stop_multipliers)} tiered stops")
     
     def generate_passengers(self, stop_id: str, current_time: str = None, delta_time: float = 1.0) -> int:
         """
@@ -52,8 +61,9 @@ class PassengerDemand:
         is_peak = route_manager.is_peak_hour(stop_id, current_time)
         multiplier = 4.0 if is_peak else 1.0 # Increased from 3.0
         
-        # Calculate expected number of passengers
-        arrival_rate = base_rate * multiplier
+        # Apply tiered multiplier
+        stop_multiplier = self.stop_multipliers.get(stop_id, 0.1)
+        arrival_rate = base_rate * multiplier * stop_multiplier
         expected_passengers = arrival_rate * delta_time
         
         # Use Poisson distribution for realistic arrivals

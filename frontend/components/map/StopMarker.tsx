@@ -16,50 +16,102 @@ interface StopMarkerProps {
 }
 
 const StopMarker: React.FC<StopMarkerProps> = ({ stop }) => {
+  // Determine demand level and color
+  const passengerCount = stop.passengerCount || 0;
+  let demandColor = "#10B981"; // Green (Low)
+  let demandOpacity = 0.1;
+  let demandRadius = 0;
+
+  if (passengerCount > 15) {
+    demandColor = "#ef4444"; // Red (High)
+    demandOpacity = 0.4;
+    demandRadius = 25 + Math.min(passengerCount, 40) * 1.5;
+  } else if (passengerCount > 5) {
+    demandColor = "#f59e0b"; // Yellow (Medium)
+    demandOpacity = 0.25;
+    demandRadius = 15 + passengerCount * 2;
+  } else if (passengerCount > 0) {
+    demandRadius = 10 + passengerCount * 3;
+  }
+
   // Create a custom icon using DivIcon for better styling control
-  const stopIcon = L.divIcon({
-    className: "stop-marker-icon",
-    html: `
-            <div class="relative group">
-                <div style="
-                    background-color: white;
-                    border: 2px solid #000000;
-                    border-radius: 50%;
-                    padding: 4px;
-                    width: 24px;
-                    height: 24px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 12px;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                    transition: all 0.2s ease;
-                ">
-                    🚏
-                </div>
-                ${
-                  stop.passengerCount && stop.passengerCount > 0
-                    ? `
+  const stopIcon = React.useMemo(() => {
+    if (typeof window === 'undefined') return null;
+
+    // Priority 1: Clear Demand Visuals
+    let markerColor = "#10B981"; // Green (0-5)
+    if (passengerCount > 15) {
+      markerColor = "#ef4444"; // Red (15+)
+    } else if (passengerCount > 5) {
+      markerColor = "#f59e0b"; // Yellow (6-15)
+    }
+
+    return L.divIcon({
+      className: "stop-marker-icon",
+      html: `
+            <div class="relative flex flex-col items-center justify-center">
+                <!-- Demand Label "X waiting" (Priority 1) -->
+                ${passengerCount > 0 ? `
                 <div style="
                     position: absolute;
-                    top: -5px;
-                    right: -5px;
-                    background-color: #ef4444;
+                    top: -24px;
+                    white-space: nowrap;
+                    background: rgba(0,0,0,0.85);
                     color: white;
                     font-size: 10px;
-                    padding: 1px 4px;
+                    padding: 2px 8px;
                     border-radius: 4px;
-                    font-weight: bold;
+                    font-weight: 800;
+                    pointer-events: none;
+                    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+                    z-index: 10;
+                    border: 1px solid ${markerColor};
                 ">
-                    ${stop.passengerCount}
-                </div>`
-                    : ""
-                }
+                    ${passengerCount} waiting
+                </div>
+                ` : ""}
+
+                <div class="relative flex items-center justify-center">
+                    <!-- Demand Layer Circle -->
+                    ${passengerCount > 0 ? `
+                    <div style="
+                        position: absolute;
+                        width: ${demandRadius}px;
+                        height: ${demandRadius}px;
+                        background-color: ${markerColor};
+                        opacity: ${demandOpacity};
+                        border-radius: 50%;
+                        transition: all 0.5s ease;
+                        z-index: -1;
+                    "></div>
+                    ` : ""}
+                    
+                    <div style="
+                        background-color: white;
+                        border: 2px solid #000000;
+                        border-radius: 50%;
+                        padding: 4px;
+                        width: 24px;
+                        height: 24px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 12px;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                        transition: all 0.2s ease;
+                        z-index: 2;
+                    ">
+                        🚏
+                    </div>
+                </div>
             </div>
         `,
-    iconSize: [24, 24],
-    iconAnchor: [12, 12],
-  });
+      iconSize: [24, 24],
+      iconAnchor: [12, 12],
+    });
+  }, [passengerCount, demandRadius, demandColor, demandOpacity]);
+
+  if (!stopIcon) return null;
 
   return (
     <Marker position={[stop.location.lat, stop.location.lng]} icon={stopIcon}>

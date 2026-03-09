@@ -7,6 +7,7 @@ export interface Stop {
   id: string;
   name: string;
   location: Location;
+  passengerCount?: number;
   passengers_waiting?: number;
 }
 
@@ -17,13 +18,13 @@ export interface Bus {
   passengers: string[] | any[]; // Passenger IDs - handle different structures
   capacity: number;
   state:
-    | "IDLE"
-    | "MOVING"
-    | "BOARDING"
-    | "ALIGHTING"
-    | "IN_TRANSIT"
-    | "AT_STOP"
-    | "WAITING"; // Adjust based on backend
+  | "IDLE"
+  | "MOVING"
+  | "BOARDING"
+  | "ALIGHTING"
+  | "IN_TRANSIT"
+  | "AT_STOP"
+  | "WAITING"; // Adjust based on backend
   position?: Location; // Real-time (backend uses position, not location)
   location?: Location; // For compatibility
   next_stop_id?: string;
@@ -33,6 +34,7 @@ export interface Bus {
   route_color?: string;
   total_served?: number;
   is_dynamic?: boolean;
+  last_action?: string;
 }
 
 export interface SimulationState {
@@ -49,10 +51,15 @@ export interface Statistics {
   total_passengers_waiting: number;
   buses_in_transit: number;
   simulation_time: number;
+  high_demand_stops?: string[];
+  num_high_demand_stops?: number;
+  num_buses?: number;
+  buses_with_passengers?: number;
+  fleet_utilization?: number;
 }
 
 export interface Alert {
-  id: number;
+  id: string;
   message: string;
   type: "success" | "error" | "warning" | "info";
   timestamp: Date;

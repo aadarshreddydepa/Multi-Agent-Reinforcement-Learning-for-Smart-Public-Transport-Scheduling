@@ -84,6 +84,9 @@ simulation_thread = None
 # Statistics tracking
 stats_history = []
 
+# Inject socketio into traffic_env for background emissions
+traffic_env.socketio = socketio
+
 system_logger.info("Flask app initialized")
 
 @app.before_request
@@ -218,9 +221,12 @@ def start_simulation():
         # Get optional parameters
         data = request.get_json(silent=True) or {}
         use_trained_agents = data.get('use_trained_agents', False)
+        print(f"Simulation start request: {data}")
+        system_logger.info(f"Simulation start request: {use_trained_agents}")
         
-        # Initialize MARL agents per bus
-        initialize_agents(traffic_env)
+        # Initialize MARL agents per bus using imported function
+        from agents.marl_agents import initialize_agents as init_marl_agents
+        init_marl_agents(traffic_env)
         
         if use_trained_agents:
             coordinator.load_all_models()
@@ -426,7 +432,8 @@ def start_training():
     
     # Initialize trainer if needed
     if not traffic_env.agents_initialized:
-        initialize_agents(use_trained=False)
+        from agents.marl_agents import initialize_agents as init_marl_agents
+        init_marl_agents(traffic_env)
     
     # Start training in background thread
     training_thread = threading.Thread(
@@ -503,30 +510,7 @@ def handle_statistics_request():
 # HELPER FUNCTIONS
 # ============================================================================
 
-def initialize_agents(use_trained=False):
-    """Initialize RL agents"""
-    system_logger.info("Initializing agents...")
-    
-    # Reset environment to get bus information
-    # If simulation is NOT running, we use the current fleet
-    state = traffic_env.get_state()
-    
-    # Clear existing agents
-    coordinator.agents = {}
-    
-    # Create agents for all buses
-    for bus_id in state['buses'].keys():
-        route_id = state['buses'][bus_id]['route_id']
-        agent = BusAgent(bus_id, route_id)
-        coordinator.add_agent(agent)
-    
-    # Load trained models if requested
-    if use_trained:
-        loaded = coordinator.load_all_models()
-        system_logger.info(f"Loaded {loaded} trained models")
-    
-    traffic_env.agents_initialized = True
-    system_logger.info(f"Initialized {len(coordinator.agents)} agents")
+# Local initialize_agents removed to avoid collision with agents.marl_agents
 
 def simulation_loop(use_ai=True):
     """
@@ -536,68 +520,89 @@ def simulation_loop(use_ai=True):
     print(f"DEBUG: Engine Loop Entered with use_ai={use_ai}")
     update_interval = Config.UPDATE_INTERVAL
     
-    try:
-        while traffic_env.simulation_running:
-            loop_start = time.time()
-            
-            # Step 1: For each bus, select action using its PPO agent
-            for bus_id in list(traffic_env.buses.keys()):
-                # Get observation for this specific bus
-                state = traffic_env.get_state_for_bus(bus_id)
+    with app.app_context():
+        try:
+            while traffic_env.simulation_running:
+                loop_start = time.time()
                 
-                # Select action via agent
-                if use_ai and traffic_env.agents_initialized and bus_id in traffic_env.agents:
-                    action_idx = traffic_env.agents[bus_id].select_action(state, training=False)
-                    action_name = Config.ACTIONS[action_idx]
-                else:
-                    # Fallback to heuristic if agent not ready
-                    action_name = traffic_env._make_intelligent_decision(traffic_env.buses[bus_id])
+                # Step 1: Collect actions from agents
+                actions = {}
+                for bus_id in list(traffic_env.buses.keys()):
+                    # Get observation for this specific bus
+                    state = traffic_env.get_state_for_bus(bus_id)
+                    
+                    # Select action via agent
+                    if use_ai and traffic_env.agents_initialized and bus_id in traffic_env.agents:
+                        action_idx = traffic_env.agents[bus_id].select_action(state, training=False)
+                        action_name = Config.ACTIONS[action_idx]
+                    else:
+                        # Fallback to heuristic
+                        action_name = traffic_env._make_intelligent_decision(traffic_env.buses[bus_id])
+                    
+                    actions[bus_id] = action_name
                 
-                # Apply action to environment
-                traffic_env.apply_action(bus_id, action_name)
-            
-            # Step 2: Update physics and demand
-            traffic_env.update_positions()
-            traffic_env.update_passengers()
-            
-            # Step 3: Increment time
-            traffic_env.simulation_time += 1.0
-            
-            # Step 4: Broadcast state update via WebSocket
-            try:
-                state_data = traffic_env.serialize()
-                system_logger.debug(f"Loop: Serialized state at t={traffic_env.simulation_time}")
+                # Step 2: Execute environment step
+                # This handles movement, demand, and time increment
+                obs, rewards, done = traffic_env.step(actions)
                 
-                socketio.emit('state_update', state_data)
-                system_logger.debug("Loop: Emitted state_update")
-            except Exception as emit_err:
-                system_logger.error(f"Loop: Socket emission failure: {emit_err}")
-
-            # Send statistics update periodically
-            if int(traffic_env.simulation_time) % 5 == 0:
+                # Step 3: Broadcast state update via WebSocket
                 try:
-                    stats = traffic_env.get_statistics()
-                    socketio.emit('statistics_update', stats)
-                except Exception as stats_err:
-                    system_logger.error(f"Loop: Stats emission failure: {stats_err}")
-            
-            # Heartbeat log every 5 steps (increased frequency for debugging)
-            if int(traffic_env.simulation_time) % 5 == 0:
-                system_logger.info(f"SIM-HEARTBEAT: Time={traffic_env.simulation_time}, Buses={len(traffic_env.buses)}")
+                    state_data = traffic_env.serialize()
+                    socketio.emit('simulation_update', state_data)
+                    print("Simulation step executed")
+                except Exception as emit_err:
+                    system_logger.error(f"Loop: Socket emission failure: {emit_err}")
 
-            # Control timing
-            elapsed = time.time() - loop_start
-            sleep_time = update_interval - elapsed
-            if sleep_time > 0:
-                time.sleep(sleep_time)
+                # Send statistics update periodically
+                if int(traffic_env.simulation_time) % 5 == 0:
+                    try:
+                        stats = traffic_env.get_statistics()
+                        socketio.emit('statistics_update', stats)
+                    except Exception as stats_err:
+                        system_logger.error(f"Loop: Stats emission failure: {stats_err}")
+
+                # Step 4: Emit stop demand updates
+                try:
+                    demand_updates = []
+                    for stop_id, queue in traffic_env.passenger_demand.stop_queues.items():
+                        stop_info = route_manager.get_stop(stop_id)
+                        if stop_info:
+                            demand_updates.append({
+                                'stop_id': stop_id,
+                                'passengers_waiting': len(queue),
+                                'lat': stop_info['location']['lat'],
+                                'lng': stop_info['location']['lng']
+                            })
+                    
+                    if demand_updates:
+                        socketio.emit('stop_demand_update', demand_updates)
+                except Exception as demand_err:
+                    system_logger.error(f"Loop: Demand emission failure: {demand_err}")
                 
-    except Exception as e:
-        system_logger.error(f"CRITICAL: Simulation loop failure: {e}")
-        import traceback
-        traceback.print_exc()
-    finally:
-        traffic_env.simulation_running = False
-        system_logger.info("Engine Loop: Terminated")
+                # Heartbeat log
+                if int(traffic_env.simulation_time) % 10 == 0:
+                    print(f"Simulation step running: time={traffic_env.simulation_time}")
+                    system_logger.info(f"SIM-HEARTBEAT: Time={traffic_env.simulation_time}, Buses={len(traffic_env.buses)}")
+
+                if done:
+                    system_logger.info("Simulation reached time limit")
+                    traffic_env.simulation_running = False
+                    socketio.emit('simulation_finished', {'message': 'Simulation reached time limit'})
+                    break
+
+                # Control timing
+                elapsed = time.time() - loop_start
+                sleep_time = update_interval - elapsed
+                if sleep_time > 0:
+                    time.sleep(sleep_time)
+                    
+        except Exception as e:
+            system_logger.error(f"CRITICAL: Simulation loop failure: {e}")
+            import traceback
+            traceback.print_exc()
+        finally:
+            traffic_env.simulation_running = False
+            system_logger.info("Engine Loop: Terminated")
 
 def run_training(num_episodes):
     """Run training in background"""

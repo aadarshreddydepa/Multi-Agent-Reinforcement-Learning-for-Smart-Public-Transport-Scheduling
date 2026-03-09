@@ -8,16 +8,17 @@ import { Bus } from "../../types";
 
 interface BusMarkerProps {
   bus: Bus;
+  isHighlighted?: boolean;
 }
 
-const BusMarker: React.FC<BusMarkerProps> = ({ bus }) => {
+const BusMarker: React.FC<BusMarkerProps> = ({ bus, isHighlighted }) => {
   // 🎨 Premium Colors based on State
   const getColor = (state: string, routeColor?: string) => {
     // Use route color if available, otherwise fallback to state-based colors
     if (routeColor && routeColor.startsWith('#')) {
       return routeColor;
     }
-    
+
     switch (state) {
       case "IDLE":
         return "#6B7280";
@@ -34,61 +35,124 @@ const BusMarker: React.FC<BusMarkerProps> = ({ bus }) => {
     }
   };
 
-  const color = getColor(bus.state || "IDLE", bus.route_color);
   const occupancyRate = bus.passengers
     ? bus.passengers.length / bus.capacity
     : 0;
+
+  // 🎨 Multi-color occupancy logic
+  let occupancyColor = "#10B981"; // Green (Low)
+  if (occupancyRate > 0.8) {
+    occupancyColor = "#ef4444"; // Red (High)
+  } else if (occupancyRate > 0.4) {
+    occupancyColor = "#f59e0b"; // Yellow (Medium)
+  }
+
+  const color = getColor(bus.state || "IDLE", bus.route_color);
   const isMoving = ["IN_TRANSIT", "MOVING"].includes(bus.state || "IDLE");
 
   // Dynamic scale based on occupancy
-  const radius = 40 + occupancyRate * 20; // 40px base + up to 20px extra
-  const size = radius;
+  const size = 36; // Constant base size for better alignment
 
-  // Use Tailwind classes inside HTML string is tricky as they might not be applied if not used elsewhere.
-  // However, I'll use inline styles for reliability in Leaflet divIcon.
-
-  const busIcon = L.divIcon({
-    className: "bus-marker-icon bus-marker-enhanced",
-    html: `
-            <div class="relative group">
+  const busIcon = React.useMemo(() => {
+    if (typeof window === 'undefined') return null;
+    return L.divIcon({
+      className: "bus-marker-icon",
+      html: `
+            <div class="relative flex flex-col items-center">
+                <!-- Action Label -->
                 <div style="
-                    background: linear-gradient(135deg, ${color} 0%, ${color}dd 100%);
-                    border-radius: 50%;
-                    width: 32px;
-                    height: 32px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 16px;
-                    box-shadow: 
-                        0 2px 4px rgba(0,0,0,0.2);
-                    border: 2px solid white;
-                    transition: all 0.3s ease;
-                ">
-                    🚌
-                </div>
-                ${occupancyRate > 0.8 ? `
-                    <div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse" style="box-shadow: 0 0 6px rgba(239, 68, 68, 0.6);"></div>
-                ` : ''}
-                ${bus.state === 'MOVING' || bus.state === 'IN_TRANSIT' ? `
-                    <div class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
-                ` : ''}
-                ${occupancyRate > 0 ? `
-                <div class="absolute -top-2 left-1/2 transform -translate-x-1/2 text-xs font-bold" style="
-                    background: ${color};
+                    position: absolute;
+                    top: -22px;
+                    white-space: nowrap;
+                    background: rgba(0,0,0,0.75);
                     color: white;
                     font-size: 9px;
-                    padding: 1px 3px;
+                    padding: 1px 6px;
                     border-radius: 4px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    opacity: ${bus.last_action ? 1 : 0};
+                    transition: opacity 0.3s;
+                    z-index: 10;
+                ">
+                    ${(bus.last_action || "").replace("_", " ")}
+                </div>
+
+                <!-- Highlight Ring (Priority 5) -->
+                ${isHighlighted ? `
+                <div class="absolute -inset-2 bg-blue-400 rounded-full animate-ping opacity-40" style="width: 48px; height: 48px; left: -8px; top: -8px;"></div>
+                <div class="absolute -inset-1 border-2 border-blue-500 rounded-full" style="width: 40px; height: 40px; left: -4px; top: -4px;"></div>
+                ` : ""}
+
+                <div class="relative">
+                    <!-- Progress Ring / Border -->
+                    <div style="
+                        position: absolute;
+                        top: -3px;
+                        left: -3px;
+                        width: 38px;
+                        height: 38px;
+                        border-radius: 50%;
+                        border: 3px solid ${occupancyColor}33;
+                        z-index: 1;
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: -3px;
+                        left: -3px;
+                        width: 38px;
+                        height: 38px;
+                        border-radius: 50%;
+                        border: 3px solid ${occupancyColor};
+                        border-bottom-color: transparent;
+                        border-left-color: transparent;
+                        transform: rotate(${occupancyRate * 360}deg);
+                        transition: transform 0.5s ease;
+                        z-index: 2;
+                    "></div>
+
+                    <!-- Main Bus Icon -->
+                    <div style="
+                        background: linear-gradient(135deg, ${color} 0%, ${color}dd 100%);
+                        border-radius: 50%;
+                        width: 32px;
+                        height: 32px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 16px;
+                        box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+                        border: 2px solid white;
+                        position: relative;
+                        z-index: 3;
+                    ">
+                        🚌
+                    </div>
+                </div>
+
+                <!-- Occupancy Percentage Badge -->
+                ${occupancyRate > 0 ? `
+                <div class="absolute" style="
+                    bottom: -10px;
+                    background: ${occupancyColor};
+                    color: white;
+                    font-size: 8px;
+                    padding: 1px 4px;
+                    border-radius: 8px;
                     border: 1px solid white;
-                    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+                    font-weight: 800;
+                    z-index: 11;
                 ">${(occupancyRate * 100).toFixed(0)}%</div>
                 ` : ''}
             </div>
         `,
-    iconSize: [size, size],
-    iconAnchor: [size / 2, size / 2],
-  });
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2],
+    });
+  }, [bus.last_action, occupancyColor, occupancyRate, color, size, isHighlighted]);
+
+  if (!busIcon) return null;
 
   if (!bus.position && !bus.location) return null;
 
