@@ -17,7 +17,6 @@ const LiveMap = dynamic<any>(
     loading: () => <div className="w-full h-full bg-gray-100 animate-pulse rounded-xl" />
   }
 );
-
 export default function Home() {
   const [state, setState] = useState<SimulationState | null>(null);
   const [stats, setStats] = useState<Statistics | null>(null);
