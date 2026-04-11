@@ -11,7 +11,8 @@ const Map = dynamic(() => import("./Map"), {
       <div className="relative z-10 text-gray-400 dark:text-gray-500 font-medium transition-colors duration-300">
         Initializing Map Engine...
       </div>
-    ),
+    </div>
+  ),
   }
 );
 
