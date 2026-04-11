@@ -59,7 +59,7 @@ const RouteVisualization: React.FC<RouteVisualizationProps> = ({ buses, stops })
   // Get route color
   const getRouteColor = (routeId: string) => {
     const bus = buses.find(b => b.current_route_id === routeId);
-    return bus?.route_color || '#3B82F6';
+    return bus?.route_color || 'var(--color-accent-primary)';
   };
 
   // Create route path using real road data when available, fallback to straight lines
@@ -123,7 +123,7 @@ const RouteVisualization: React.FC<RouteVisualizationProps> = ({ buses, stops })
           key={line.id}
           positions={line.positions}
           pathOptions={{
-            color: line.color || "#3B82F6",
+            color: line.color || "var(--color-accent-primary)",
             opacity: 0.8,
             weight: 3,
             dashArray: "10, 5",

@@ -453,37 +453,40 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-dark-950 text-gray-500 dark:text-gray-400 font-medium transition-colors duration-300">
-        Loading Smart Bus MARL System...
+      <div className="flex items-center justify-center min-h-screen bg-background-primary text-foreground-muted font-medium">
+        <div className="flex items-center gap-3">
+          <div className="w-5 h-5 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+          Loading Smart Bus MARL System...
+        </div>
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-white dark:bg-dark-950 text-black dark:text-gray-100 font-sans overflow-hidden flex flex-col transition-colors duration-300">
-      {/* Professional Notification System */}
+    <main className="min-h-screen bg-background-primary text-foreground-primary font-sans overflow-hidden flex flex-col">
+      {/* Notification System */}
       <div className="fixed top-20 right-6 z-50 flex flex-col gap-3 w-full max-w-sm pointer-events-none">
         {alerts.map((alert) => (
           <div
             key={alert.id}
             className={clsx(
-              "pointer-events-auto flex items-start gap-3 px-4 py-3 rounded-xl shadow-lg border backdrop-blur-md animate-slide-in-right duration-300",
-              "bg-white/80 dark:bg-dark-800/80 border-gray-100/20 dark:border-gray-700/20"
+              "pointer-events-auto flex items-start gap-3 px-4 py-3 rounded-xl shadow-lg border backdrop-blur-md animate-slide-in-right",
+              "bg-background-elevated/95 border-border"
             )}
           >
             <div className={clsx(
               "w-2 h-2 rounded-full mt-2 flex-shrink-0",
-              alert.type === "success" && "bg-green-500",
-              alert.type === "error" && "bg-red-500",
-              alert.type === "warning" && "bg-amber-500",
-              alert.type === "info" && "bg-blue-500"
+              alert.type === "success" && "bg-success",
+              alert.type === "error" && "bg-danger",
+              alert.type === "warning" && "bg-warning",
+              alert.type === "info" && "bg-info"
             )} />
             <div className="flex-1">
-              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{alert.message}</p>
+              <p className="text-sm font-medium text-foreground-primary">{alert.message}</p>
             </div>
             <button
               onClick={() => setAlerts(prev => prev.filter(a => a.id !== alert.id))}
-              className="text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
+              className="text-foreground-muted hover:text-foreground-primary transition-colors"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
@@ -493,51 +496,52 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Professional Uber-Style Header */}
-      <header className="bg-white dark:bg-dark-900 border-b border-gray-100 dark:border-gray-800 shadow-sm z-30 px-6 py-4 flex items-center justify-between transition-colors duration-300">
+      {/* Header */}
+      <header className="h-16 sticky top-0 z-30 bg-background-primary/80 backdrop-blur-md border-b border-border flex items-center justify-between px-6">
         <div className="flex items-center gap-4">
-          {/* Professional Logo */}
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-black dark:bg-primary-600 rounded-lg flex items-center justify-center shadow-md transition-colors duration-300">
-              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+          {/* Logo */}
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-foreground-primary dark:bg-accent rounded-lg flex items-center justify-center shadow-md">
+              <svg className="w-6 h-6 text-background-primary" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M4 16c0 .88.39 1.67 1 2.22V20c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h8v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4s-8 .5-8 4v10zm3.5 1c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm9 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm1.5-6H6V6h12v5z" />
               </svg>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-black dark:text-gray-100 tracking-tight transition-colors duration-300">
+              <h1 className="text-xl font-bold text-foreground-primary tracking-tight font-display">
                 SwiftBus
               </h1>
-              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium transition-colors duration-300">
+              <p className="text-xs text-foreground-secondary font-medium">
                 Intelligent Transport Network
               </p>
             </div>
           </div>
         </div>
 
-        {/* Navigation Items */}
+        {/* Navigation */}
         <nav className="flex items-center gap-6">
-          <button className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-gray-100 font-medium text-sm transition-colors duration-200">
+          <button className="text-foreground-secondary hover:text-foreground-primary font-medium text-sm transition-colors">
             Dashboard
           </button>
-          <button className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-gray-100 font-medium text-sm transition-colors duration-200">
+          <button className="text-foreground-secondary hover:text-foreground-primary font-medium text-sm transition-colors">
             Fleet
           </button>
-          <button className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-gray-100 font-medium text-sm transition-colors duration-200">
+          <button className="text-foreground-secondary hover:text-foreground-primary font-medium text-sm transition-colors">
             Analytics
           </button>
+          <div className="h-6 w-px bg-border" />
           <ThemeToggle />
-          <div className="w-8 h-8 bg-gray-200 dark:bg-dark-700 rounded-full flex items-center justify-center transition-colors duration-300">
-            <svg className="w-5 h-5 text-gray-600 dark:text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+          <div className="w-9 h-9 bg-background-surface rounded-full flex items-center justify-center border border-border">
+            <svg className="w-5 h-5 text-foreground-secondary" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
             </svg>
           </div>
         </nav>
       </header>
 
-      {/* Full-Screen Map Layout */}
-      <div className="flex flex-1 overflow-hidden bg-white dark:bg-dark-950 transition-colors duration-300">
+      {/* Main Layout */}
+      <div className="flex flex-1 overflow-hidden bg-background-primary">
         {/* Left Control Panel */}
-        <aside className="w-80 border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-dark-900 p-4 flex flex-col gap-4 overflow-y-auto custom-scrollbar z-20 transition-colors duration-300">
+        <aside className="w-80 border-r border-border bg-background-secondary p-4 flex flex-col gap-4 overflow-y-auto custom-scrollbar z-20">
           <ControlPanel
             isRunning={isRunning}
             onStart={handleStart}
@@ -563,8 +567,8 @@ export default function Home() {
           />
         </aside>
 
-        {/* Full-Screen Map */}
-        <div className="flex-1 relative bg-white dark:bg-dark-950 transition-colors duration-300">
+        {/* Map Area */}
+        <div className="flex-1 relative bg-background-primary">
           <div className="absolute inset-0 overflow-hidden z-10">
             <LiveMap
               buses={displayBuses}

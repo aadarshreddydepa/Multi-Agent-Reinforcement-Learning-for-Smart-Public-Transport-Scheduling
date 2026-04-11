@@ -16,18 +16,18 @@ interface StopMarkerProps {
 }
 
 const StopMarker: React.FC<StopMarkerProps> = ({ stop }) => {
-  // Determine demand level and color
+  // Determine demand level and color using CSS variables
   const passengerCount = stop.passengerCount || 0;
-  let demandColor = "#10B981"; // Green (Low)
+  let demandColor = "var(--color-success)"; // Green (Low)
   let demandOpacity = 0.1;
   let demandRadius = 0;
 
   if (passengerCount > 15) {
-    demandColor = "#ef4444"; // Red (High)
+    demandColor = "var(--color-danger)"; // Red (High)
     demandOpacity = 0.4;
     demandRadius = 25 + Math.min(passengerCount, 40) * 1.5;
   } else if (passengerCount > 5) {
-    demandColor = "#f59e0b"; // Yellow (Medium)
+    demandColor = "var(--color-warning)"; // Yellow (Medium)
     demandOpacity = 0.25;
     demandRadius = 15 + passengerCount * 2;
   } else if (passengerCount > 0) {
@@ -39,11 +39,11 @@ const StopMarker: React.FC<StopMarkerProps> = ({ stop }) => {
     if (typeof window === 'undefined') return null;
 
     // Priority 1: Clear Demand Visuals
-    let markerColor = "#10B981"; // Green (0-5)
+    let markerColor = "var(--color-success)"; // Green (0-5)
     if (passengerCount > 15) {
-      markerColor = "#ef4444"; // Red (15+)
+      markerColor = "var(--color-danger)"; // Red (15+)
     } else if (passengerCount > 5) {
-      markerColor = "#f59e0b"; // Yellow (6-15)
+      markerColor = "var(--color-warning)"; // Yellow (6-15)
     }
 
     return L.divIcon({
@@ -116,28 +116,28 @@ const StopMarker: React.FC<StopMarkerProps> = ({ stop }) => {
   return (
     <Marker position={[stop.location.lat, stop.location.lng]} icon={stopIcon}>
       <Popup className="premium-popup">
-        <div className="p-2 min-w-[220px]">
-          <div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-200">
-            <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
-              <span className="text-white text-sm">🚏</span>
+        <div className="p-3 min-w-[220px]">
+          <div className="flex items-center gap-2 mb-3 pb-2 border-b border-border">
+            <div className="w-8 h-8 bg-foreground-primary rounded-lg flex items-center justify-center">
+              <span className="text-background-primary text-sm">🚏</span>
             </div>
             <div>
-              <h3 className="font-bold text-black text-base">{stop.name}</h3>
-              {stop.id && <span className="text-xs text-gray-500 uppercase">{stop.id}</span>}
+              <h3 className="font-bold text-foreground-primary text-base">{stop.name}</h3>
+              {stop.id && <span className="text-xs text-foreground-secondary uppercase">{stop.id}</span>}
             </div>
           </div>
 
           <div className="space-y-2 text-sm">
             {stop.description && (
-              <div className="italic text-gray-500 text-xs">
+              <div className="italic text-foreground-muted text-xs">
                 {stop.description}
               </div>
             )}
 
             {stop.passengerCount !== undefined && stop.passengerCount > 0 && (
-              <div className="flex justify-between bg-gray-50 p-2 rounded-lg">
-                <span className="text-gray-700 font-medium">Waiting:</span>
-                <span className="font-bold text-red-600">
+              <div className="flex justify-between bg-background-surface p-2 rounded-lg">
+                <span className="text-foreground-secondary font-medium">Waiting:</span>
+                <span className="font-bold text-danger">
                   {stop.passengerCount}
                 </span>
               </div>
@@ -145,14 +145,14 @@ const StopMarker: React.FC<StopMarkerProps> = ({ stop }) => {
 
             {stop.amenities && stop.amenities.length > 0 && (
               <div className="mt-2">
-                <span className="font-semibold text-gray-500 text-xs uppercase">
+                <span className="font-semibold text-foreground-secondary text-xs uppercase">
                   Facilities
                 </span>
                 <div className="flex flex-wrap gap-1 mt-1">
                   {stop.amenities.map((amenity) => (
                     <span
                       key={amenity}
-                      className="px-2 py-1 bg-gray-100 rounded text-gray-600 text-xs border border-gray-200"
+                      className="px-2 py-1 bg-background-surface rounded text-foreground-secondary text-xs border border-border"
                     >
                       {amenity}
                     </span>

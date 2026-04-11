@@ -57,33 +57,33 @@ const FleetManager: React.FC<FleetManagerProps> = ({
   };
 
   return (
-    <div className="bg-white dark:bg-dark-900 rounded-xl border border-gray-200 dark:border-gray-800 p-6 flex flex-col gap-6 transition-colors duration-300">
+    <div className="card p-5 flex flex-col gap-5">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-black dark:text-gray-100 flex items-center gap-3 transition-colors duration-300">
-          <div className="w-8 h-8 bg-black dark:bg-primary-600 rounded-lg flex items-center justify-center transition-colors duration-300">
-            <BusIcon className="w-4 h-4 text-white" />
+        <h2 className="text-lg font-semibold text-foreground-primary flex items-center gap-3 font-display">
+          <div className="w-8 h-8 bg-foreground-primary dark:bg-accent rounded-lg flex items-center justify-center">
+            <BusIcon className="w-4 h-4 text-background-primary" />
           </div>
           Fleet Operations
         </h2>
-        <div className="text-xs text-gray-500 dark:text-gray-400 font-medium transition-colors duration-300">
+        <div className="text-xs text-foreground-secondary font-medium">
           {totalBuses} vehicles
         </div>
       </div>
 
       {/* Fleet Stats */}
       <div className="grid grid-cols-3 gap-3">
-        <div className="text-center">
-          <div className="text-2xl font-bold text-black dark:text-gray-100 transition-colors duration-300">{totalBuses}</div>
-          <div className="text-xs text-gray-500 dark:text-gray-400 transition-colors duration-300">Total</div>
+        <div className="text-center p-2 bg-background-surface rounded-lg">
+          <div className="text-2xl font-bold text-foreground-primary">{totalBuses}</div>
+          <div className="text-xs text-foreground-secondary">Total</div>
         </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-green-600 dark:text-green-400 transition-colors duration-300">{activeBuses}</div>
-          <div className="text-xs text-gray-500 dark:text-gray-400 transition-colors duration-300">Active</div>
+        <div className="text-center p-2 bg-background-surface rounded-lg">
+          <div className="text-2xl font-bold text-success">{activeBuses}</div>
+          <div className="text-xs text-foreground-secondary">Active</div>
         </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 transition-colors duration-300">{utilization}%</div>
-          <div className="text-xs text-gray-500 dark:text-gray-400 transition-colors duration-300">Utilization</div>
+        <div className="text-center p-2 bg-background-surface rounded-lg">
+          <div className="text-2xl font-bold text-accent">{utilization}%</div>
+          <div className="text-xs text-foreground-secondary">Utilization</div>
         </div>
       </div>
 
@@ -92,16 +92,16 @@ const FleetManager: React.FC<FleetManagerProps> = ({
         onClick={handleAddWithLoading}
         disabled={loading || totalBuses >= 20}
         className={clsx(
-          "w-full flex items-center justify-center gap-2 py-3 rounded-lg font-medium transition-all duration-200",
+          "w-full btn",
           loading
-            ? "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-wait"
+            ? "bg-background-surface text-foreground-muted cursor-wait"
             : totalBuses >= 20
-              ? "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed"
-              : "bg-black dark:bg-primary-600 text-white hover:bg-gray-800 dark:hover:bg-primary-700",
+              ? "bg-background-surface text-foreground-muted cursor-not-allowed"
+              : "bg-foreground-primary dark:bg-accent text-background-primary hover:bg-foreground-primary/90 dark:hover:bg-accent-hover"
         )}
       >
         {loading ? (
-          <div className="w-4 h-4 border-2 border-gray-400 dark:border-gray-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-4 h-4 border-2 border-foreground-muted border-t-transparent rounded-full animate-spin" />
         ) : (
           <Plus className="w-4 h-4" />
         )}
@@ -115,40 +115,40 @@ const FleetManager: React.FC<FleetManagerProps> = ({
           const isHighlighted = bus.id === highlightedBusId;
 
           return (
-            <div key={bus.id} className="bg-white dark:bg-dark-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <div key={bus.id} className="card p-4">
               {/* Bus Header */}
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: bus.route_color || '#000000' }}>
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: bus.route_color || 'var(--color-accent-primary)' }}>
                     <BusIcon className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <div className="font-bold text-black dark:text-gray-100 transition-colors duration-300">Bus {bus.id}</div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400 transition-colors duration-300">
+                    <div className="font-bold text-foreground-primary">Bus {bus.id}</div>
+                    <div className="text-xs text-foreground-secondary">
                       {bus.state === 'MOVING' || bus.state === 'IN_TRANSIT' ? 'In Service' : bus.state === 'IDLE' ? 'Inactive' : bus.state}
                     </div>
                   </div>
                 </div>
                 <button
                   onClick={() => onRemoveBus(bus.id)}
-                  className="p-2 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors duration-200"
+                  className="p-2 rounded-lg bg-danger-muted text-danger hover:bg-danger/20 transition-colors"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>
 
               {/* Bus Details */}
-              <div className="grid grid-cols-2 gap-4 mb-3">
-                <div className="bg-gray-50 dark:bg-dark-700 p-3 rounded-lg transition-colors duration-300">
-                  <div className="text-xs text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wide font-semibold transition-colors duration-300">Route</div>
-                  <div className="font-bold text-black dark:text-gray-100" style={{ color: bus.route_color || '#000000' }}>
+              <div className="grid grid-cols-2 gap-3 mb-3">
+                <div className="bg-background-surface p-3 rounded-lg">
+                  <div className="text-xs text-foreground-secondary mb-1 uppercase tracking-wide font-medium">Route</div>
+                  <div className="font-bold text-foreground-primary" style={{ color: bus.route_color || 'var(--color-accent-primary)' }}>
                     {bus.current_route_id || "N/A"}
                   </div>
                 </div>
-                
-                <div className="bg-gray-50 dark:bg-dark-700 p-3 rounded-lg transition-colors duration-300">
-                  <div className="text-xs text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wide font-semibold transition-colors duration-300">Capacity</div>
-                  <div className="font-bold text-black dark:text-gray-100 transition-colors duration-300">
+
+                <div className="bg-background-surface p-3 rounded-lg">
+                  <div className="text-xs text-foreground-secondary mb-1 uppercase tracking-wide font-medium">Capacity</div>
+                  <div className="font-bold text-foreground-primary">
                     {bus.passengers?.length || 0}/{bus.capacity || 50}
                   </div>
                 </div>
@@ -157,20 +157,20 @@ const FleetManager: React.FC<FleetManagerProps> = ({
               {/* Occupancy Bar */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-semibold transition-colors duration-300">Occupancy</div>
-                  <div className="text-xs font-bold text-black dark:text-gray-100 transition-colors duration-300">
+                  <div className="text-xs text-foreground-secondary uppercase tracking-wide font-medium">Occupancy</div>
+                  <div className="text-xs font-bold text-foreground-primary">
                     {occupancy.toFixed(1)}%
                   </div>
                 </div>
-                <div className="w-full h-3 bg-gray-100 dark:bg-dark-600 rounded-full overflow-hidden transition-colors duration-300">
+                <div className="w-full h-2 bg-background-surface rounded-full overflow-hidden">
                   <div
                     className={clsx(
                       "h-full rounded-full transition-all duration-500",
-                      occupancy > 0.8
-                        ? "bg-gradient-to-r from-red-400 to-red-600"
-                        : occupancy > 0.5
-                          ? "bg-gradient-to-r from-amber-400 to-amber-600"
-                          : "bg-gradient-to-r from-green-400 to-green-600"
+                      occupancy > 80
+                        ? "bg-danger"
+                        : occupancy > 50
+                          ? "bg-warning"
+                          : "bg-success"
                     )}
                     style={{ width: `${Math.min(occupancy, 100)}%` }}
                   />
@@ -183,14 +183,14 @@ const FleetManager: React.FC<FleetManagerProps> = ({
 
       {buses.length === 0 && (
         <div className="text-center py-12">
-          <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gray-100 dark:bg-dark-800 flex items-center justify-center transition-colors duration-300">
-            <BusIcon className="w-10 h-10 text-gray-400 dark:text-gray-500 transition-colors duration-300" />
+          <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-background-surface flex items-center justify-center">
+            <BusIcon className="w-10 h-10 text-foreground-muted" />
           </div>
-          <h3 className="text-xl font-bold text-black dark:text-gray-100 mb-2 transition-colors duration-300">No buses in fleet</h3>
-          <p className="text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">Add your first bus to start the simulation</p>
+          <h3 className="text-xl font-bold text-foreground-primary mb-2 font-display">No buses in fleet</h3>
+          <p className="text-foreground-secondary mb-4">Add your first bus to start the simulation</p>
           <button
             onClick={onAddBus}
-            className="bg-black dark:bg-primary-600 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 mx-auto hover:bg-gray-800 dark:hover:bg-primary-700 hover:scale-105 transition-all duration-200"
+            className="btn bg-foreground-primary dark:bg-accent text-background-primary hover:bg-foreground-primary/90 dark:hover:bg-accent-hover"
           >
             <Plus className="w-5 h-5" />
             Add Your First Bus

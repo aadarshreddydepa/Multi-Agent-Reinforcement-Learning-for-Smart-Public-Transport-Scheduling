@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import clsx from "clsx";
 import {
   AreaChart,
   Area,
@@ -51,20 +52,20 @@ interface AdvancedChartsProps {
 }
 
 const COLORS = {
-  primary: "#3b82f6",
-  success: "#10b981",
-  warning: "#f59e0b",
-  danger: "#ef4444",
-  info: "#8b5cf6",
+  primary: "var(--color-accent-primary)",
+  success: "var(--color-success)",
+  warning: "var(--color-warning)",
+  danger: "var(--color-danger)",
+  info: "var(--color-info)",
   dark: {
-    grid: "rgba(156, 163, 175, 0.1)",
-    text: "rgba(156, 163, 175, 0.8)",
-    tooltip: "rgba(31, 41, 55, 0.95)",
+    grid: "var(--color-border)",
+    text: "var(--color-text-muted)",
+    tooltip: "var(--color-bg-elevated)",
   },
   light: {
-    grid: "rgba(156, 163, 175, 0.2)",
-    text: "rgba(107, 114, 128, 1)",
-    tooltip: "rgba(255, 255, 255, 0.95)",
+    grid: "var(--color-border)",
+    text: "var(--color-text-secondary)",
+    tooltip: "var(--color-bg-elevated)",
   },
 };
 
@@ -132,13 +133,12 @@ const AdvancedCharts: React.FC<AdvancedChartsProps> = ({ data, currentStats }) =
     if (active && payload && payload.length) {
       return (
         <div
-          className="p-3 rounded-lg shadow-lg border backdrop-blur-md"
+          className="p-3 rounded-lg shadow-lg border border-border backdrop-blur-md"
           style={{
-            backgroundColor: colors.tooltip,
-            borderColor: theme === 'dark' ? 'rgba(75, 85, 99, 0.3)' : 'rgba(229, 231, 235, 0.8)',
+            backgroundColor: 'var(--color-bg-elevated)',
           }}
         >
-          <p className="text-sm font-medium mb-2" style={{ color: colors.text }}>
+          <p className="text-sm font-medium mb-2 text-foreground-secondary">
             Time: {label}
           </p>
           {payload.map((entry: any, index: number) => (
@@ -164,11 +164,12 @@ const AdvancedCharts: React.FC<AdvancedChartsProps> = ({ data, currentStats }) =
             <button
               key={metric}
               onClick={() => setSelectedMetric(metric)}
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition-all duration-200 ${
+              className={clsx(
+                "px-3 py-1 rounded-lg text-xs font-medium transition-all",
                 selectedMetric === metric
-                  ? 'bg-primary-600 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
+                  ? 'bg-accent text-white shadow-md'
+                  : 'bg-background-surface text-foreground-secondary hover:bg-background-surface/80'
+              )}
             >
               {metric === 'all' && 'All Metrics'}
               {metric === 'waitTime' && 'Wait Time'}
@@ -177,17 +178,18 @@ const AdvancedCharts: React.FC<AdvancedChartsProps> = ({ data, currentStats }) =
             </button>
           ))}
         </div>
-        
+
         <div className="flex gap-2">
           {(['1h', '6h', '24h', 'all'] as const).map((range) => (
             <button
               key={range}
               onClick={() => setTimeRange(range)}
-              className={`px-2 py-1 rounded text-xs font-medium transition-all duration-200 ${
+              className={clsx(
+                "px-2 py-1 rounded text-xs font-medium transition-all",
                 timeRange === range
-                  ? 'bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300'
-                  : 'bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
+                  ? 'bg-accent-muted text-accent'
+                  : 'bg-background-surface text-foreground-muted hover:text-foreground-secondary'
+              )}
             >
               {range === 'all' ? 'All Time' : range}
             </button>
@@ -196,98 +198,98 @@ const AdvancedCharts: React.FC<AdvancedChartsProps> = ({ data, currentStats }) =
       </div>
 
       {/* Main Performance Chart */}
-      <div className="bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-300">
+      <div className="card p-5">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold text-black dark:text-gray-100 flex items-center gap-2">
-            <Activity className="w-5 h-5 text-primary-600" />
+          <h3 className="text-lg font-semibold text-foreground-primary flex items-center gap-2 font-display">
+            <Activity className="w-5 h-5 text-accent" />
             Performance Metrics
           </h3>
           <div className="flex items-center gap-4 text-xs">
             <div className="flex items-center gap-1">
               {trends.waitTime >= 0 ? (
-                <TrendingUp className="w-4 h-4 text-danger-500" />
+                <TrendingUp className="w-4 h-4 text-danger" />
               ) : (
-                <TrendingDown className="w-4 h-4 text-success-500" />
+                <TrendingDown className="w-4 h-4 text-success" />
               )}
-              <span className={`font-medium ${trends.waitTime >= 0 ? 'text-danger-500' : 'text-success-500'}`}>
+              <span className={clsx("font-medium", trends.waitTime >= 0 ? 'text-danger' : 'text-success')}>
                 Wait Time {Math.abs(trends.waitTime).toFixed(1)}%
               </span>
             </div>
             <div className="flex items-center gap-1">
               {trends.occupancy >= 0 ? (
-                <TrendingUp className="w-4 h-4 text-success-500" />
+                <TrendingUp className="w-4 h-4 text-success" />
               ) : (
-                <TrendingDown className="w-4 h-4 text-warning-500" />
+                <TrendingDown className="w-4 h-4 text-warning" />
               )}
-              <span className={`font-medium ${trends.occupancy >= 0 ? 'text-success-500' : 'text-warning-500'}`}>
+              <span className={clsx("font-medium", trends.occupancy >= 0 ? 'text-success' : 'text-warning')}>
                 Occupancy {Math.abs(trends.occupancy).toFixed(1)}%
               </span>
             </div>
           </div>
         </div>
 
-        <div className="h-80">
+        <div className="h-72">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={filteredData}>
               <defs>
                 <linearGradient id="colorWait" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor={COLORS.warning} stopOpacity={0.3} />
-                  <stop offset="95%" stopColor={COLORS.warning} stopOpacity={0} />
+                  <stop offset="5%" stopColor="var(--color-warning)" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="var(--color-warning)" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="colorOccupancy" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor={COLORS.primary} stopOpacity={0.3} />
-                  <stop offset="95%" stopColor={COLORS.primary} stopOpacity={0} />
+                  <stop offset="5%" stopColor="var(--color-accent-primary)" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="var(--color-accent-primary)" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="colorEfficiency" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor={COLORS.success} stopOpacity={0.3} />
-                  <stop offset="95%" stopColor={COLORS.success} stopOpacity={0} />
+                  <stop offset="5%" stopColor="var(--color-success)" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="var(--color-success)" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              
-              <CartesianGrid strokeDasharray="3 3" stroke={colors.grid} />
-              <XAxis 
-                dataKey="time" 
-                tick={{ fontSize: 11, fill: colors.text }}
+
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis
+                dataKey="time"
+                tick={{ fontSize: 11, fill: "var(--color-text-muted)" }}
                 axisLine={false}
                 tickLine={false}
               />
-              <YAxis 
-                tick={{ fontSize: 11, fill: colors.text }}
+              <YAxis
+                tick={{ fontSize: 11, fill: "var(--color-text-muted)" }}
                 axisLine={false}
                 tickLine={false}
               />
-              
+
               <Tooltip content={<CustomTooltip />} />
-              
+
               {(selectedMetric === 'all' || selectedMetric === 'waitTime') && (
                 <Line
                   type="monotone"
                   dataKey="waitTime"
-                  stroke={COLORS.warning}
+                  stroke="var(--color-warning)"
                   strokeWidth={2}
                   dot={false}
                   name="Wait Time"
                   animationDuration={1000}
                 />
               )}
-              
+
               {(selectedMetric === 'all' || selectedMetric === 'occupancy') && (
                 <Line
                   type="monotone"
                   dataKey="occupancy"
-                  stroke={COLORS.primary}
+                  stroke="var(--color-accent-primary)"
                   strokeWidth={2}
                   dot={false}
                   name="Occupancy"
                   animationDuration={1200}
                 />
               )}
-              
+
               {(selectedMetric === 'all' || selectedMetric === 'efficiency') && (
                 <Line
                   type="monotone"
                   dataKey="efficiency"
-                  stroke={COLORS.success}
+                  stroke="var(--color-success)"
                   strokeWidth={2}
                   dot={false}
                   name="Efficiency"
@@ -300,15 +302,15 @@ const AdvancedCharts: React.FC<AdvancedChartsProps> = ({ data, currentStats }) =
       </div>
 
       {/* Secondary Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {/* Bus Utilization Pie Chart */}
-        <div className="bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-300">
-          <h3 className="text-lg font-semibold text-black dark:text-gray-100 flex items-center gap-2 mb-4">
-            <BusIcon className="w-5 h-5 text-primary-600" />
+        <div className="card p-5">
+          <h3 className="text-lg font-semibold text-foreground-primary flex items-center gap-2 mb-4 font-display">
+            <BusIcon className="w-5 h-5 text-accent" />
             Fleet Utilization
           </h3>
-          
-          <div className="h-64">
+
+          <div className="h-56">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -328,16 +330,16 @@ const AdvancedCharts: React.FC<AdvancedChartsProps> = ({ data, currentStats }) =
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: colors.tooltip,
-                    border: 'none',
-                    borderRadius: '8px',
-                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                    backgroundColor: 'var(--color-bg-elevated)',
+                    border: '1px solid var(--color-border)',
+                    borderRadius: 'var(--radius-md)',
+                    boxShadow: 'var(--shadow-md)',
                   }}
                 />
               </PieChart>
             </ResponsiveContainer>
           </div>
-          
+
           <div className="flex justify-center gap-6 mt-4">
             {utilizationData.map((item) => (
               <div key={item.name} className="flex items-center gap-2">
@@ -345,7 +347,7 @@ const AdvancedCharts: React.FC<AdvancedChartsProps> = ({ data, currentStats }) =
                   className="w-3 h-3 rounded-full"
                   style={{ backgroundColor: item.color }}
                 />
-                <span className="text-sm text-gray-600 dark:text-gray-300">
+                <span className="text-sm text-foreground-secondary">
                   {item.name}: {item.value.toFixed(1)}%
                 </span>
               </div>
@@ -354,40 +356,40 @@ const AdvancedCharts: React.FC<AdvancedChartsProps> = ({ data, currentStats }) =
         </div>
 
         {/* Demand & Service Bar Chart */}
-        <div className="bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-300">
-          <h3 className="text-lg font-semibold text-black dark:text-gray-100 flex items-center gap-2 mb-4">
-            <Users className="w-5 h-5 text-primary-600" />
+        <div className="card p-5">
+          <h3 className="text-lg font-semibold text-foreground-primary flex items-center gap-2 mb-4 font-display">
+            <Users className="w-5 h-5 text-accent" />
             Demand vs Service
           </h3>
-          
-          <div className="h-64">
+
+          <div className="h-56">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={filteredData.slice(-12)}>
-                <CartesianGrid strokeDasharray="3 3" stroke={colors.grid} />
-                <XAxis 
-                  dataKey="time" 
-                  tick={{ fontSize: 11, fill: colors.text }}
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis
+                  dataKey="time"
+                  tick={{ fontSize: 11, fill: "var(--color-text-muted)" }}
                   axisLine={false}
                   tickLine={false}
                 />
-                <YAxis 
-                  tick={{ fontSize: 11, fill: colors.text }}
+                <YAxis
+                  tick={{ fontSize: 11, fill: "var(--color-text-muted)" }}
                   axisLine={false}
                   tickLine={false}
                 />
                 <Tooltip content={<CustomTooltip />} />
                 <Legend />
-                
+
                 <Bar
                   dataKey="demand"
-                  fill={COLORS.info}
+                  fill="var(--color-info)"
                   name="Demand"
                   animationDuration={1000}
                   radius={[4, 4, 0, 0]}
                 />
                 <Bar
                   dataKey="served"
-                  fill={COLORS.success}
+                  fill="var(--color-success)"
                   name="Served"
                   animationDuration={1200}
                   radius={[4, 4, 0, 0]}

@@ -35,7 +35,7 @@ const AnimatedRouteVisualization: React.FC<AnimatedRouteVisualizationProps> = ({
     
     buses.forEach((bus: Bus) => {
       if (bus.assigned_route && Array.isArray(bus.assigned_route) && bus.assigned_route.length > 1) {
-        const routeColor = bus.route_color || "#3b82f6";
+        const routeColor = bus.route_color || "var(--color-accent-primary)";
         
         // Create segments between consecutive stops
         for (let i = 0; i < bus.assigned_route.length - 1; i++) {

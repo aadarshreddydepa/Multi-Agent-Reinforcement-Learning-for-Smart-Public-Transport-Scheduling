@@ -17,19 +17,19 @@ interface EventLogProps {
 
 const EventLog: React.FC<EventLogProps> = ({ logs }) => {
     return (
-        <div className="bg-white rounded-xl border border-gray-200 flex flex-col h-[300px] overflow-hidden shadow-sm">
-            <div className="p-3 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
-                <h3 className="text-xs font-bold text-gray-700 uppercase tracking-wider flex items-center gap-2">
-                    <ScrollText className="w-4 h-4 text-black" />
+        <div className="card flex flex-col h-[300px] overflow-hidden">
+            <div className="p-3 border-b border-border flex items-center justify-between bg-background-surface">
+                <h3 className="text-xs font-bold text-foreground-secondary uppercase tracking-wider flex items-center gap-2">
+                    <ScrollText className="w-4 h-4 text-foreground-primary" />
                     System Event Log
                 </h3>
-                <span className="text-[10px] font-medium text-gray-400">Recent 10 events</span>
+                <span className="text-[10px] font-medium text-foreground-muted">Recent 10 events</span>
             </div>
 
             <div className="flex-1 overflow-y-auto p-2 space-y-2 custom-scrollbar">
                 {logs.length === 0 ? (
-                    <div className="h-full flex flex-col items-center justify-center text-gray-400 gap-2">
-                        <Info className="w-5 h-5 opacity-20" />
+                    <div className="h-full flex flex-col items-center justify-center text-foreground-muted gap-2">
+                        <Info className="w-5 h-5 opacity-30" />
                         <p className="text-[10px]">No events recorded yet</p>
                     </div>
                 ) : (
@@ -38,10 +38,10 @@ const EventLog: React.FC<EventLogProps> = ({ logs }) => {
                             key={log.id}
                             className={clsx(
                                 "p-2 rounded-lg border text-xs transition-all animate-slide-in-top",
-                                log.type === "info" && "bg-blue-50/50 border-blue-100 text-blue-800",
-                                log.type === "warning" && "bg-amber-50/50 border-amber-100 text-amber-800",
-                                log.type === "success" && "bg-green-50/50 border-green-100 text-green-800",
-                                log.type === "action" && "bg-purple-50/50 border-purple-100 text-purple-800"
+                                log.type === "info" && "bg-info-muted border-info/20 text-info",
+                                log.type === "warning" && "bg-warning-muted border-warning/20 text-warning",
+                                log.type === "success" && "bg-success-muted border-success/20 text-success",
+                                log.type === "action" && "bg-accent-muted border-accent/20 text-accent"
                             )}
                         >
                             <div className="flex items-start gap-2">
@@ -53,7 +53,7 @@ const EventLog: React.FC<EventLogProps> = ({ logs }) => {
                                 </div>
                                 <div className="flex-1">
                                     <p className="font-medium leading-tight">{log.message}</p>
-                                    <p className="text-[9px] opacity-60 mt-1">
+                                    <p className="text-[9px] text-foreground-muted mt-1">
                                         {log.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
                                     </p>
                                 </div>

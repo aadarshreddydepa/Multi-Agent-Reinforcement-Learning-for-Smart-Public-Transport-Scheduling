@@ -12,7 +12,7 @@ interface BusMarkerProps {
 }
 
 const BusMarker: React.FC<BusMarkerProps> = ({ bus, isHighlighted }) => {
-  // 🎨 Premium Colors based on State
+  // Colors based on State - using CSS variables
   const getColor = (state: string, routeColor?: string) => {
     // Use route color if available, otherwise fallback to state-based colors
     if (routeColor && routeColor.startsWith('#')) {
@@ -21,17 +21,17 @@ const BusMarker: React.FC<BusMarkerProps> = ({ bus, isHighlighted }) => {
 
     switch (state) {
       case "IDLE":
-        return "#6B7280";
+        return "var(--color-text-muted)";
       case "MOVING":
       case "IN_TRANSIT":
-        return "#10B981";
+        return "var(--color-success)";
       case "BOARDING":
       case "ALIGHTING":
-        return "#F59E0B";
+        return "var(--color-warning)";
       case "AT_STOP":
-        return "#3B82F6";
+        return "var(--color-accent-primary)";
       default:
-        return "#6B7280";
+        return "var(--color-text-muted)";
     }
   };
 
@@ -39,12 +39,12 @@ const BusMarker: React.FC<BusMarkerProps> = ({ bus, isHighlighted }) => {
     ? bus.passengers.length / bus.capacity
     : 0;
 
-  // 🎨 Multi-color occupancy logic
-  let occupancyColor = "#10B981"; // Green (Low)
+  // Multi-color occupancy logic using CSS variables
+  let occupancyColor = "var(--color-success)"; // Green (Low)
   if (occupancyRate > 0.8) {
-    occupancyColor = "#ef4444"; // Red (High)
+    occupancyColor = "var(--color-danger)"; // Red (High)
   } else if (occupancyRate > 0.4) {
-    occupancyColor = "#f59e0b"; // Yellow (Medium)
+    occupancyColor = "var(--color-warning)"; // Yellow (Medium)
   }
 
   const color = getColor(bus.state || "IDLE", bus.route_color);
@@ -175,30 +175,30 @@ const BusMarker: React.FC<BusMarkerProps> = ({ bus, isHighlighted }) => {
       </Tooltip>
 
       <Popup className="premium-popup">
-        <div className="p-1 min-w-[200px]">
-          <div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-100">
+        <div className="p-3 min-w-[200px]">
+          <div className="flex items-center gap-2 mb-3 pb-2 border-b border-border">
             <span className="text-xl">🚌</span>
             <div>
-              <h3 className="font-bold text-gray-800 text-base">
+              <h3 className="font-bold text-foreground-primary text-base">
                 Bus {bus.id || 'Unknown'}
               </h3>
-              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">
+              <span className="text-xs text-foreground-secondary uppercase tracking-wide font-semibold">
                 {(bus.state || "UNKNOWN") ? String(bus.state).replace("_", " ") : "UNKNOWN"}
               </span>
             </div>
           </div>
 
-          <div className="space-y-2 text-sm text-gray-600">
+          <div className="space-y-2 text-sm text-foreground-secondary">
             <div className="flex justify-between">
               <span>Route:</span>
-              <span className="font-medium text-black">
+              <span className="font-medium text-foreground-primary">
                 {bus.current_route_id || "N/A"}
               </span>
             </div>
             {bus.assigned_route && Array.isArray(bus.assigned_route) && (
               <div className="flex justify-between">
                 <span>Path:</span>
-                <span className="font-medium text-black text-xs">
+                <span className="font-medium text-foreground-primary text-xs">
                   {bus.assigned_route.slice(0, 2).join(' → ')}...
                 </span>
               </div>
@@ -206,7 +206,8 @@ const BusMarker: React.FC<BusMarkerProps> = ({ bus, isHighlighted }) => {
             <div className="flex justify-between">
               <span>Passengers:</span>
               <span
-                className={`font-bold ${occupancyRate > 0.8 ? "text-red-500" : "text-green-600"}`}
+                style={{ color: occupancyRate > 0.8 ? 'var(--color-danger)' : 'var(--color-success)' }}
+                className="font-bold"
               >
                 {bus.passengers?.length || 0} / {bus.capacity}
               </span>

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google"; // Use Plus Jakarta Sans to match original premium feel
+import { Inter } from "next/font/google";
 import "./globals.css";
 import "leaflet/dist/leaflet.css";
 import { ThemeProvider } from "../contexts/ThemeContext";
 
-const jakarta = Plus_Jakarta_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-jakarta",
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -27,10 +27,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${jakarta.variable} font-sans antialiased text-gray-900 bg-gray-50 dark:text-gray-100 dark:bg-dark-950 min-h-screen relative transition-colors duration-300`}
+        className={`${inter.variable} font-sans antialiased bg-background-primary text-foreground-primary min-h-screen relative`}
       >
         <ThemeProvider>
-          <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] dark:[mask-image:linear-gradient(180deg,rgba(15,23,42,1),rgba(15,23,42,0))] opacity-40 dark:opacity-20 -z-10 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] dark:[mask-image:linear-gradient(180deg,rgba(12,14,18,1),rgba(12,14,18,0))] opacity-40 dark:opacity-20 -z-10 pointer-events-none"></div>
           {children}
         </ThemeProvider>
       </body>

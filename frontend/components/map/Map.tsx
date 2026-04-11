@@ -56,12 +56,12 @@ const Map: React.FC<MapProps> = ({ buses, stops, center, children, spawnIndicato
       className: "spawn-indicator",
       html: `
         <div class="relative flex flex-col items-center">
-          <div class="bg-blue-600 text-white text-[10px] px-3 py-1 rounded-full font-extrabold whitespace-nowrap mb-2 shadow-xl border-2 border-white animate-bounce">
+          <div style="background-color: var(--color-accent-primary); color: white; font-size: 10px; padding: 4px 12px; border-radius: 9999px; font-weight: 800; white-space: nowrap; margin-bottom: 8px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border: 2px solid white; animation: bounce 1s infinite;" class="animate-bounce">
             NEW BUS DISPATCHED 🚌
           </div>
           <div class="relative">
-            <div class="absolute -inset-4 bg-blue-500 opacity-20 rounded-full animate-ping"></div>
-            <div class="w-4 h-4 bg-blue-600 rounded-full border-2 border-white shadow-lg z-10"></div>
+            <div style="position: absolute; inset: -16px; background-color: var(--color-accent-primary); opacity: 0.2; border-radius: 50%;" class="animate-ping"></div>
+            <div style="width: 16px; height: 16px; background-color: var(--color-accent-primary); border-radius: 50%; border: 2px solid white; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); z-index: 10;"></div>
           </div>
         </div>
       `,
@@ -104,13 +104,13 @@ const Map: React.FC<MapProps> = ({ buses, stops, center, children, spawnIndicato
   const zoom = calculateZoom();
 
   return (
-    <div className="w-full h-full relative rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+    <div className="w-full h-full relative rounded-xl overflow-hidden shadow-lg border border-border">
       <MapContainer
         center={defaultCenter}
         zoom={zoom}
         scrollWheelZoom={true}
         className="w-full h-full z-0"
-        zoomControl={false} // Custom zoom control maybe later
+        zoomControl={false}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
